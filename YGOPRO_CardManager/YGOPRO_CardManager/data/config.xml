@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AutoDetect>true</AutoDetect>
+  <AutoSave>true</AutoSave>
+  <CardDatabasePath>C:\Users\hp owner\Desktop\OutlawPro\cards.cdb</CardDatabasePath>
+  <FieldPath>C:\Users\hp owner\Desktop\OutlawPro\pics\field\</FieldPath>
+  <PicturePath>C:\Users\hp owner\Desktop\OutlawPro\pics\</PicturePath>
+  <ScriptPath>C:\Users\hp owner\Desktop\OutlawPro\script\</ScriptPath>
+  <ThumbnailPath>C:\Users\hp owner\Desktop\OutlawPro\pics\thumbnail\</ThumbnailPath>
+</Config>

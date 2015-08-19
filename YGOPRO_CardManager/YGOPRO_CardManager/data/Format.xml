@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Data>
+	<keyword value="function" bold="false" color="blue"></keyword>
+	<keyword value="end" bold="false" color="blue"></keyword>
+	<keyword value="if" bold="false" color="blue"></keyword>
+	<keyword value="else" bold="false" color="blue"></keyword>
+	<keyword value="return" bold="false" color="blue"></keyword>
+	<keyword value="then" bold="false" color="blue"></keyword>
+	<keyword value="and" bold="false" color="blue"></keyword>
+	<keyword value="or" bold="false" color="blue"></keyword>
+	<keyword value="not" bold="false" color="blue"></keyword>
+	<keyword value="local" bold="false" color="blue"></keyword>
+	<keyword value="nil" bold="false" color="blue"></keyword>
+	<keyword value="while" bold="false" color="blue"></keyword>
+	<keyword value="do" bold="false" color="blue"></keyword>
+	<keyword value="true" bold="false" color="blue"></keyword>
+	<keyword value="false" bold="false" color="blue"></keyword>
+	<keyword value="string" bold="false" color="blue"></keyword>
+	<keyword value="integer" bold="false" color="blue"></keyword>
+	<keyword value="boolean" bold="false" color="blue"></keyword>
+	<keyword value="card" bold="true" color="red"></keyword>
+	<keyword value="group" bold="true" color="red"></keyword>
+	<keyword value="effect" bold="true" color="red"></keyword>
+	<keyword value="Card" bold="true" color="red"></keyword>
+	<keyword value="Group" bold="true" color="red"></keyword>
+	<keyword value="Effect" bold="true" color="red"></keyword>
+	<keyword value="Duel" bold="true" color="red"></keyword>
+	<keyword value="duel" bold="true" color="red"></keyword>
+	<constant bold="true" value="LOCATION_DECK" color="green" />
+    <constant bold="true" value="LOCATION_HAND" color="green" />
+    <constant bold="true" value="LOCATION_MZONE" color="green" />
+    <constant bold="true" value="LOCATION_SZONE" color="green" />
+    <constant bold="true" value="LOCATION_GRAVE" color="green" />
+    <constant bold="true" value="LOCATION_REMOVED" color="green" />
+    <constant bold="true" value="LOCATION_EXTRA" color="green" />
+    <constant bold="true" value="LOCATION_OVERLAY" color="green" />
+    <constant bold="true" value="LOCATION_ONFIELD" color="green" />
+    <constant bold="true" value="LOCATION_DECKBOT" color="green" />
+    <constant bold="true" value="LOCATION_DECKSHF" color="green" />
+    <constant bold="true" value="POS_FACEUP_ATTACK" color="green" />
+    <constant bold="true" value="POS_FACEDOWN_ATTACK" color="green" />
+    <constant bold="true" value="POS_FACEUP_DEFENCE" color="green" />
+    <constant bold="true" value="POS_FACEDOWN_DEFENCE" color="green" />
+    <constant bold="true" value="POS_FACEUP" color="green" />
+    <constant bold="true" value="POS_FACEDOWN" color="green" />
+    <constant bold="true" value="POS_ATTACK" color="green" />
+    <constant bold="true" value="POS_DEFENCE" color="green" />
+    <constant bold="true" value="NO_FLIP_EFFECT" color="green" />
+    <constant bold="true" value="TYPE_MONSTER" color="green" />
+    <constant bold="true" value="TYPE_SPELL" color="green" />
+    <constant bold="true" value="TYPE_TRAP" color="green" />
+    <constant bold="true" value="TYPE_NORMAL" color="green" />
+    <constant bold="true" value="TYPE_EFFECT" color="green" />
+    <constant bold="true" value="TYPE_FUSION" color="green" />
+    <constant bold="true" value="TYPE_RITUAL" color="green" />
+    <constant bold="true" value="TYPE_TRAPMONSTER" color="green" />
+    <constant bold="true" value="TYPE_SPIRIT" color="green" />
+    <constant bold="true" value="TYPE_UNION" color="green" />
+    <constant bold="true" value="TYPE_DUAL" color="green" />
+    <constant bold="true" value="TYPE_TUNER" color="green" />
+    <constant bold="true" value="TYPE_SYNCHRO" color="green" />
+    <constant bold="true" value="TYPE_TOKEN" color="green" />
+    <constant bold="true" value="TYPE_QUICKPLAY" color="green" />
+    <constant bold="true" value="TYPE_CONTINUOUS" color="green" />
+    <constant bold="true" value="TYPE_EQUIP" color="green" />
+    <constant bold="true" value="TYPE_FIELD" color="green" />
+    <constant bold="true" value="TYPE_COUNTER" color="green" />
+    <constant bold="true" value="TYPE_FLIP" color="green" />
+    <constant bold="true" value="TYPE_TOON" color="green" />
+    <constant bold="true" value="TYPE_XYZ" color="green" />
+    <constant bold="true" value="ATTRIBUTE_EARTH" color="green" />
+    <constant bold="true" value="ATTRIBUTE_WATER" color="green" />
+    <constant bold="true" value="ATTRIBUTE_FIRE" color="green" />
+    <constant bold="true" value="ATTRIBUTE_WIND" color="green" />
+    <constant bold="true" value="ATTRIBUTE_LIGHT" color="green" />
+    <constant bold="true" value="ATTRIBUTE_DARK" color="green" />
+    <constant bold="true" value="ATTRIBUTE_DEVINE" color="green" />
+ 
+  
+    <constant bold="true" value="RACE_WARRIOR" color="green" />
+    <constant bold="true" value="RACE_SPELLCASTER" color="green" />
+    <constant bold="true" value="RACE_FAIRY" color="green" />
+    <constant bold="true" value="RACE_FIEND" color="green" />
+    <constant bold="true" value="RACE_ZOMBIE" color="green" />
+    <constant bold="true" value="RACE_MACHINE" color="green" />
+    <constant bold="true" value="RACE_AQUA" color="green" />
+    <constant bold="true" value="RACE_PYRO" color="green" />
+    <constant bold="true" value="RACE_ROCK" color="green" />
+    <constant bold="true" value="RACE_WINDBEAST" color="green" />
+    <constant bold="true" value="RACE_PLANT" color="green" />
+    <constant bold="true" value="RACE_INSECT" color="green" />
+    <constant bold="true" value="RACE_THUNDER" color="green" />
+    <constant bold="true" value="RACE_DRAGON" color="green" />
+    <constant bold="true" value="RACE_BEAST" color="green" />
+    <constant bold="true" value="RACE_BEASTWARRIOR" color="green" />
+    <constant bold="true" value="RACE_DINOSAUR" color="green" />
+    <constant bold="true" value="RACE_FISH" color="green" />
+    <constant bold="true" value="RACE_SEASERPENT" color="green" />
+    <constant bold="true" value="RACE_REPTILE" color="green" />
+    <constant bold="true" value="RACE_PSYCHO" color="green" />
+    <constant bold="true" value="RACE_DEVINE" color="green" />
+    <constant bold="true" value="RACE_CREATORGOD" color="green" />
+ 
+  
+    <constant bold="true" value="REASON_DESTROY" color="green" />
+    <constant bold="true" value="REASON_RELEASE" color="green" />
+    <constant bold="true" value="REASON_TEMPORARY" color="green" />
+    <constant bold="true" value="REASON_MATERIAL" color="green" />
+    <constant bold="true" value="REASON_SUMMON" color="green" />
+    <constant bold="true" value="REASON_BATTLE" color="green" />
+    <constant bold="true" value="REASON_EFFECT" color="green" />
+    <constant bold="true" value="REASON_COST" color="green" />
+    <constant bold="true" value="REASON_ADJUST" color="green" />
+    <constant bold="true" value="REASON_LOST_TARGET" color="green" />
+    <constant bold="true" value="REASON_RULE" color="green" />
+    <constant bold="true" value="REASON_SPSUMMON" color="green" />
+    <constant bold="true" value="REASON_DISSUMMON" color="green" />
+    <constant bold="true" value="REASON_FLIP" color="green" />
+    <constant bold="true" value="REASON_DISCARD" color="green" />
+    <constant bold="true" value="REASON_RDAMAGE" color="green" />
+    <constant bold="true" value="REASON_RRECOVER" color="green" />
+    <constant bold="true" value="REASON_RETURN" color="green" />
+    <constant bold="true" value="REASON_FUSION" color="green" />
+    <constant bold="true" value="REASON_SYNCHRO" color="green" />
+    <constant bold="true" value="REASON_RITUAL" color="green" />
+    <constant bold="true" value="REASON_XYZ" color="green" />
+    <constant bold="true" value="REASON_REPLACE" color="green" />
+    <constant bold="true" value="REASON_DRAW" color="green" />
+    <constant bold="true" value="REASON_REDIRECT" color="green" />
+ 
+  
+    <constant bold="true" value="SUMMON_TYPE_NORMAL" color="green" />
+    <constant bold="true" value="SUMMON_TYPE_ADVANCE" color="green" />
+    <constant bold="true" value="SUMMON_TYPE_DUAL" color="green" />
+    <constant bold="true" value="SUMMON_TYPE_FLIP" color="green" />
+    <constant bold="true" value="SUMMON_TYPE_SPECIAL" color="green" />
+    <constant bold="true" value="SUMMON_TYPE_FUSION" color="green" />
+    <constant bold="true" value="SUMMON_TYPE_RITUAL" color="green" />
+    <constant bold="true" value="SUMMON_TYPE_SYNCHRO" color="green" />
+    <constant bold="true" value="SUMMON_TYPE_XYZ" color="green" />
+ 
+  
+    <constant bold="true" value="STATUS_DISABLED" color="green" />
+    <constant bold="true" value="STATUS_TO_ENABLE" color="green" />
+    <constant bold="true" value="STATUS_TO_DISABLE" color="green" />
+    <constant bold="true" value="STATUS_PROC_COMPLETE" color="green" />
+    <constant bold="true" value="STATUS_SET_TURN" color="green" />
+    <constant bold="true" value="STATUS_FLIP_SUMMONED" color="green" />
+    <constant bold="true" value="STATUS_REVIVE_LIMIT" color="green" />
+    <constant bold="true" value="STATUS_ATTACKED" color="green" />
+    <constant bold="true" value="STATUS_FORM_CHANGED" color="green" />
+    <constant bold="true" value="STATUS_SUMMONING" color="green" />
+    <constant bold="true" value="STATUS_EFFECT_ENABLED" color="green" />
+    <constant bold="true" value="STATUS_SUMMON_TURN" color="green" />
+    <constant bold="true" value="STATUS_DESTROY_CONFIRMED" color="green" />
+    <constant bold="true" value="STATUS_LEAVE_CONFIRMED" color="green" />
+    <constant bold="true" value="STATUS_BATTLE_DESTROYED" color="green" />
+    <constant bold="true" value="STATUS_COPYING_EFFECT" color="green" />
+    <constant bold="true" value="STATUS_CHAINING" color="green" />
+    <constant bold="true" value="STATUS_SUMMON_DISABLED" color="green" />
+    <constant bold="true" value="STATUS_ACTIVATE_DISABLED" color="green" />
+    <constant bold="true" value="STATUS_UNSUMMONABLE_CARD" color="green" />
+    <constant bold="true" value="STATUS_UNION" color="green" />
+    <constant bold="true" value="STATUS_ATTACK_CANCELED" color="green" />
+    <constant bold="true" value="STATUS_INITIALIZING" color="green" />
+    <constant bold="true" value="STATUS_ACTIVATED" color="green" />
+    <constant bold="true" value="STATUS_JUST_POS" color="green" />
+    <constant bold="true" value="STATUS_CONTINUOUS_POS" color="green" />
+    <constant bold="true" value="STATUS_IS_PUBLIC" color="green" />
+    <constant bold="true" value="STATUS_ACT_FROM_HAND" color="green" />
+ 
+  
+    <constant bold="true" value="ASSUME_CODE" color="green" />
+    <constant bold="true" value="ASSUME_TYPE" color="green" />
+    <constant bold="true" value="ASSUME_LEVEL" color="green" />
+    <constant bold="true" value="ASSUME_RANK" color="green" />
+    <constant bold="true" value="ASSUME_ATTRIBUTE" color="green" />
+    <constant bold="true" value="ASSUME_RACE" color="green" />
+    <constant bold="true" value="ASSUME_ATTACK" color="green" />
+    <constant bold="true" value="ASSUME_DEFENCE" color="green" />
+ 
+  
+    <constant bold="true" value="COUNTER_NEED_PERMIT" color="green" />
+    <constant bold="true" value="COUNTER_NEED_ENABLE" color="green" />
+ 
+  
+    <constant bold="true" value="PHASE_DRAW" color="green" />
+    <constant bold="true" value="PHASE_STANDBY" color="green" />
+    <constant bold="true" value="PHASE_MAIN1" color="green" />
+    <constant bold="true" value="PHASE_BATTLE" color="green" />
+    <constant bold="true" value="PHASE_DAMAGE" color="green" />
+    <constant bold="true" value="PHASE_DAMAGE_CAL" color="green" />
+    <constant bold="true" value="PHASE_MAIN2" color="green" />
+    <constant bold="true" value="PHASE_END" color="green" />
+ 
+  
+    <constant bold="true" value="PLAYER_NONE" color="green" />
+    <constant bold="true" value="PLAYER_ALL" color="green" />
+ 
+
+    <constant bold="true" value="CHAININFO_CHAIN_COUNT" color="green" />
+    <constant bold="true" value="CHAININFO_TRIGGERING_EFFECT" color="green" />
+    <constant bold="true" value="CHAININFO_TRIGGERING_PLAYER" color="green" />
+    <constant bold="true" value="CHAININFO_TRIGGERING_CONTROLER" color="green" />
+    <constant bold="true" value="CHAININFO_TRIGGERING_LOCATION" color="green" />
+    <constant bold="true" value="CHAININFO_TRIGGERING_SEQUENCE" color="green" />
+    <constant bold="true" value="CHAININFO_TARGET_CARDS" color="green" />
+    <constant bold="true" value="CHAININFO_TARGET_PLAYER" color="green" />
+    <constant bold="true" value="CHAININFO_TARGET_PARAM" color="green" />
+    <constant bold="true" value="CHAININFO_DISABLE_REASON" color="green" />
+    <constant bold="true" value="CHAININFO_DISABLE_PLAYER" color="green" />
+    <constant bold="true" value="CHAININFO_CHAIN_ID" color="green" />
+    <constant bold="true" value="CHAININFO_TYPE" color="green" />
+    <constant bold="true" value="CHAININFO_EXTTYPE" color="green" />
+ 
+
+    <constant bold="true" value="RESET_DRAW" color="green" />
+    <constant bold="true" value="RESET_STANDBY" color="green" />
+    <constant bold="true" value="RESET_MAIN1" color="green" />
+    <constant bold="true" value="RESET_BATTLE" color="green" />
+    <constant bold="true" value="RESET_DAMAGE" color="green" />
+    <constant bold="true" value="RESET_DAMAGE_CAL" color="green" />
+    <constant bold="true" value="RESET_MAIN2" color="green" />
+    <constant bold="true" value="RESET_END" color="green" />
+    <constant bold="true" value="RESET_SELF_TURN" color="green" />
+    <constant bold="true" value="RESET_OPPO_TURN" color="green" />
+    <constant bold="true" value="RESET_PHASE" color="green" />
+    <constant bold="true" value="RESET_CHAIN" color="green" />
+    <constant bold="true" value="RESET_EVENT" color="green" />
+    <constant bold="true" value="RESET_CARD" color="green" />
+    <constant bold="true" value="RESET_CODE" color="green" />
+    <constant bold="true" value="RESET_COPY" color="green" />
+    <constant bold="true" value="RESET_DISABLE" color="green" />
+    <constant bold="true" value="RESET_TURN_SET" color="green" />
+    <constant bold="true" value="RESET_TOGRAVE" color="green" />
+    <constant bold="true" value="RESET_REMOVE" color="green" />
+    <constant bold="true" value="RESET_TEMP_REMOVE" color="green" />
+    <constant bold="true" value="RESET_TOHAND" color="green" />
+    <constant bold="true" value="RESET_TODECK" color="green" />
+    <constant bold="true" value="RESET_LEAVE" color="green" />
+    <constant bold="true" value="RESET_TOFIELD" color="green" />
+    <constant bold="true" value="RESET_CONTROL" color="green" />
+    <constant bold="true" value="RESET_OVERLAY" color="green" />
+ 
+    <constant bold="true" value="EFFECT_TYPE_SINGLE" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_FIELD" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_EQUIP" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_ACTIONS" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_ACTIVATE" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_FLIP" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_IGNITION" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_TRIGGER_O" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_QUICK_O" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_TRIGGER_F" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_QUICK_F" color="green" />
+    <constant bold="true" value="EFFECT_TYPE_CONTINUOUS" color="green" />
+ 
+    <constant bold="true" value="EFFECT_FLAG_INITIAL" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_FUNC_VALUE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_COUNT_LIMIT" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_FIELD_ONLY" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_CARD_TARGET" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_IGNORE_RANGE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_ABSOLUTE_TARGET" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_IGNORE_IMMUNE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_SET_AVAILABLE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_MULTIACT_HAND" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_CANNOT_DISABLE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_PLAYER_TARGET" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_BOTH_SIDE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_COPY_INHERIT" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_DAMAGE_STEP" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_DAMAGE_CAL" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_DELAY" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_SINGLE_RANGE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_UNCOPYABLE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_OATH" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_SPSUM_PARAM" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_REPEAT" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_NO_TURN_RESET" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_EVENT_PLAYER" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_OWNER_RELATE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_AVAILABLE_BD" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_CLIENT_HINT" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_CHAIN_UNIQUE" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_NAGA" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_COF" color="green" />
+    <constant bold="true" value="EFFECT_FLAG_CVAL_CHECK" color="green" />
+ 
+    <constant bold="true" value="EFFECT_IMMUNE_EFFECT" color="green" />
+    <constant bold="true" value="EFFECT_DISABLE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DISABLE" color="green" />
+    <constant bold="true" value="EFFECT_SET_CONTROL" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_CHANGE_CONTROL" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_ACTIVATE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_TRIGGER" color="green" />
+    <constant bold="true" value="EFFECT_DISABLE_EFFECT" color="green" />
+    <constant bold="true" value="EFFECT_DISABLE_CHAIN" color="green" />
+    <constant bold="true" value="EFFECT_DISABLE_TRAPMONSTER" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_INACTIVATE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DISEFFECT" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_CHANGE_POSITION" color="green" />
+    <constant bold="true" value="EFFECT_TRAP_ACT_IN_HAND" color="green" />
+    <constant bold="true" value="EFFECT_TRAP_ACT_IN_SET_TURN" color="green" />
+    <constant bold="true" value="EFFECT_REMAIN_FIELD" color="green" />
+    <constant bold="true" value="EFFECT_MONSTER_SSET" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_SUMMON" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_FLIP_SUMMON" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_SPECIAL_SUMMON" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_MSET" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_SSET" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DRAW" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DISABLE_SUMMON" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DISABLE_SPSUMMON" color="green" />
+    <constant bold="true" value="EFFECT_SET_SUMMON_COUNT_LIMIT" color="green" />
+    <constant bold="true" value="EFFECT_EXTRA_SUMMON_COUNT" color="green" />
+    <constant bold="true" value="EFFECT_SPSUMMON_CONDITION" color="green" />
+    <constant bold="true" value="EFFECT_REVIVE_LIMIT" color="green" />
+    <constant bold="true" value="EFFECT_SUMMON_PROC" color="green" />
+    <constant bold="true" value="EFFECT_LIMIT_SUMMON_PROC" color="green" />
+    <constant bold="true" value="EFFECT_SPSUMMON_PROC" color="green" />
+    <constant bold="true" value="EFFECT_EXTRA_SET_COUNT" color="green" />
+    <constant bold="true" value="EFFECT_SET_PROC" color="green" />
+    <constant bold="true" value="EFFECT_LIMIT_SET_PROC" color="green" />
+    <constant bold="true" value="EFFECT_DEVINE_LIGHT" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DISABLE_FLIP_SUMMON" color="green" />
+  
+    <constant bold="true" value="EFFECT_INDESTRUCTABLE" color="green" />
+    <constant bold="true" value="EFFECT_INDESTRUCTABLE_EFFECT" color="green" />
+    <constant bold="true" value="EFFECT_INDESTRUCTABLE_BATTLE" color="green" />
+    <constant bold="true" value="EFFECT_UNRELEASABLE_SUM" color="green" />
+    <constant bold="true" value="EFFECT_UNRELEASABLE_NONSUM" color="green" />
+    <constant bold="true" value="EFFECT_DESTROY_SUBSTITUTE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_RELEASE" color="green" />
+    <constant bold="true" value="EFFECT_INDESTRUCTABLE_COUNT" color="green" />
+    <constant bold="true" value="EFFECT_UNRELEASABLE_EFFECT" color="green" />
+    <constant bold="true" value="EFFECT_DESTROY_REPLACE" color="green" />
+    <constant bold="true" value="EFFECT_RELEASE_REPLACE" color="green" />
+    <constant bold="true" value="EFFECT_SEND_REPLACE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DISCARD_HAND" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DISCARD_DECK" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_USE_AS_COST" color="green" />
+  
+    <constant bold="true" value="EFFECT_LEAVE_FIELD_REDIRECT" color="green" />
+    <constant bold="true" value="EFFECT_TO_HAND_REDIRECT" color="green" />
+    <constant bold="true" value="EFFECT_TO_DECK_REDIRECT" color="green" />
+    <constant bold="true" value="EFFECT_TO_GRAVE_REDIRECT" color="green" />
+    <constant bold="true" value="EFFECT_REMOVE_REDIRECT" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_TO_HAND" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_TO_DECK" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_REMOVE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_TO_GRAVE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_TURN_SET" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_BE_BATTLE_TARGET" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_BE_EFFECT_TARGET" color="green" />
+    <constant bold="true" value="EFFECT_IGNORE_BATTLE_TARGET" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_DIRECT_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_DIRECT_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_DUAL_STATUS" color="green" />
+    <constant bold="true" value="EFFECT_EQUIP_LIMIT" color="green" />
+    <constant bold="true" value="EFFECT_DUAL_SUMMONABLE" color="green" />
+    <constant bold="true" value="EFFECT_REVERSE_DAMAGE" color="green" />
+    <constant bold="true" value="EFFECT_REVERSE_RECOVER" color="green" />
+    <constant bold="true" value="EFFECT_CHANGE_DAMAGE" color="green" />
+    <constant bold="true" value="EFFECT_REFLECT_DAMAGE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_ATTACK_ANNOUNCE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_CHANGE_POS_E" color="green" />
+    <constant bold="true" value="EFFECT_ACTIVATE_COST" color="green" />
+    <constant bold="true" value="EFFECT_SUMMON_COST" color="green" />
+    <constant bold="true" value="EFFECT_SPSUMMON_COST" color="green" />
+    <constant bold="true" value="EFFECT_FLIPSUMMON_COST" color="green" />
+    <constant bold="true" value="EFFECT_MSET_COST" color="green" />
+    <constant bold="true" value="EFFECT_SSET_COST" color="green" />
+    <constant bold="true" value="EFFECT_ATTACK_COST" color="green" />
+  
+    <constant bold="true" value="EFFECT_UPDATE_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_SET_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_SET_ATTACK_FINAL" color="green" />
+    <constant bold="true" value="EFFECT_SET_BASE_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_UPDATE_DEFENCE" color="green" />
+    <constant bold="true" value="EFFECT_SET_DEFENCE" color="green" />
+    <constant bold="true" value="EFFECT_SET_DEFENCE_FINAL" color="green" />
+    <constant bold="true" value="EFFECT_SET_BASE_DEFENCE" color="green" />
+    <constant bold="true" value="EFFECT_REVERSE_UPDATE" color="green" />
+    <constant bold="true" value="EFFECT_SWAP_AD" color="green" />
+    <constant bold="true" value="EFFECT_SWAP_BASE_AD" color="green" />
+    <constant bold="true" value="EFFECT_CHANGE_CODE" color="green" />
+    <constant bold="true" value="EFFECT_ADD_TYPE" color="green" />
+    <constant bold="true" value="EFFECT_REMOVE_TYPE" color="green" />
+    <constant bold="true" value="EFFECT_CHANGE_TYPE" color="green" />
+    <constant bold="true" value="EFFECT_ADD_RACE" color="green" />
+    <constant bold="true" value="EFFECT_REMOVE_RACE" color="green" />
+    <constant bold="true" value="EFFECT_CHANGE_RACE" color="green" />
+    <constant bold="true" value="EFFECT_ADD_ATTRIBUTE" color="green" />
+    <constant bold="true" value="EFFECT_REMOVE_ATTRIBUTE" color="green" />
+    <constant bold="true" value="EFFECT_CHANGE_ATTRIBUTE" color="green" />
+    <constant bold="true" value="EFFECT_UPDATE_LEVEL" color="green" />
+    <constant bold="true" value="EFFECT_CHANGE_LEVEL" color="green" />
+    <constant bold="true" value="EFFECT_UPDATE_RANK" color="green" />
+    <constant bold="true" value="EFFECT_CHANGE_RANK" color="green" />
+    <constant bold="true" value="EFFECT_SET_POSITION" color="green" />
+    <constant bold="true" value="EFFECT_SELF_DESTROY" color="green" />
+    <constant bold="true" value="EFFECT_DOUBLE_TRIBUTE" color="green" />
+    <constant bold="true" value="EFFECT_DECREASE_TRIBUTE" color="green" />
+    <constant bold="true" value="EFFECT_DECREASE_TRIBUTE_SET" color="green" />
+    <constant bold="true" value="EFFECT_EXTRA_RELEASE" color="green" />
+    <constant bold="true" value="EFFECT_TRIBUTE_LIMIT" color="green" />
+    <constant bold="true" value="EFFECT_PUBLIC" color="green" />
+    <constant bold="true" value="EFFECT_COUNTER_PERMIT" color="green" />
+    <constant bold="true" value="EFFECT_COUNTER_LIMIT" color="green" />
+    <constant bold="true" value="EFFECT_RCOUNTER_REPLACE" color="green" />
+    <constant bold="true" value="EFFECT_LPCOST_CHANGE" color="green" />
+    <constant bold="true" value="EFFECT_LPCOST_REPLACE" color="green" />
+    <constant bold="true" value="EFFECT_SKIP_DP" color="green" />
+    <constant bold="true" value="EFFECT_SKIP_SP" color="green" />
+    <constant bold="true" value="EFFECT_SKIP_M1" color="green" />
+    <constant bold="true" value="EFFECT_SKIP_BP" color="green" />
+    <constant bold="true" value="EFFECT_SKIP_M2" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_BP" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_M2" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_EP" color="green" />
+    <constant bold="true" value="EFFECT_SKIP_TURN" color="green" />
+    <constant bold="true" value="EFFECT_DEFENCE_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_MUST_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_FIRST_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_ATTACK_ALL" color="green" />
+    <constant bold="true" value="EFFECT_EXTRA_ATTACK" color="green" />
+    <constant bold="true" value="EFFECT_MUST_BE_ATTACKED" color="green" />
+    <constant bold="true" value="EFFECT_AUTO_BE_ATTACKED" color="green" />
+    <constant bold="true" value="EFFECT_ATTACK_DISABLED" color="green" />
+    <constant bold="true" value="EFFECT_NO_BATTLE_DAMAGE" color="green" />
+    <constant bold="true" value="EFFECT_AVOID_BATTLE_DAMAGE" color="green" />
+    <constant bold="true" value="EFFECT_REFLECT_BATTLE_DAMAGE" color="green" />
+    <constant bold="true" value="EFFECT_PIERCE" color="green" />
+    <constant bold="true" value="EFFECT_BATTLE_DESTROY_REDIRECT" color="green" />
+    <constant bold="true" value="EFFECT_BATTLE_DAMAGE_TO_EFFECT" color="green" />
+    <constant bold="true" value="EFFECT_TOSS_COIN_REPLACE" color="green" />
+    <constant bold="true" value="EFFECT_TOSS_DICE_REPLACE" color="green" />
+    <constant bold="true" value="EFFECT_FUSION_MATERIAL" color="green" />
+    <constant bold="true" value="EFFECT_CHAIN_MATERIAL" color="green" />
+    <constant bold="true" value="EFFECT_SYNCHRO_MATERIAL" color="green" />
+    <constant bold="true" value="EFFECT_XYZ_MATERIAL" color="green" />
+    <constant bold="true" value="EFFECT_FUSION_SUBSTITUTE" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_BE_FUSION_MATERIAL" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_BE_SYNCHRO_MATERIAL" color="green" />
+    <constant bold="true" value="EFFECT_SYNCHRO_MATERIAL_CUSTOM" color="green" />
+    <constant bold="true" value="EFFECT_CANNOT_BE_XYZ_MATERIAL" color="green" />
+    <constant bold="true" value="EFFECT_SYNCHRO_LEVEL" color="green" />
+    <constant bold="true" value="EFFECT_RITUAL_LEVEL" color="green" />
+    <constant bold="true" value="EFFECT_XYZ_LEVEL" color="green" />
+    <constant bold="true" value="EFFECT_EXTRA_RITUAL_MATERIAL" color="green" />
+    <constant bold="true" value="EFFECT_NONTUNER" color="green" />
+    <constant bold="true" value="EFFECT_OVERLAY_REMOVE_REPLACE" color="green" />
+    <constant bold="true" value="EFFECT_SCRAP_CHIMERA" color="green" />
+    <constant bold="true" value="EFFECT_SPSUM_EFFECT_ACTIVATED" color="green" />
+    <constant bold="true" value="EFFECT_MATERIAL_CHECK" color="green" />
+    <constant bold="true" value="EFFECT_DISABLE_FIELD" color="green" />
+    <constant bold="true" value="EFFECT_USE_EXTRA_MZONE" color="green" />
+    <constant bold="true" value="EFFECT_USE_EXTRA_SZONE" color="green" />
+    <constant bold="true" value="EFFECT_MAX_MZONE" color="green" />
+    <constant bold="true" value="EFFECT_MAX_SZONE" color="green" />
+    <constant bold="true" value="EFFECT_HAND_LIMIT" color="green" />
+    <constant bold="true" value="EFFECT_DRAW_COUNT" color="green" />
+    <constant bold="true" value="EFFECT_SPIRIT_DONOT_RETURN" color="green" />
+    <constant bold="true" value="EFFECT_SPIRIT_MAYNOT_RETURN" color="green" />
+    <constant bold="true" value="EFFECT_CHANGE_ENVIRONMENT" color="green" />
+    <constant bold="true" value="EFFECT_NECRO_VALLEY" color="green" />
+    <constant bold="true" value="EFFECT_FORBIDDEN" color="green" />
+    <constant bold="true" value="EFFECT_NECRO_VALLEY_IM" color="green" />
+    <constant bold="true" value="EFFECT_REVERSE_DECK" color="green" />
+    <constant bold="true" value="EFFECT_REMOVE_BRAINWASHING" color="green" />
+    <constant bold="true" value="EFFECT_BP_TWICE" color="green" />
+    <constant bold="true" value="EFFECT_UNIQUE_CHECK" color="green" />
+    <constant bold="true" value="EFFECT_MATCH_KILL" color="green" />
+    <constant bold="true" value="EFFECT_SYNCHRO_CHECK" color="green" />
+  
+    <constant bold="true" value="EVENT_STARTUP" color="green" />
+    <constant bold="true" value="EVENT_FLIP" color="green" />
+    <constant bold="true" value="EVENT_FREE_CHAIN" color="green" />
+    <constant bold="true" value="EVENT_DESTROY" color="green" />
+    <constant bold="true" value="EVENT_REMOVE" color="green" />
+    <constant bold="true" value="EVENT_TO_HAND" color="green" />
+    <constant bold="true" value="EVENT_TO_DECK" color="green" />
+    <constant bold="true" value="EVENT_TO_GRAVE" color="green" />
+    <constant bold="true" value="EVENT_LEAVE_FIELD" color="green" />
+    <constant bold="true" value="EVENT_CHANGE_POS" color="green" />
+    <constant bold="true" value="EVENT_RELEASE" color="green" />
+    <constant bold="true" value="EVENT_DISCARD" color="green" />
+    <constant bold="true" value="EVENT_LEAVE_FIELD_P" color="green" />
+    <constant bold="true" value="EVENT_CHAIN_SOLVING" color="green" />
+    <constant bold="true" value="EVENT_CHAIN_ACTIVATING" color="green" />
+    <constant bold="true" value="EVENT_CHAIN_SOLVED" color="green" />
+    <constant bold="true" value="EVENT_CHAIN_ACTIVATED" color="green" />
+    <constant bold="true" value="EVENT_CHAIN_NEGATED" color="green" />
+    <constant bold="true" value="EVENT_CHAIN_DISABLED" color="green" />
+    <constant bold="true" value="EVENT_CHAIN_END" color="green" />
+    <constant bold="true" value="EVENT_CHAINING" color="green" />
+    <constant bold="true" value="EVENT_BECOME_TARGET" color="green" />
+    <constant bold="true" value="EVENT_DESTROYED" color="green" />
+    <constant bold="true" value="EVENT_ADJUST" color="green" />
+    <constant bold="true" value="EVENT_SUMMON_SUCCESS" color="green" />
+    <constant bold="true" value="EVENT_FLIP_SUMMON_SUCCESS" color="green" />
+    <constant bold="true" value="EVENT_SPSUMMON_SUCCESS" color="green" />
+    <constant bold="true" value="EVENT_SUMMON" color="green" />
+    <constant bold="true" value="EVENT_FLIP_SUMMON" color="green" />
+    <constant bold="true" value="EVENT_SPSUMMON" color="green" />
+    <constant bold="true" value="EVENT_MSET" color="green" />
+    <constant bold="true" value="EVENT_SSET" color="green" />
+    <constant bold="true" value="EVENT_BE_MATERIAL" color="green" />
+    <constant bold="true" value="EVENT_DRAW" color="green" />
+    <constant bold="true" value="EVENT_DAMAGE" color="green" />
+    <constant bold="true" value="EVENT_RECOVER" color="green" />
+    <constant bold="true" value="EVENT_PREDRAW" color="green" />
+    <constant bold="true" value="EVENT_CONTROL_CHANGED" color="green" />
+    <constant bold="true" value="EVENT_EQUIP" color="green" />
+    <constant bold="true" value="EVENT_ATTACK_ANNOUNCE" color="green" />
+    <constant bold="true" value="EVENT_BE_BATTLE_TARGET" color="green" />
+    <constant bold="true" value="EVENT_BATTLE_START" color="green" />
+    <constant bold="true" value="EVENT_BATTLE_CONFIRM" color="green" />
+    <constant bold="true" value="EVENT_PRE_DAMAGE_CALCULATE" color="green" />
+    <constant bold="true" value="EVENT_DAMAGE_CALCULATING" color="green" />
+    <constant bold="true" value="EVENT_PRE_BATTLE_DAMAGE" color="green" />
+    <constant bold="true" value="EVENT_BATTLE_END" color="green" />
+    <constant bold="true" value="EVENT_BATTLED" color="green" />
+    <constant bold="true" value="EVENT_BATTLE_DESTROYING" color="green" />
+    <constant bold="true" value="EVENT_BATTLE_DESTROYED" color="green" />
+    <constant bold="true" value="EVENT_DAMAGE_STEP_END" color="green" />
+    <constant bold="true" value="EVENT_ATTACK_DISABLED" color="green" />
+    <constant bold="true" value="EVENT_BATTLE_DAMAGE" color="green" />
+    <constant bold="true" value="EVENT_TOSS_DICE" color="green" />
+    <constant bold="true" value="EVENT_TOSS_COIN" color="green" />
+    <constant bold="true" value="EVENT_TOSS_COIN_NEGATE" color="green" />
+    <constant bold="true" value="EVENT_TOSS_DICE_NEGATE" color="green" />
+    <constant bold="true" value="EVENT_LEVEL_UP" color="green" />
+    <constant bold="true" value="EVENT_PAY_LPCOST" color="green" />
+    <constant bold="true" value="EVENT_DETACH_MATERIAL" color="green" />
+    <constant bold="true" value="EVENT_TURN_END" color="green" />
+    <constant bold="true" value="EVENT_PHASE" color="green" />
+    <constant bold="true" value="EVENT_PHASE_START" color="green" />
+    <constant bold="true" value="EVENT_ADD_COUNTER" color="green" />
+    <constant bold="true" value="EVENT_REMOVE_COUNTER" color="green" />
+ 
+  
+    <constant bold="true" value="CATEGORY_DESTROY" color="green" />
+    <constant bold="true" value="CATEGORY_RELEASE" color="green" />
+    <constant bold="true" value="CATEGORY_REMOVE" color="green" />
+    <constant bold="true" value="CATEGORY_TOHAND" color="green" />
+    <constant bold="true" value="CATEGORY_TODECK" color="green" />
+    <constant bold="true" value="CATEGORY_TOGRAVE" color="green" />
+    <constant bold="true" value="CATEGORY_DECKDES" color="green" />
+    <constant bold="true" value="CATEGORY_HANDES" color="green" />
+    <constant bold="true" value="CATEGORY_SUMMON" color="green" />
+    <constant bold="true" value="CATEGORY_SPECIAL_SUMMON" color="green" />
+    <constant bold="true" value="CATEGORY_TOKEN" color="green" />
+    <constant bold="true" value="CATEGORY_FLIP" color="green" />
+    <constant bold="true" value="CATEGORY_POSITION" color="green" />
+    <constant bold="true" value="CATEGORY_CONTROL" color="green" />
+    <constant bold="true" value="CATEGORY_DISABLE" color="green" />
+    <constant bold="true" value="CATEGORY_DISABLE_SUMMON" color="green" />
+    <constant bold="true" value="CATEGORY_DRAW" color="green" />
+    <constant bold="true" value="CATEGORY_SEARCH" color="green" />
+    <constant bold="true" value="CATEGORY_EQUIP" color="green" />
+    <constant bold="true" value="CATEGORY_DAMAGE" color="green" />
+    <constant bold="true" value="CATEGORY_RECOVER" color="green" />
+    <constant bold="true" value="CATEGORY_ATKCHANGE" color="green" />
+    <constant bold="true" value="CATEGORY_DEFCHANGE" color="green" />
+    <constant bold="true" value="CATEGORY_COUNTER" color="green" />
+    <constant bold="true" value="CATEGORY_COIN" color="green" />
+    <constant bold="true" value="CATEGORY_DICE" color="green" />
+    <constant bold="true" value="CATEGORY_LEAVE_GRAVE" color="green" />
+    <constant bold="true" value="CATEGORY_LVCHANGE" color="green" />
+    <constant bold="true" value="CATEGORY_NEGATE" color="green" />
+ 
+  
+    <constant bold="true" value="HINT_EVENT" color="green" />
+    <constant bold="true" value="HINT_MESSAGE" color="green" />
+    <constant bold="true" value="HINT_SELECTMSG" color="green" />
+    <constant bold="true" value="HINT_OPSELECTED" color="green" />
+    <constant bold="true" value="HINT_EFFECT" color="green" />
+    <constant bold="true" value="HINT_RACE" color="green" />
+    <constant bold="true" value="HINT_ATTRIB" color="green" />
+    <constant bold="true" value="HINT_CODE" color="green" />
+    <constant bold="true" value="HINT_NUMBER" color="green" />
+    <constant bold="true" value="HINT_CARD" color="green" />
+ 
+    <constant bold="true" value="CHINT_TURN" color="green" />
+    <constant bold="true" value="CHINT_CARD" color="green" />
+    <constant bold="true" value="CHINT_RACE" color="green" />
+    <constant bold="true" value="CHINT_ATTRIBUTE" color="green" />
+    <constant bold="true" value="CHINT_NUMBER" color="green" />
+    <constant bold="true" value="CHINT_DESC" color="green" />
+ 
+    <constant bold="true" value="HINTMSG_RELEASE" color="green" />
+    <constant bold="true" value="HINTMSG_DISCARD" color="green" />
+    <constant bold="true" value="HINTMSG_DESTROY" color="green" />
+    <constant bold="true" value="HINTMSG_REMOVE" color="green" />
+    <constant bold="true" value="HINTMSG_TOGRAVE" color="green" />
+    <constant bold="true" value="HINTMSG_RTOHAND" color="green" />
+    <constant bold="true" value="HINTMSG_ATOHAND" color="green" />
+    <constant bold="true" value="HINTMSG_TODECK" color="green" />
+    <constant bold="true" value="HINTMSG_SUMMON" color="green" />
+    <constant bold="true" value="HINTMSG_SPSUMMON" color="green" />
+    <constant bold="true" value="HINTMSG_SET" color="green" />
+    <constant bold="true" value="HINTMSG_FMATERIAL" color="green" />
+    <constant bold="true" value="HINTMSG_SMATERIAL" color="green" />
+    <constant bold="true" value="HINTMSG_XMATERIAL" color="green" />
+    <constant bold="true" value="HINTMSG_FACEUP" color="green" />
+    <constant bold="true" value="HINTMSG_FACEDOWN" color="green" />
+    <constant bold="true" value="HINTMSG_ATTACK" color="green" />
+    <constant bold="true" value="HINTMSG_DEFENCE" color="green" />
+    <constant bold="true" value="HINTMSG_EQUIP" color="green" />
+    <constant bold="true" value="HINTMSG_REMOVEXYZ" color="green" />
+    <constant bold="true" value="HINTMSG_CONTROL" color="green" />
+    <constant bold="true" value="HINTMSG_DESREPLACE" color="green" />
+    <constant bold="true" value="HINTMSG_FACEUPATTACK" color="green" />
+    <constant bold="true" value="HINTMSG_FACEUPDEFENCE" color="green" />
+    <constant bold="true" value="HINTMSG_FACEDOWNATTACK" color="green" />
+    <constant bold="true" value="HINTMSG_FACEDOWNDEFENCE" color="green" />
+    <constant bold="true" value="HINTMSG_CONFIRM" color="green" />
+    <constant bold="true" value="HINTMSG_TOFIELD" color="green" />
+    <constant bold="true" value="HINTMSG_POSCHANGE" color="green" />
+    <constant bold="true" value="HINTMSG_SELF" color="green" />
+    <constant bold="true" value="HINTMSG_OPPO" color="green" />
+    <constant bold="true" value="HINTMSG_EFFECT" color="green" />
+    <constant bold="true" value="HINTMSG_TARGET" color="green" />
+    <constant bold="true" value="HINTMSG_COIN" color="green" />
+    <constant bold="true" value="HINTMSG_DICE" color="green" />
+    <constant bold="true" value="HINTMSG_CARDTYPE" color="green" />
+ 
+  
+    <constant bold="true" value="TIMING_DRAW_PHASE" color="green" />
+    <constant bold="true" value="TIMING_STANDBY_PHASE" color="green" />
+    <constant bold="true" value="TIMING_MAIN_END" color="green" />
+    <constant bold="true" value="TIMING_BATTLE_START" color="green" />
+    <constant bold="true" value="TIMING_BATTLE_END" color="green" />
+    <constant bold="true" value="TIMING_END_PHASE" color="green" />
+    <constant bold="true" value="TIMING_SUMMON" color="green" />
+    <constant bold="true" value="TIMING_SPSUMMON" color="green" />
+    <constant bold="true" value="TIMING_FLIPSUMMON" color="green" />
+    <constant bold="true" value="TIMING_MSET" color="green" />
+    <constant bold="true" value="TIMING_SSET" color="green" />
+    <constant bold="true" value="TIMING_POS_CHANGE" color="green" />
+    <constant bold="true" value="TIMING_ATTACK" color="green" />
+    <constant bold="true" value="TIMING_DAMAGE_STEP" color="green" />
+    <constant bold="true" value="TIMING_DAMAGE_CAL" color="green" />
+    <constant bold="true" value="TIMING_CHAIN_END" color="green" />
+    <constant bold="true" value="TIMING_DRAW" color="green" />
+    <constant bold="true" value="TIMING_DAMAGE" color="green" />
+    <constant bold="true" value="TIMING_RECOVER" color="green" />
+    <constant bold="true" value="TIMING_DESTROY" color="green" />
+    <constant bold="true" value="TIMING_REMOVE" color="green" />
+    <constant bold="true" value="TIMING_TOHAND" color="green" />
+    <constant bold="true" value="TIMING_TODECK" color="green" />
+    <constant bold="true" value="TIMING_TOGRAVE" color="green" />
+    <constant bold="true" value="TIMING_BATTLE_PHASE" color="green" />
+    <constant bold="true" value="TIMING_EQUIP" color="green" />
+ 
+    <constant bold="true" value="GLOBALFLAG_DECK_REVERSE_CHECK" color="green" />
+    <constant bold="true" value="GLOBALFLAG_BRAINWASHING_CHECK" color="green" />
+    <constant bold="true" value="GLOBALFLAG_SCRAP_CHIMERA" color="green" />
+    <constant bold="true" value="GLOBALFLAG_DELAYED_QUICKEFFECT" color="green" />
+    <constant bold="true" value="GLOBALFLAG_DETACH_EVENT" color="green" />
+ 
+  
+    <constant bold="true" value="DUEL_TEST_MODE" color="green" />
+    <constant bold="true" value="DUEL_ATTACK_FIRST_TURN" color="green" />
+    <constant bold="true" value="DUEL_NO_CHAIN_HINT" color="green" />
+    <constant bold="true" value="DUEL_ENABLE_PRIORITY" color="green" />
+    <constant bold="true" value="DUEL_PSEUDO_SHUFFLE" color="green" />
+    <constant bold="true" value="DUEL_TAG_MODE" color="green" />
+</Data>

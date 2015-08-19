@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<library des="函数库" insertInfo="" tips="函数库">
+  <command des="模板" insertInfo="" tips="">
+	<template des="调试用对话框" insertInfo="Duel.Hint(HINT_MESSAGE,tp,HINT_SELECTMSG) " tips="当脚本执行到这一步的时候会弹出一个对话框,可以用来跟踪脚本运行到哪里，"></template>
+	
+	<template des="新建效果" insertInfo="function c当前卡号.initial_effect(c)
+	local e1=Effect.CreateEffect(c) 
+	e1:SetDescription(integer desc)
+	e1:SetCode(integer code) 
+	e1:SetRange(integer range) 
+	e1:SetCountLimit(integer count) 
+	e1:SetReset(integer reset_flag, [integer reset_count=1]) 
+	e1:SetProperty(integer prop) 
+	e1:SetCategory(integer cate) 
+	e1:SetCondition(function con_func) 
+	e1:SetCost(function cost_func) 
+	e1:SetTarget(function targ_func) 
+	e1:SetOperation(function op_func) 
+	e1:SetValue(integer|function val) 
+	e1:SetOwnerPlayer(integer player) 
+	c:RegisterEffect(e1)
+end" tips=""></template>
+	<template des="filter()" insertInfo="function sample_filter(c,....)
+	return 代码
+end" tips=""></template>
+	<template des="operation()" insertInfo="function c当前卡号.operation(e,tp,eg,ep,ev,re,r,rp,chk)
+	Duel.Hint(HINT_MESSAGE,tp,HINT_SELECTMSG) --跟踪调试用，函数能执行到这一步证明效果可行，此代码可删除。
+	if chk==0 then return true end 
+end" tips="operation函数模板
+--e effect 
+--tp This Player 
+--eg Event Group 
+--ep Event Player 
+--ev Event Value
+--re Reason Effect 
+--r  Reason
+--rp Reason Player
+--chk Check
+"></template>
+<template des="condition()" insertInfo="function c当前卡号.condition(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_MESSAGE,tp,HINT_SELECTMSG) --跟踪调试用，函数能执行到这一步证明效果可行，此代码可删除。
+	return 条件1 and 条件2 and ....
+end" tips="condition函数模板
+--e effect 
+--tp This Player 
+--eg Event Group 
+--ep Event Player 
+--ev Event Value
+--re Reason Effect 
+--r  Reason
+--rp Reason Player
+"></template>
+<template des="target()" insertInfo="function c当前卡号.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	Duel.Hint(HINT_MESSAGE,tp,HINT_SELECTMSG) --跟踪调试用，函数能执行到这一步证明效果可行，此代码可删除。
+	if chk == 0 then return true end 
+	return 条件1 and 条件2 and ....
+end" tips="target函数模板
+--e effect Effect
+--tp This Player 
+--eg Event Group 
+--ep Event Player 
+--ev Event Value 
+--re Reason Effect 
+--r  Reason 
+--rp Reason Player 
+--chk check 
+--chkc check card
+"></template>
+<template des="value()" insertInfo="function c当前卡号.value(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	Duel.Hint(HINT_MESSAGE,tp,HINT_SELECTMSG) --跟踪调试用，函数能执行到这一步证明效果可行，此代码可删除。
+	if chk == 0 then return true end 
+	return 条件1 and 条件2 and ....
+end" tips="value函数模板
+--e effect Effect
+--tp This Player 
+--eg Event Group 
+--ep Event Player 
+--ev Event Value 
+--re Reason Effect 
+--r  Reason 
+--rp Reason Player 
+--chk check 
+--chkc check card
+"></template>
+<template des="cost()" insertInfo="function c当前卡号.cost(e,tp,eg,ep,ev,re,r,rp)
+Duel.Hint(HINT_MESSAGE,tp,HINT_SELECTMSG) --跟踪调试用，函数能执行到这一步证明效果可行，此代码可删除。
+end" tips="cost函数模板
+--e effect Effect 
+--tp This Player 
+--eg Event Group 
+--ep Event Player 
+--ev Event Value
+--re Reason Effect 
+--r  Reason
+--rp Reason Player
+"></template>
+
+	<template des="HelloCard 1.0" insertInfo="function c当前卡号.initial_effect(c)
+	--Activate
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	c:RegisterEffect(e1)
+end" tips="最简单的可以可触发的效果-通常魔法卡"></template>
+	
+  </command>
+  
+  <command des="Aux" insertInfo="" tips="工具类">
+	<template des="Stringid(code,id)" insertInfo="aux.Stringid(Integer code,Integer id)" tips="获取脚本文本字符串
+param------------------
+Code：卡密
+id：脚本文本的序号"></template>
+	<template des="AddRitualProcGreater()" insertInfo="aux.AddRitualProcGreater(Card c,function filter)" tips="绑定可以仪式召唤的怪，filter参数的存在意味着可以像大地赞颂一样召唤特定的条件的仪式怪。
+Param------------------
+c: initial_effect的卡
+filter:只带有一个Card c形参的过滤函数，如 filter(Card c)"></template>
+	<template des="FilterBoolFunction()" insertInfo="aux.FilterBoolFunction(function filter,local p……)" tips="用Card类型的函数构建过滤函数的工具函数
+Param------------------
+filter: Card类型的函数，如Card.isCode
+p: filter的参数，如filter是Card.isCode(integer ID),那么p就是 一个integer的值
+例：FilterBoolFunction(Card.IsCode,8888888888)
+过滤出卡片Id是8888888888的卡片"></template>
+  </command>
+  
+  <command des="bit" insertInfo="" tips="">
+    <template des="band(integer a, integer b)" insertInfo="integer bit.band(integer a, integer b)" tips="a与b的位与" />
+    <template des="bor(integer a, integer b)" insertInfo="integer bit.bor(integer a, integer b)" tips="a与b的位或" />
+    <template des="bxor(integer a, integer b)" insertInfo="integer bit.bxor(integer a, integer b)" tips="a与b的位异或" />
+    <template des="bls(integer a, integer b)" insertInfo="integer bit.bls(integer a, integer b)" tips="a左移b" />
+    <template des="brs(integer a, integer b)" insertInfo="integer bit.brs(integer a, integer b)" tips="a右移b" />
+  </command>
+  <command des="Card" insertInfo="" tips="">
+	
+    <template des="GetCode(Card c)" insertInfo="integer Card.GetCode(Card c)" tips="返回c的当前代号（可能因为效果改变）" />
+    <template des="GetOriginalCode(Card c)" insertInfo="integer Card.GetOriginalCode(Card c)" tips="返回c的卡片记载的代号" />
+    <template des="IsSetCard(Card c, integer setname)" insertInfo="boolean Card.IsSetCard(Card c, integer setname)" tips="检查c是否是名字含有setname的卡" />
+    <template des="GetType(Card c)" insertInfo="integer Card.GetType(Card c)" tips="返回c的当前类型。" />
+    <template des="GetOriginalType(Card c)" insertInfo="integer Card.GetOriginalType(Card c)" tips="返回c的卡片记载的类型。" />
+    <template des="GetLevel(Card c)" insertInfo="integer Card.GetLevel(Card c)" tips="返回c的当前等级" />
+    <template des="GetSynchroLevel(Card c)" insertInfo="integer Card.GetSynchroLevel(Card c)" tips="返回c的同调用等级。此函数除了某些特定卡如调节支援士，返回值与Card.GetLevel(c)相同" />
+    <template des="GetRitualLevel(Card c)" insertInfo="integer Card.GetRitualLevel(Card c)" tips="返回c的仪式解放等级。此函数除了某些特定卡如仪式供物，返回值与Card.GetLevel(c)相同" />
+    <template des="GetOriginalLevel(Card c)" insertInfo="integer Card.GetOriginalLevel(Card c)" tips="返回c的卡片记载的等级" />
+    <template des="GetAttribute(Card c)" insertInfo="integer Card.GetAttribute(Card c)" tips="返回c的当前属性。注：对某些多属性怪物如光与暗之龙，此函数的返回值可能是几个属性的组合值。" />
+    <template des="GetOriginalAttribute(Card c)" insertInfo="integer Card.GetOriginalAttribute(Card c)" tips="返回c的卡片记载的属性" />
+    <template des="GetRace(Card c)" insertInfo="integer Card.GetRace(Card c)" tips="返回c的当前种族。注：对某些多种族怪物如动画效果的魔术猿，此函数的返回值可能是几个种族的组合值。" />
+    <template des="GetOriginalRace(Card c)" insertInfo="integer Card.GetOriginalRace(Card c)" tips="返回c的卡片记载的种族" />
+    <template des="GetAttack(Card c)" insertInfo="integer Card.GetAttack(Card c)" tips="返回c的当前攻击力，返回值是负数表示是&quot;?&quot;" />
+    <template des="GetBaseAttack(Card c)" insertInfo="integer Card.GetBaseAttack(Card c)" tips="返回c的原本攻击力" />
+    <template des="GetTextAttack(Card c)" insertInfo="integer Card.GetTextAttack(Card c)" tips="返回c的卡片记载的攻击力" />
+    <template des="GetDefence(Card c)" insertInfo="integer Card.GetDefence(Card c)" tips="返回c的当前守备力，返回值是负数表示是&quot;?&quot;" />
+    <template des="GetBaseDefence(Card c)" insertInfo="integer Card.GetBaseDefence(Card c)" tips="返回c的原本守备力" />
+    <template des="GetTextDefence(Card c)" insertInfo="integer Card.GetTextDefence(Card c)" tips="返回c的卡片记载的守备力" />
+    <template des="GetOwner(Card c)" insertInfo="integer Card.GetOwner(Card c)" tips="返回c的持有者" />
+    <template des="GetControler(Card c)" insertInfo="integer Card.GetControler(Card c)" tips="返回c的当前控制者" />
+    <template des="GetPreviousControler(Card c)" insertInfo="integer Card.GetPreviousControler(Card c)" tips="返回c的位置变化之前的控制者" />
+    <template des="GetReason(Card c)" insertInfo="integer Card.GetReason(Card c)" tips="返回c的位置变化原因" />
+    <template des="GetReasonCard(Card c)" insertInfo="Card Card.GetReasonCard(Card c)" tips="返回导致c的位置变化的卡。此函数仅在某卡被战斗破坏时，因为上级召唤被解放，或者成为特殊召唤使用的素材时有效。" />
+    <template des="GetReasonEffect(Card c)" insertInfo="Effect Card.GetReasonEffect(Card c)" tips="返回导致c的位置变化的效果。" />
+    <template des="GetPosition(Card c)" insertInfo="integer Card.GetPosition(Card c)" tips="返回c当前的表示形式" />
+    <template des="GetPreviousPosition(Card c)" insertInfo="integer Card.GetPreviousPosition(Card c)" tips="返回c位置变化前的表示形式" />
+    <template des="GetBattlePosition(Card c)" insertInfo="integer Card.GetBattlePosition(Card c)" tips="返回c在本次战斗发生之前的表示形式" />
+    <template des="GetLocation(Card c)" insertInfo="integer Card.GetLocation(Card c)" tips="返回c当前的所在位置" />
+    <template des="GetPreviousLocation(Card c)" insertInfo="integer Card.GetPreviousLocation(Card c)" tips="返回c位置变化前的所在的位置" />
+    <template des="GetSequence(Card c)" insertInfo="integer Card.GetSequence(Card c)" tips="返回c在当前位置的序号" />
+    <template des="GetPreviousSequence(Card c)" insertInfo="integer Card.GetPreviousSequence(Card c)" tips="返回c位置变化前的序号" />
+    <template des="GetSummonType(Card c)" insertInfo="integer Card.GetSummonType(Card c)" tips="返回c上场的方式。" />
+    <template des="GetSummonPlayer(Card c)" insertInfo="integer Card.GetSummonPlayer(Card c)" tips="返回召唤，特殊召唤c上场的玩家" />
+    <template des="GetDestination(Card c)" insertInfo="integer Card.GetDestination(Card c)" tips="返回c位置变化的目的地。此函数仅在处理位置转移代替效果时有效。" />
+    <template des="GetTurnID(Card c)" insertInfo="integer Card.GetTurnID(Card c)" tips="返回c转移到当前位置的回合" />
+    <template des="GetFieldID(Card c)" insertInfo="integer Card.GetFieldID(Card c)" tips="返回c转移到当前位置的时间标识。此数值唯一，越小表示c是越早出现在那个位置。" />
+    <template des="IsCode(Card c, integer code)" insertInfo="boolean Card.IsCode(Card c, integer code)" tips="检查c的代号是否是code。" />
+    <template des="IsType(Card c, integer type)" insertInfo="boolean Card.IsType(Card c, integer type)" tips="检查c是否属于类型type。" />
+    <template des="IsRace(Card c, integer race)" insertInfo="boolean Card.IsRace(Card c, integer race)" tips="检查c是否属于种族race。" />
+    <template des="IsAttribute(Card c, integer attribute)" insertInfo="boolean Card.IsAttribute(Card c, integer attribute)" tips="检查c是否属于属性attribute。" />
+    <template des="IsReason(Card c, integer reason)" insertInfo="boolean Card.IsReason(Card c, integer reason)" tips="检查c是否包含原因reason。" />
+    <template des="IsStatus(Card c, integer status)" insertInfo="boolean Card.IsStatus(Card c, integer status)" tips="检查c是否包含某个状态码。" />
+    <template des="IsNotTuner(Card c)" insertInfo="boolean Card.IsNotTuner(Card c)" tips="检查c是否可以当成非调整来使用。" />
+    <template des="SetStatus(Card c, integer state, boolean enable)" insertInfo="void Card.SetStatus(Card c, integer state, boolean enable)" tips="给c设置或者取消状态码。除非妳清楚的了解每个状态码的含意，否则不要轻易使用此函数。" />
+    <template des="IsDualState(Card c)" insertInfo="boolean Card.IsDualState(Card c)" tips="检查c属否处于再召唤状态。" />
+    <template des="EnableDualState(Card c)" insertInfo="void Card.EnableDualState(Card c)" tips="把c设置成再召唤状态。" />
+    <template des="SetTurnCounter(Card c, integer counter)" insertInfo="void Card.SetTurnCounter(Card c, integer counter)" tips="设置c的回合计数器(光之护封剑等)" />
+    <template des="GetTurnCounter(Card c)" insertInfo="integer Card.GetTurnCounter(Card c)" tips="返回c的回合计数器" />
+    <template des="SetCustomValue(Card c, string tag, any object)" insertInfo="void Card.SetCustomValue(Card c, string tag, any object)" tips="以tag作为标签为c设置一个自定义值object" />
+    <template des="GetCustomValue(Card c, string tag)" insertInfo="any Card.GetCustomValue(Card c, string tag)" tips="返回c的以tag作为标签的自定义值" />
+    <template des="SetMaterial(Card c, Group g)" insertInfo="void Card.SetMaterial(Card c, Group g)" tips="把g中的所有卡作为c的素材（上级召唤，特殊召唤）" />
+    <template des="GetMaterial(Card c)" insertInfo="Group Card.GetMaterial(Card c)" tips="返回c出场使用的素材" />
+    <template des="GetMaterialCount(Card c)" insertInfo="integer Card.GetMaterialCount(Card c)" tips="返回c出场使用的素材数量" />
+    <template des="GetEquipGroup(Card c)" insertInfo="Group Card.GetEquipGroup(Card c)" tips="返回c当前装备着的卡片组" />
+    <template des="GetEquipCount(Card c)" insertInfo="integer Card.GetEquipCount(Card c)" tips="返回c当前装备着的卡片数量" />
+    <template des="GetEquipTarget(Card c)" insertInfo="Card Card.GetEquipTarget(Card c)" tips="返回c当前的装备对象" />
+    <template des="CheckEquipTarget(Card c1, Card c2)" insertInfo="boolean Card.CheckEquipTarget(Card c1, Card c2)" tips="检查c2是否是c1的正确的装备对象" />
+    <template des="GetUnionCount(Card c)" insertInfo="integer Card.GetUnionCount(Card c)" tips="返回c当前装备的同盟卡数量" />
+    <template des="GetOverlayGroup(Card c)" insertInfo="Group Card.GetOverlayGroup(Card c)" tips="返回c当前叠放着的卡片组" />
+    <template des="GetOverlayCount(Card c)" insertInfo="integer Card.GetOverlayCount(Card c)" tips="返回c当前叠放着的卡片数量" />
+    <template des="RemoveOverlayCard(Card c,integer player, integer min, integer max, integer reason)" insertInfo="integer Card.RemoveOverlayCard(Card c,integer player, integer min, integer max, integer reason)" tips="以reason为原因，让玩家player移除c叠放的min-max张卡" />
+    <template des="GetAttackGroup(Card c)" insertInfo="Group Card.GetAttackGroup(Card c)" tips="返回c本回合攻击过的卡片组" />
+    <template des="GetAttackedGroupCount(Card c)" insertInfo="integer Card.GetAttackedGroupCount(Card c)" tips="返回c本回合攻击过的卡片数量" />
+    <template des="GetAttackedCount(Card c)" insertInfo="integer Card.GetAttackedCount(Card c)" tips="返回c本回合攻击过的次数" />
+    <template des="GetBattledGroup(Card c)" insertInfo="Group Card.GetBattledGroup(Card c)" tips="返回与c本回合进行过战斗的卡片组" />
+    <template des="GetBattledGroupCount(Card c)" insertInfo="integer Card.GetBattledGroupCount(Card c)" tips="返回与c本回合进行过战斗的的卡片数量" />
+    <template des="GetAttackAnnouncedCount(Card c)" insertInfo="integer Card.GetAttackAnnouncedCount(Card c)" tips="返回c本回合攻击宣言的次数" />
+    <template des="SetCardTarget(Card c1, Card c2)" insertInfo="void Card.SetCardTarget(Card c1, Card c2)" tips="把c2作为c1的永续对象。" />
+    <template des="GetCardTarget(Card c)" insertInfo="Group Card.GetCardTarget(Card c)" tips="返回c当前所有的永续对象" />
+    <template des="GetCardTargetCount(Card c)" insertInfo="integer Card.GetCardTargetCount(Card c)" tips="返回c当前的永续对象的数量" />
+    <template des="IsHasCardTarget(Card c1, Card c2)" insertInfo="boolean Card.IsHasCardTarget(Card c1, Card c2)" tips="检查c1是否取c2为永续对象" />
+    <template des="GetOwnerTarget(Card c)" insertInfo="Group Card.GetOwnerTarget(Card c)" tips="返回取c作为永续对象的所有卡" />
+    <template des="GetOwnerTargetCount(Card c)" insertInfo="integer Card.GetOwnerTargetCount(Card c)" tips="返回取c作为永续对象的卡的数量" />
+    <template des="GetActivateEffect(Card c)" insertInfo="Effect Card.GetActivateEffect(Card c)" tips="返回c的“卡片发动”的效果。仅对魔法和陷阱有效。" />
+    <template des="RegisterEffect(Card c, Effect e, [boolean forced=false])" insertInfo="integer Card.RegisterEffect(Card c, Effect e, [boolean forced=false])" tips="把效果e注册给c，返回效果的全局id。" />
+    <template des="IsHasEffect(Card c, integer code)" insertInfo="boolean Card.IsHasEffect(Card c, integer code)" tips="检查c是否受到效果种类是code的效果的影响" />
+    <template des="GetEffectCount(Card c, integer code)" insertInfo="integer Card.GetEffectCount(Card c, integer code)" tips="返回c受到影响的种类是code的效果的数量" />
+    <template des="RegisterFlagEffect(Card c, integer code, integer reset_flag, integer property, integer reset_count)" insertInfo="Effect Card.RegisterFlagEffect(Card c, integer code, integer reset_flag, integer property, integer reset_count)" tips="为c注册一个标识用效果。" />
+    <template des="GetFlagEffect(Card c, integer code)" insertInfo="integer Card.GetFlagEffect(Card c, integer code)" tips="返回c的种类是code的标识效果的数量。" />
+    <template des="ResetFlagEffect(Card c, integer code)" insertInfo="void Card.ResetFlagEffect(Card c, integer code)" tips="手动清除c的种类是code的标识效果。" />
+    <template des="CreateRelation(Card c1, Card c2, integer reset_flag)" insertInfo="void Card.CreateRelation(Card c1, Card c2, integer reset_flag)" tips="为c1建立于c2的联系。此联系仅会由于RESET_EVENT的事件reset。" />
+    <template des="ReleaseRelation(Card c1, Card c2)" insertInfo="void Card.ReleaseRelation(Card c1, Card c2)" tips="手动释放c1对于c2的联系" />
+    <template des="IsRelateToEffect(Card c, Effect e)" insertInfo="boolean Card.IsRelateToEffect(Card c, Effect e)" tips="检查c是否和效果e有联系。" />
+    <template des="IsRelateToCard(Card c1, Card c2)" insertInfo="boolean Card.IsRelateToCard(Card c1, Card c2)" tips="检查c1是否和c2有联系。" />
+    <template des="IsRelateToBattle(Card c)" insertInfo="boolean Card.IsRelateToBattle(Card c)" tips="检查c是否和本次战斗关联。" />
+    <template des="CopyEffect(Card c, integer code, integer reset_flag, integer reset_count)" insertInfo="integer Card.CopyEffect(Card c, integer code, integer reset_flag, integer reset_count)" tips="为c添加代号是code的卡的可复制的效果，并且添加额外的reset条件。" />
+    <template des="EnableReviveLimit(Card c)" insertInfo="void Card.EnableReviveLimit(Card c)" tips="为c添加苏生限制。此函数也可通过Card.SetStatus实现。" />
+    <template des="CompleteProcedure(Card c)" insertInfo="void Card.CompleteProcedure(Card c)" tips="使c完成正规的召唤手续。此函数也可通过Card.SetStatus实现。" />
+    <template des="IsDisabled(Card c)" insertInfo="boolean Card.IsDisabled(Card c)" tips="检查c是否处于无效状态" />
+    <template des="IsDestructable(Card c)" insertInfo="boolean Card.IsDestructable(Card c)" tips="检查c是否是可破坏的。" />
+    <template des="IsSummonableCard(Card c)" insertInfo="boolean Card.IsSummonableCard(Card c)" tips="检查c是否是可通常召唤的卡。" />
+    <template des="IsSpecialSummonable(Card c)" insertInfo="boolean Card.IsSpecialSummonable(Card c)" tips="检查是否可以对c进行特殊召唤手续。" />
+    <template des="IsSynchroSummonable(Card c, [Card tuner=nil])" insertInfo="boolean Card.IsSynchroSummonable(Card c, [Card tuner=nil])" tips="检查是否可以以tuner作为调整对c进行同调召唤手续。如果tuner是nil，此函数与上一个函数作用相同。" />
+    <template des="IsSummonable(Card c)" insertInfo="boolean Card.IsSummonable(Card c)" tips="检查c是否可进行通常召唤（不包含通常召唤的set)" />
+    <template des="IsMSetable(Card c)" insertInfo="boolean Card.IsMSetable(Card c)" tips="检查c是否可进行通常召唤的set" />
+    <template des="IsSSetable(Card c)" insertInfo="boolean Card.IsSSetable(Card c)" tips="检查c是否可以set到魔法陷阱区" />
+    <template des="IsCanBeSpecialSummoned(Card c, Effect e, integer sumtype, integer sumplayer, boolean nocheck, boolean nolimit, [integer sumpos=POS_FACEUP, integer target_player=sumplayer])" insertInfo="boolean Card.IsCanBeSpecialSummoned(Card c, Effect e, integer sumtype, integer sumplayer, boolean nocheck, boolean nolimit, [integer sumpos=POS_FACEUP, integer target_player=sumplayer])" tips="检查c是否可以被玩家sumplayer用效果e以sumtype方式和sumpos表示形式特殊召唤到target_player场上。如果nocheck是true则不检查c的召唤条件，如果nolimit是true则不检查c的苏生限制。" />
+    <template des="IsAbleToHand(Card c)" insertInfo="boolean Card.IsAbleToHand(Card c)" tips="检查c是否可以送去手牌。" />
+    <template des="IsAbleToDeck(Card c)" insertInfo="boolean Card.IsAbleToDeck(Card c)" tips="检查c是否可以送去卡组。" />
+    <template des="IsAbleToExtra(Card c)" insertInfo="boolean Card.IsAbleToExtra(Card c)" tips="检查c是否可以送去额外卡组。" />
+    <template des="IsAbleToGrave(Card c)" insertInfo="boolean Card.IsAbleToGrave(Card c)" tips="检查c是否可以送去墓地。" />
+    <template des="IsAbleToRemove(Card c)" insertInfo="boolean Card.IsAbleToRemove(Card c)" tips="检查c是否可以除外。" />
+    <template des="IsAbleToHandAsCost(Card c)" insertInfo="boolean Card.IsAbleToHandAsCost(Card c)" tips="检查c是否可以作为cost送去手牌。" />
+    <template des="IsAbleToDeckAsCost(Card c)" insertInfo="boolean Card.IsAbleToDeckAsCost(Card c)" tips="检查c是否可以作为cost送去卡组。" />
+    <template des="IsAbleToExtraAsCost(Card c)" insertInfo="boolean Card.IsAbleToExtraAsCost(Card c)" tips="检查c是否可以作为cost送去额外卡组。" />
+    <template des="IsAbleToGraveAsCost(Card c)" insertInfo="boolean Card.IsAbleToGraveAsCost(Card c)" tips="检查c是否可以作为cost送去墓地。" />
+    <template des="IsAbleToRemoveAsCost(Card c)" insertInfo="boolean Card.IsAbleToRemoveAsCost(Card c)" tips="检查c是否可以作为cost除外。" />
+    <template des="IsReleaseable(Card c)" insertInfo="boolean Card.IsReleaseable(Card c)" tips="检查c是否可以解放（非上级召唤用）" />
+    <template des="IsDiscardable(Card c)" insertInfo="boolean Card.IsDiscardable(Card c)" tips="检查c是否可以丢弃" />
+    <template des="IsAttackable(Card c)" insertInfo="boolean Card.IsAttackable(Card c)" tips="检查c是否可以攻击" />
+    <template des="IsChainAttackable(Card c)" insertInfo="boolean Card.IsChainAttackable(Card c)" tips="检查c是否可以连续攻击" />
+    <template des="IsFaceup(Card c)" insertInfo="boolean Card.IsFaceup(Card c)" tips="检查c是否是表侧表示" />
+    <template des="IsFacedown(Card c)" insertInfo="boolean Card.IsFacedown(Card c)" tips="检查c是否是里侧测表示" />
+    <template des="IsAttack(Card c)" insertInfo="boolean Card.IsAttack(Card c)" tips="检查c是否是攻击表示" />
+    <template des="IsDefence(Card c)" insertInfo="boolean Card.IsDefence(Card c)" tips="检查c是否是守备表示" />
+    <template des="IsControler(Card c, integer con)" insertInfo="boolean Card.IsControler(Card c, integer con)" tips="检查c的当前控制着是否是con" />
+    <template des="IsOnField(Card c)" insertInfo="boolean Card.IsOnField(Card c)" tips="检查c是否在场。" />
+    <template des="IsLocation(Card c, integer loc)" insertInfo="boolean Card.IsLocation(Card c, integer loc)" tips="检查c当前位置是否是loc。" />
+    <template des="IsPublic(Card c)" insertInfo="boolean Card.IsPublic(Card c)" tips="检查c是否处于公开状态" />
+    <template des="IsForbidden(Card c)" insertInfo="boolean Card.IsForbidden(Card c)" tips="检查c是否处于被宣言禁止状态" />
+    <template des="IsAbleToChangeControler(Card c)" insertInfo="boolean Card.IsAbleToChangeControler(Card c)" tips="检查c是否可以改变控制权" />
+    <template des="IsControlerCanBeChanged(Card c)" insertInfo="boolean Card.IsControlerCanBeChanged(Card c)" tips="检查c的控制权是否可以改变" />
+    <template des="AddCounter(Card c, integer countertype, integer count)" insertInfo="void Card.AddCounter(Card c, integer countertype, integer count)" tips="为c放置count个countertype类型的指示物" />
+    <template des="RemoveCounter(Card c, integer player, integer countertype, integer count, integer reason)" insertInfo="void Card.RemoveCounter(Card c, integer player, integer countertype, integer count, integer reason)" tips="让玩家player以原因reason移除c上的count个countertype类型的指示物" />
+    <template des="GetCounter(Card c, integer countertype)" insertInfo="integer Card.GetCounter(Card c, integer countertype)" tips="返回c上的countertype类型的指示物的数量" />
+    <template des="EnableCounterPermit(Card c, integer countertype)" insertInfo="void Card.EnableCounterPermit(Card c, integer countertype)" tips="允许c放置那个需要“可以放置”才能放置的指示物countertype" />
+    <template des="SetCounterLimit(Card c, integer countertype, integer count)" insertInfo="void Card.SetCounterLimit(Card c, integer countertype, integer count)" tips="设定c放置countertype类型指示物的上限" />
+    <template des="IsCanTurnSet(Card c)" insertInfo="boolean Card.IsCanTurnSet(Card c)" tips="检查c是否可以转成里侧表示。" />
+    <template des="IsCanAddCounter(Card c, integer countertype, integer count)" insertInfo="boolean Card.IsCanAddCounter(Card c, integer countertype, integer count)" tips="检查c是否可以放置count个countertype类型的指示物" />
+    <template des="IsCanRemoveCounter(Card c, integer player, integer countertype, integer count, integer reason)" insertInfo="boolean Card.IsCanRemoveCounter(Card c, integer player, integer countertype, integer count, integer reason)" tips="检查玩家player是否可以以原因reason移除c上的count个countertype类型的指示物" />
+    <template des="IsCanBeFusionMaterial(Card c)" insertInfo="boolean Card.IsCanBeFusionMaterial(Card c)" tips="检查c是否可以成为融合素材" />
+    <template des="IsCanBeSynchroMaterial(Card c)" insertInfo="boolean Card.IsCanBeSynchroMaterial(Card c)" tips="检查c是否可以成为同调素材" />
+    <template des="IsCanBeExceedMaterial(Card c)" insertInfo="boolean Card.IsCanBeExceedMaterial(Card c)" tips="检查c是否可以成为超量素材" />
+    <template des="CheckFusionMaterial(Card c, Group g)" insertInfo="boolean Card.CheckFusionMaterial(Card c, Group g)" tips="检查g是否包含了c需要的一组融合素材" />
+    <template des="IsImmuneToEffect(Card c, Effect e)" insertInfo="boolean Card.IsImmuneToEffect(Card c, Effect e)" tips="检查c是否免疫效果e（即不受效果e的影响）" />
+    <template des="IsCanBeEffectTarget(Card c, Effect e)" insertInfo="boolean Card.IsCanBeEffectTarget(Card c, Effect e)" tips="检查c是否可以成为效果e的对象" />
+    <template des="IsCanBeBattleTarget(Card c1, Card c2)" insertInfo="boolean Card.IsCanBeBattleTarget(Card c1, Card c2)" tips="检查c1是否可以成为c2的攻击目标" />
+    <template des="AddTrapMonsterAttribute(Card c, boolean is_effect)" insertInfo="void Card.AddTrapMonsterAttribute(Card c, boolean is_effect)" tips="为c添加陷阱怪物属性。is_effect=true表示视作效果怪物，否则视为通常怪物" />
+    <template des="CancelToGrave(Card c)" insertInfo="void Card.CancelToGrave(Card c)" tips="取消送墓确定状态。" />
+    <template des="GetTributeRequirement(Card c)" insertInfo="integer,integer Card.GetTributeRequirement(Card c)" tips="返回通常召唤c所需要的祭品的最小和最大数量" />
+  </command>
+  <command des="Effect" insertInfo="" tips="">
+  
+    <template des="CreateEffect(Card c)" insertInfo="Effect Effect.CreateEffect(Card c)" tips="新建一个空效果,并且效果的拥有者为c" />
+	<template des="GetHandler()" insertInfo="Card Effect.GetHandler(Effect e)" tips="返回持有当前效果e的卡片c" />
+    <template des="Clone(Effect e)" insertInfo="Effect Effect.Clone(Effect e)" tips="新建一个效果e的副本" />
+    <template des="Reset(Effect e)" insertInfo="void Effect.Reset(Effect e)" tips="把效果e重置。重置之后不可以再使用此效果" />
+    <template des="SetDescription(Effect e, integer desc)" insertInfo="void Effect.SetDescription(Effect e, integer desc)" tips="为效果e设置效果描述" />
+    <template des="SetCode(Effect e, integer code)" insertInfo="void Effect.SetCode(Effect e, integer code)" tips="为效果e设置Code属性" />
+    <template des="SetRange(Effect e, integer range)" insertInfo="void Effect.SetRange(Effect e, integer range)" tips="为效果e设置Range属性" />
+    <template des="SetTargetRange(Effect e, integer s_range, integer o_range)" insertInfo="void Effect.SetTargetRange(Effect e, integer s_range, integer o_range)" tips="为效果e设置Target Range属性" />
+    <template des="SetAbsoluteRange(Effect e, integer s_range, integer o_range)" insertInfo="void Effect.SetAbsoluteRange(Effect e, integer s_range, integer o_range)" tips="设置target range属性并设置EFFECT_FLAG_ABSOLUTE_RANGE标志" />
+    <template des="SetCountLimit(Effect e, integer count)" insertInfo="void Effect.SetCountLimit(Effect e, integer count)" tips="设置一回合可以发动的次数（仅触发型效果有效）" />
+    <template des="SetReset(Effect e, integer reset_flag, [integer reset_count=1])" insertInfo="void Effect.SetReset(Effect e, integer reset_flag, [integer reset_count=1])" tips="设置reset参数" />
+    <template des="SetReset(Effect e, integer type)" insertInfo="void Effect.SetReset(Effect e, integer type)" tips="设置Type属性" />
+    <template des="SetProperty(Effect e, integer prop)" insertInfo="void Effect.SetProperty(Effect e, integer prop)" tips="设置Property属性" />
+    <template des="SetLabel(Effect e, integer label)" insertInfo="void Effect.SetLabel(Effect e, integer label)" tips="设置Label属性" />
+    <template des="SetCategory(Effect e, integer cate)" insertInfo="void Effect.SetCategory(Effect e, integer cate)" tips="设置Category属性" />
+    <template des="SetCategory(Effect e, integer cate)" insertInfo="void Effect.SetCategory(Effect e, integer cate)" tips="设置Category属性" />
+    <template des="SetCondition(Effect e, function con_func)" insertInfo="void Effect.SetCondition(Effect e, function con_func)" tips="设置Condition属性" />
+    <template des="SetCost(Effect e, function cost_func)" insertInfo="void Effect.SetCost(Effect e, function cost_func)" tips="设置Cost属性" />
+    <template des="SetTarget(Effect e, function targ_func)" insertInfo="void Effect.SetTarget(Effect e, function targ_func)" tips="设置Target属性" />
+    <template des="SetOperation(Effect e, function op_func)" insertInfo="void Effect.SetOperation(Effect e, function op_func)" tips="设置Operation属性" />
+    <template des="SetValue(Effect e, integer|function val)" insertInfo="void Effect.SetValue(Effect e, integer|function val)" tips="设置Value属性" />
+    <template des="SetOwnerPlayer(Effect e, integer player)" insertInfo="void Effect.SetOwnerPlayer(Effect e, integer player)" tips="设置Owner player属性" />
+    <template des="GetDescription(Effect e)" insertInfo="integer Effect.GetDescription(Effect e)" tips="返回效果描述" />
+    <template des="GetCode(Effect e)" insertInfo="integer Effect.GetCode(Effect e)" tips="返回code属性" />
+    <template des="GetType(Effect e)" insertInfo="integer Effect.GetType(Effect e)" tips="返回Type属性" />
+    <template des="GetProperty(Effect e)" insertInfo="integer Effect.GetProperty(Effect e)" tips="返回Property属性" />
+    <template des="GetLabel(Effect e)" insertInfo="integer Effect.GetLabel(Effect e)" tips="返回Label属性" />
+    <template des="GetCategory(Effect e)" insertInfo="integer Effect.GetCategory(Effect e)" tips="返回Category属性" />
+    <template des="GetOwner(Effect e)" insertInfo="Card Effect.GetOwner(Effect e)" tips="返回效果拥有者" />
+    <template des="GetHandler(Effect e)" insertInfo="Card Effect.GetHandler(Effect e)" tips="返回效果在哪一张卡上生效(通常是注册该效果的卡)" />
+    <template des="GetCondition(Effect e)" insertInfo="function Effect.GetCondition(Effect e)" tips="返回condition属性" />
+    <template des="GetCost(Effect e)" insertInfo="function Effect.GetCost(Effect e)" tips="返回cost属性" />
+    <template des="GetTarget(Effect e)" insertInfo="function Effect.GetTarget(Effect e)" tips="返回target属性" />
+    <template des="GetOperation(Effect e)" insertInfo="function Effect.GetOperation(Effect e)" tips="返回operation属性" />
+    <template des="GetValue(Effect e)" insertInfo="function|integer Effect.GetValue(Effect e)" tips="返回value属性" />
+    <template des="IsHasProperty(Effect e, integer prop)" insertInfo="boolean Effect.IsHasProperty(Effect e, integer prop)" tips="检查效果是否含有标志prop" />
+    <template des="IsHasCategory(Effect e, integer cate)" insertInfo="boolean Effect.IsHasCategory(Effect e, integer cate)" tips="检查效果是否含有效果分类cate" />
+    <template des="IsHasType(Effect e, integer type)" insertInfo="boolean Effect.IsHasType(Effect e, integer type)" tips="检查效果是否属于类型type" />
+  </command>
+  <command des="group" insertInfo="" tips="">
+    <template des="CreateGroup()" insertInfo="Group Group.CreateGroup()" tips="新建一个空的卡片组" />
+    <template des="CreateGroup(Group g)" insertInfo="void Group.CreateGroup(Group g)" tips="删除卡片组g" />
+    <template des="Clone(Group g)" insertInfo="Group Group.Clone(Group g)" tips="新建卡片组g的副本" />
+    <template des="FromCards(Card c, ...)" insertInfo="Group Group.FromCards(Card c, ...)" tips="不定参数，把传入的所有卡组合成一个卡片组并返回" />
+    <template des="Clear(Group g)" insertInfo="void Group.Clear(Group g)" tips="清空卡片组" />
+    <template des="AddCard(Group g, Card c)" insertInfo="void Group.AddCard(Group g, Card c)" tips="往g中增加c" />
+    <template des="RemoveCard(Group g, Card c)" insertInfo="void Group.RemoveCard(Group g, Card c)" tips="把c从g中移除" />
+    <template des="GetFirst(Group g)" insertInfo="Card Group.GetFirst(Group g)" tips="返回g中第一张卡，并重置当前指针到g中第一张卡。如果g中不存在卡则返回nil" />
+    <template des="GetNext(Group g)" insertInfo="Card Group.GetNext(Group g)" tips="返回并使指针指向下一张卡。如果g中不存在卡则返回nil" />
+    <template des="GetCount(Group g)" insertInfo="integer Group.GetCount(Group g)" tips="返回g中卡的数量" />
+    <template des="ForEach(Group g, function f)" insertInfo="void Group.ForEach(Group g, function f)" tips="以g中的每一张卡作为参数调用一次f" />
+    <template des="Filter(Group g, function f, Card ex, ...)" insertInfo="Group Group.Filter(Group g, function f, Card ex, ...)" tips="过滤函数。从g中筛选满足筛选条件f并且不等于ex的卡。从第4个参数开始为额外参数。" />
+    <template des="FilterCount(Group g, function f, Card ex, ...)" insertInfo="integer Group.FilterCount(Group g, function f, Card ex, ...)" tips="过滤函数。和上一个函数基本相同。不同指出在于此函数只返回满足条件的卡的数量。" />
+    <template des="FilterSelect(Group g, integer player, function f,integer min, integer max, Card ex, ...)" insertInfo="Group Group.FilterSelect(Group g, integer player, function f,integer min, integer max, Card ex, ...)" tips="过滤函数。让玩家player从g中选择min-max张满足筛选条件f并且不等于ex的卡。从第7个参数开始为额外参数。" />
+    <template des="Select(Group g, integer player, integer min, integer max, Card ex)" insertInfo="Group Group.Select(Group g, integer player, integer min, integer max, Card ex)" tips="让玩家player从g中选择min-max张不等于ex的卡。" />
+    <template des="RandomSelect(Group g, integer player, integer count)" insertInfo="Group Group.RandomSelect(Group g, integer player, integer count)" tips="让玩家player从g中随机选择count张卡。因为是随机算则，所以参数player基本无用，由系统随机选取。" />
+    <template des="IsExists(Group g, function f, integer count, Card ex, ...)" insertInfo="boolean Group.IsExists(Group g, function f, integer count, Card ex, ...)" tips="过滤函数。检查g中是否存在至少count张满足筛选条件f并且不等于ex的卡。从第5个参数开始为额外参数。" />
+    <template des="CheckWithSumEqual(Group g, function f, integer sum, integer min)" insertInfo="boolean Group.CheckWithSumEqual(Group g, function f, integer sum, integer min)" tips="子集求和判定函数。f为返回一个interger值的函数（通常用于同调判定）。检查g中是否存在一个数量至少为min的子集满足以f对子集的每一个元素求值的和等于sum。" />
+    <template des="SelectWithSumEqual(Group g, integer player, function f, integer sum, integer min)" insertInfo="Group Group.SelectWithSumEqual(Group g, integer player, function f, integer sum, integer min)" tips="让玩家player从g中选取一个数量至少是min的子集使子集的特定函数的和等于sum" />
+    <template des="CheckWithSumGreater(Group g, function f, integer sum)" insertInfo="boolean Group.CheckWithSumGreater(Group g, function f, integer sum)" tips="子集求和判定函数之二。f为返回一个interger值的函数（通常用于仪式判定）。检查g中是否存在一个子集满足以f对子集的每一个元素求值的和刚好大于或者等于sum。" />
+    <template des="SelectWithSumGreater(Group g, integer player, function f, integer sum)" insertInfo="Group Group.SelectWithSumGreater(Group g, integer player, function f, integer sum)" tips="让玩家player从g中选取一个子集使子集的特定函数的和大于等于sum" />
+    <template des="GetMinGroup(Group g, function f)" insertInfo="Group Group.GetMinGroup(Group g, function f)" tips="f为返回一个interger值的函数。从g中筛选出具有最小的f的值的卡。用于地裂等卡。" />
+    <template des="GetMaxGroup(Group g, function f)" insertInfo="Group Group.GetMaxGroup(Group g, function f)" tips="f为返回一个interger值的函数。从g中筛选出具有最大的f的值的卡。用于地碎等卡。" />
+    <template des="GetSum(Group g, function f)" insertInfo="integer Group.GetSum(Group g, function f)" tips="计算g中所有卡的取值的总和。f为为每张卡的取值函数。" />
+    <template des="GetSortCount(Group g, function f)" insertInfo="integer Group.GetSortCount(Group g, function f)" tips="计算g中所有卡的种类数量。f为分类的依据，返回相同的值视为同一种类。" />
+    <template des="Remove(Group g, function f, ...)" insertInfo="Group Group.Remove(Group g, function f, ...)" tips="过滤函数。从g中移除满足筛选条件f的所有卡。第三个参数开始是额外参数。" />
+    <template des="Merge(Group g1, Group g2)" insertInfo="Group Group.Merge(Group g1, Group g2)" tips="把g2中的所有卡合并到g1。" />
+    <template des="IsContains(Group g, Card c)" insertInfo="boolean Group.IsContains(Group g, Card c)" tips="检查g中是否存在卡片c" />
+    <template des="SearchCard(Group g, function f, ...)" insertInfo="Card Group.SearchCard(Group g, function f, ...)" tips="过滤函数。返回g中满足筛选条件f的第一张卡。第三个参数为额外参数。" />
+  </command>
+  <command des="Duel" insertInfo="" tips="">
+    <template des="GetLP(integer player)" insertInfo="integer Duel.GetLP(integer player)" tips="返回玩家player的当前LP" />
+    <template des="SetLP(integer player, integer lp)" insertInfo="void Duel.SetLP(integer player, integer lp)" tips="设置玩家player的当前LP为lp" />
+    <template des="GetTurnPlayer()" insertInfo="integer Duel.GetTurnPlayer()" tips="返回当前的回合玩家" />
+    <template des="GetTurnCount()" insertInfo="integer Duel.GetTurnCount()" tips="返回当前的回合数" />
+    <template des="GetDrawCount(integer player)" insertInfo="integer Duel.GetDrawCount(integer player)" tips="返回玩家player每回合的规则抽卡数量" />
+    <template des="DebugMessage(any msg)" insertInfo="void Duel.DebugMessage(any msg)" tips="Debug用函数，用于显示信息" />
+    <template des="RegisterEffect(Effect e, integer player)" insertInfo="void Duel.RegisterEffect(Effect e, integer player)" tips="把效果作为玩家player的效果注册给全局环境。" />
+    <template des="RegisterFlagEffect(integer player, integer code, integer reset_flag, integer property, integer reset_count)" insertInfo="Effect Duel.RegisterFlagEffect(integer player, integer code, integer reset_flag, integer property, integer reset_count)" tips="此函数为玩家player注册全局环境下的标识效果。此效果总是影响玩家的(EFFECT_FLAG_PLAYER_TARGET)并且不会被无效化。其余部分与Card.RegisterFlagEffect相同" />
+    <template des="GetFlagEffect(integer player, integer code)" insertInfo="integer Duel.GetFlagEffect(integer player, integer code)" tips="返回玩家player的特定的标识效果的数量" />
+    <template des="ResetFlagEffect(integer player, integer code)" insertInfo="void Duel.ResetFlagEffect(integer player, integer code)" tips="手动reset玩家player的特定的标识效果" />
+    <template des="Destroy(Card|Group targets, integer reason)" insertInfo="integer Duel.Destroy(Card|Group targets, integer reason)" tips="以reason原因破坏targets。返回值是实际被破坏的数量。" />
+    <template des="Remove(Card|Group targets, integer pos, integer reason)" insertInfo="integer Duel.Remove(Card|Group targets, integer pos, integer reason)" tips="以reason原因，pos表示形式除外targets。返回值是实际被操作的数量。" />
+    <template des="SendtoGrave(Card|Group targets, integer reason)" insertInfo="integer Duel.SendtoGrave(Card|Group targets, integer reason)" tips="以reason原因把targets送去墓地。返回值是实际被操作的数量。" />
+    <template des="SendtoHand(Card|Group targets, integer player | nil, integer reason)" insertInfo="integer Duel.SendtoHand(Card|Group targets, integer player | nil, integer reason)" tips="以reason原因把targets送去玩家player的手牌。返回值是实际被操作的数量。" />
+    <template des="SendtoDeck(Card|Group targets, integer player | nil, integer seq, integer reason)" insertInfo="integer Duel.SendtoDeck(Card|Group targets, integer player | nil, integer seq, integer reason)" tips="以reason原因把targets送去玩家player的卡组。返回值是实际被操作的数量。" />
+    <template des="GetOperatedGroup()" insertInfo="Group Duel.GetOperatedGroup()" tips="此函数返回之前一次卡片操作实际操作的卡片组。包括Duel.Destroy, Duel.Remove, Duel.SendtoGrave, Duel.SendtoHand, Duel.SendtoDeck, Duel.Release, Duel.ChangePosition, Duel.SpecialSummon" />
+    <template des="Summon(integer player, Card c, boolean ignore_count, Effect e)" insertInfo="void Duel.Summon(integer player, Card c, boolean ignore_count, Effect e)" tips="让玩家以效果e对c进行通常召唤（非set)。如果e=nil,那么就按照一般的通常召唤规则进行通常召唤。如果ignore_count=true，则忽略每回合的通常召唤次数限制。" />
+    <template des="SpecialSummonRule(integer player, Card c)" insertInfo="void Duel.SpecialSummonRule(integer player, Card c)" tips="让玩家player对c进行特殊召唤手续。" />
+    <template des="SynchroSummon(integer player, Card c, Card tuner)" insertInfo="void Duel.SynchroSummon(integer player, Card c, Card tuner)" tips="让玩家player以tuner作为调整对c进行特殊召唤手续。" />
+    <template des="MSet(integer player, Card c, boolean ignore_count, Effect e)" insertInfo="void Duel.MSet(integer player, Card c, boolean ignore_count, Effect e)" tips="让玩家以效果e对c进行通常召唤的Set。如果e=nil,那么就按照一般的通常召唤规则进行通常召唤。如果ignore_count=true，则忽略每回合的通常召唤次数限制。" />
+    <template des="SSet(integer player, Card c)" insertInfo="void Duel.SSet(integer player, Card c)" tips="让玩家player把c放置到魔法陷阱区" />
+    <template des="CreateToken(integer player, integer code, integer setcode, integer attack, integer defence, integer level, integer race, integer attribute)" insertInfo="Card Duel.CreateToken(integer player, integer code, integer setcode, integer attack, integer defence, integer level, integer race, integer attribute)" tips="以传入的参数数值新建一个Token" />
+    <template des="SpecialSummon(Card|Group targets, integer sumtype, integer sumplayer, integer target_player, boolean nocheck, boolean nolimit, integer pos)" insertInfo="integer Duel.SpecialSummon(Card|Group targets, integer sumtype, integer sumplayer, integer target_player, boolean nocheck, boolean nolimit, integer pos)" tips="让玩家player以sumtype方式，pos表示形式把targets特殊召唤到target_player场上。如果nocheck为true则无视卡的召唤条件。如果nolimit为true则无视卡的苏生限制。返回值是特殊召唤成功的卡的数量。" />
+    <template des="SpecialSummonStep(Card c, integer sumtype, integer sumplayer, integer target_player, boolean nocheck, boolean nolimit, integer pos)" insertInfo="boolean Duel.SpecialSummonStep(Card c, integer sumtype, integer sumplayer, integer target_player, boolean nocheck, boolean nolimit, integer pos)" tips="此函数是上一个函数的分解过程，只特殊召唤一张卡c。此函数用于一个效果需要双方同时特殊召唤时。此函数必须和下面的函数一起使用。返回值表示是否特殊召唤成功。" />
+    <template des="SpecialSummonComplete()" insertInfo="integer Duel.SpecialSummonComplete()" tips="此函数在确定复数个上一个函数调用完毕之后调用。用于触发事件。" />
+    <template des="RemoveCounter(integer player, integer s, integer o, integer countertype, integer count, integer reason)" insertInfo="void Duel.RemoveCounter(integer player, integer s, integer o, integer countertype, integer count, integer reason)" tips="让玩家player移除场上存在的countertype类型的count个指示物。s表示对player来说的己方的可移除指示物的位置，o表示对player来说的对方的可移除指示物的位置" />
+    <template des="IsCanRemoveCounter(integer player, integer s, integer o, integer countertype, integer count, integer reason)" insertInfo="boolean Duel.IsCanRemoveCounter(integer player, integer s, integer o, integer countertype, integer count, integer reason)" tips="检查玩家player是否能移除场上的countertype类型的count个指示物。s和o参数作用同上。" />
+    <template des="GetCounter(integer player, integer s, integer o, integer countertype)" insertInfo="integer Duel.GetCounter(integer player, integer s, integer o, integer countertype)" tips="返回场上存在的countertype类型的指示物的数量。s和o参数作用同上。" />
+    <template des="ChangePosition(Card|Group targets,integer au, [integer ad=au, integer du=au, integer dd=au, boolean noflip=false])" insertInfo="integer Duel.ChangePosition(Card|Group targets,integer au, [integer ad=au, integer du=au, integer dd=au, boolean noflip=false])" tips="改变targets的表示形式。表侧攻击表示的变成au，里侧攻击表示的变成ad, 表侧守备表示变成du,里侧守备表示变成dd" />
+    <template des="Release(Card|Group targets, integer reason)" insertInfo="integer Duel.Release(Card|Group targets, integer reason)" tips="以reason原因解放targets。返回值是实际解放的数量。" />
+    <template des="MoveToField(Card c, integer move_player, integer target_player,integer dest, integer pos, boolean enabled)" insertInfo="void Duel.MoveToField(Card c, integer move_player, integer target_player,integer dest, integer pos, boolean enabled)" tips="让玩家move_player把c移动的target_player的场上。dest只能是LOCATION_MZONE或者LOCATION_SZONE。pos表示可选表示形式。enable表示是否立刻适用c的效果。" />
+    <template des="ReturnToField(Card c)" insertInfo="void Duel.ReturnToField(Card c)" tips="把c返回到场上。c必须是以REASON_TEMPORARY原因离场，并且离场后没有离开过那个位置。" />
+    <template des="MoveSequence(Card c, integer seq)" insertInfo="void Duel.MoveSequence(Card c, integer seq)" tips="移动c的序号。通常用于在场上换格子或者在卡组中移动到最上方或者最下方。" />
+    <template des="SetChainLimit(function f)" insertInfo="void Duel.SetChainLimit(function f)" tips="设定连锁条件。f是接受一个Effect类型作为参数并且返回boolean值的函数。在cost或者target处理中调用此函数可以限制可以连锁的效果的种类（如超融合）。如果f返回false表示不能连锁。一旦设置连锁条件后发生了新的连锁那么连锁条件将会解除。" />
+    <template des="SetChainLimitTillChainEnd(function f)" insertInfo="void Duel.SetChainLimitTillChainEnd(function f)" tips="功能同上，但是此函数设定的连锁条件直到连锁结束才会解除。" />
+    <template des="GetChainMaterial(integer player)" insertInfo="Effect Duel.GetChainMaterial(integer player)" tips="返回玩家player受到的连锁素材的效果。此函数仅用于融合类卡的效果。" />
+    <template des="ConfirmDeckTop(integer player, integer count)" insertInfo="void Duel.ConfirmDeckTop(integer player, integer count)" tips="确认玩家player卡组最上方的count张卡。双方均可确认。" />
+    <template des="ConfirmCards(integer player, Card|Group targets)" insertInfo="void Duel.ConfirmCards(integer player, Card|Group targets)" tips="给玩家player确认targets" />
+    <template des="SortDecktop(integer sort_player, integer target_player, integer count)" insertInfo="void Duel.SortDecktop(integer sort_player, integer target_player, integer count)" tips="让玩家sort_player对玩家target_player的卡组最上方count张卡进行排序" />
+    <template des="CheckEvent(integer event)" insertInfo="boolean Duel.CheckEvent(integer event)" tips="检查当前是否是event时点" />
+    <template des="RaiseEvent(Group eg,integer code, Effect reason_effect, integer reason, integer reason_player,integer event_player, integer event param)" insertInfo="void Duel.RaiseEvent(Group eg,integer code, Effect reason_effect, integer reason, integer reason_player,integer event_player, integer event param)" tips="触发一个事件。" />
+    <template des="RaiseSingleEvent(Card ec,integer code, Effect reason_effect, integer reason, integer reason_player,integer event_player, integer event param)" insertInfo="void Duel.RaiseSingleEvent(Card ec,integer code, Effect reason_effect, integer reason, integer reason_player,integer event_player, integer event param)" tips="触发一个单体事件。" />
+    <template des="GetEnvironment()" insertInfo="integer, integer Duel.GetEnvironment()" tips="返回两个值，表示当前场地代号，以及当前场地效果的来源玩家。场地代号指当前生效的场地卡的代号，或者海神的巫女把场地变化效果的值。来源玩家指当前生效的场地卡的控制者，或者海神的巫女等卡的控制者。" />
+    <template des="Win(function f, Effect e, integer player)" insertInfo="void Duel.Win(function f, Effect e, integer player)" tips="在当前效果处理完之后调用f进行胜负检测。e和player作为f的两个参数传递给f。f返回值的低16位表示胜负判定玩家，0表示玩家1胜利，1表示玩家2胜利，2表示平局，此外是无胜负兵继续进行。高16位表示胜负的原因。" />
+    <template des="Draw(integer player, integer count, integer reason)" insertInfo="integer Duel.Draw(integer player, integer count, integer reason)" tips="让玩家player以原因reason抽count张卡。返回实际抽的卡的数量。" />
+    <template des="Damage(integer player, integer value, integer reason)" insertInfo="integer Duel.Damage(integer player, integer value, integer reason)" tips="以reason原因给与玩家player造成value的伤害。返回实际收到的伤害值。如果受到伤害变成回复等效果的影响时，返回值为0." />
+    <template des="Recover(integer player, integer value, integer reason)" insertInfo="integer Duel.Recover(integer player, integer value, integer reason)" tips="以reason原因使玩家player回复value的LP。返回实际的回复值。如果受到回复变成伤害等效果的影响时，返回值为0." />
+    <template des="Equip(integer player, Card c1, Card c2)" insertInfo="boolean Duel.Equip(integer player, Card c1, Card c2)" tips="把c1作为玩家player的装备卡装备给c2。返回值表示是否成功。" />
+    <template des="GetControler(integer player, Card c)" insertInfo="boolean Duel.GetControler(integer player, Card c)" tips="让玩家player得到c的控制权。返回值表示是否成功。" />
+    <template des="SwapControler(Card c1, Card c2)" insertInfo="boolean Duel.SwapControler(Card c1, Card c2)" tips="交换c1和c2的控制权。返回值表示是否成功。" />
+    <template des="CheckLPCost(integer player, integer cost)" insertInfo="boolean Duel.CheckLPCost(integer player, integer cost)" tips="检查玩家player是否能支付cost点lp" />
+    <template des="PayLPCost(integer player, integer cost)" insertInfo="void Duel.PayLPCost(integer player, integer cost)" tips="让玩家player支付cost点lp" />
+    <template des="DiscardDeck(integer player, integer count, integer reason)" insertInfo="integer Duel.DiscardDeck(integer player, integer count, integer reason)" tips="以原因reason把玩家player的卡组最上端count张卡送去墓地.返回实际转移的数量。" />
+    <template des="DiscardHand(integer player, function f, integer min, integer max, integer reason, Card ex, ...)" insertInfo="integer Duel.DiscardHand(integer player, function f, integer min, integer max, integer reason, Card ex, ...)" tips="过滤函数。让玩家player选择并丢弃满足筛选条件f兵不等于ex的min-max张手卡。第7个参数开始为额外参数。" />
+    <template des="DisableShuffleCheck()" insertInfo="void Duel.DisableShuffleCheck()" tips="使下一个操作不检查是否需要洗卡组或者洗手卡。" />
+    <template des="ShuffleDeck(integer player)" insertInfo="void Duel.ShuffleDeck(integer player)" tips="手动洗玩家player的卡组" />
+    <template des="ShuffleHand(integer player)" insertInfo="void Duel.ShuffleHand(integer player)" tips="手动洗玩家player的手卡" />
+    <template des="ChaingeAttacker(Card c)" insertInfo="void Duel.ChaingeAttacker(Card c)" tips="把当前的攻击卡替换成c进行攻击" />
+    <template des="ReplaceAttacker(Card c)" insertInfo="void Duel.ReplaceAttacker(Card c)" tips="用c代替当前攻击的卡进行伤害阶段" />
+    <template des="ChaingeAttackTarget(Card c)" insertInfo="void Duel.ChaingeAttackTarget(Card c)" tips="把当前的攻击目标替换成c。如果c=nil则变成直接攻击。" />
+    <template des="ReplaceAttackTarget(Card c)" insertInfo="void Duel.ReplaceAttackTarget(Card c)" tips="(预留）" />
+    <template des="GetBattleDamage(integer player)" insertInfo="integer Duel.GetBattleDamage(integer player)" tips="返回玩家player在本次战斗中收到的伤害" />
+    <template des="ChangeBattleDamage(integer player, integer value)" insertInfo="void Duel.ChangeBattleDamage(integer player, integer value)" tips="把玩家player在本次战斗中收到的伤害变成value" />
+    <template des="ChangeTarget(integer chainc, Group g)" insertInfo="void Duel.ChangeTarget(integer chainc, Group g)" tips="把连锁chainc的对象换成g" />
+    <template des="ChangeTargetPlayer(integer chainc, integer player)" insertInfo="void Duel.ChangeTargetPlayer(integer chainc, integer player)" tips="把连锁chainc的对象玩家换成player" />
+    <template des="ChangeTargetParam(integer chainc, integer param)" insertInfo="void Duel.ChangeTargetParam(integer chainc, integer param)" tips="把连锁chainc的对象参数换成param" />
+    <template des="BreakEffect()" insertInfo="void Duel.BreakEffect()" tips="中断当前效果，使之后的效果处理视为不同时处理。此函数会造成错时点。" />
+    <template des="ChangeChainOperation(integer chainc, function f)" insertInfo="void Duel.ChangeChainOperation(integer chainc, function f)" tips="把连锁chainc的效果的处理函数换成f。用于实现“把效果变成”等的效果" />
+    <template des="NegateActivation(integer chainc)" insertInfo="void Duel.NegateActivation(integer chainc)" tips="使连锁chainc的发动无效" />
+    <template des="NegateEffect(integer chainc)" insertInfo="void Duel.NegateEffect(integer chainc)" tips="使连锁chainc的效果无效" />
+    <template des="NegateSummon(Card c)" insertInfo="void Duel.NegateSummon(Card c)" tips="使正在召唤，反转召唤，特殊召唤的c的召唤无效" />
+    <template des="IncreaseSummonCount()" insertInfo="void Duel.IncreaseSummonCount()" tips="本回合的通常召唤限制计数+1" />
+    <template des="CheckSummonCount()" insertInfo="boolean Duel.CheckSummonCount()" tips="检查回合玩家本回合的通常召唤限制计数。" />
+    <template des="GetLocationCount(integer player, integer location)" insertInfo="integer Duel.GetLocationCount(integer player, integer location)" tips="返回玩家player的指定场地location剩余的空格数。location只能是LOCATION_MZONE或者LOCATION_SZONE。" />
+    <template des="GetFieldCard(integer controler, integer location, integer sequence)" insertInfo="Card Duel.GetFieldCard(integer controler, integer location, integer sequence)" tips="返回指定玩家指定地点指定序号的卡" />
+    <template des="GetCurrentChain()" insertInfo="integer Duel.GetCurrentChain()" tips="返回当前正在处理的连锁序号" />
+    <template des=".. Duel.GetChainInfo(integer chainc, ...)" insertInfo="... Duel.GetChainInfo(integer chainc, ...)" tips="返回连锁chainc的信息。如果chainc=0，则返回当前正在处理的连锁的信息。" />
+    <template des="GetCurrentPhase()" insertInfo="integer Duel.GetCurrentPhase()" tips="返回当前的阶段" />
+    <template des="SkipPhase(integer player, integer phase, integer reset_flag, integer reset_count)" insertInfo="void Duel.SkipPhase(integer player, integer phase, integer reset_flag, integer reset_count)" tips="跳过玩家player的phase阶段，并在特定的阶段后reset。reset参数和效果相同。" />
+    <template des="IsDamageCalculated()" insertInfo="boolean Duel.IsDamageCalculated()" tips="用于在伤害阶段检查是否已经计算了战斗伤害。" />
+    <template des="GetAttacker()" insertInfo="Card Duel.GetAttacker()" tips="返回此次战斗攻击的卡" />
+    <template des="GetAttackTarget()" insertInfo="Card Duel.GetAttackTarget()" tips="返回此次战斗被攻击的卡。如果返回nil表示是直接攻击。" />
+    <template des="DisableAttack()" insertInfo="void Duel.DisableAttack()" tips="使本次攻击无效" />
+    <template des="ChainAttack()" insertInfo="void Duel.ChainAttack()" tips="使攻击卡再进行一次连续攻击（开辟，破灭的女王）" />
+    <template des="Readjust()" insertInfo="void Duel.Readjust()" tips="刷新场上的卡的信息。非特定情况或者不清楚原理请勿使用此函数以免形成死循环。" />
+    <template des="GetFieldGroup(integer player, integer s, integer o)" insertInfo="Group Duel.GetFieldGroup(integer player, integer s, integer o)" tips="返回指定位置的卡。s指对玩家player来说的己方的位置，o指对玩家player来说的对方的位置。下面提到的指定位置均为此意。" />
+    <template des="GetFieldGroupCount(integer player, integer s, integer o)" insertInfo="integer Duel.GetFieldGroupCount(integer player, integer s, integer o)" tips="同上，返回值变成卡的数量" />
+    <template des="GetDecktopGroup(integer player, integer count)" insertInfo="Group Duel.GetDecktopGroup(integer player, integer count)" tips="返回玩家player的卡组最上方的count张卡" />
+    <template des="GetMatchingGroup(function f, integer player, integer s, integer o, Card ex, ...)" insertInfo="Group Duel.GetMatchingGroup(function f, integer player, integer s, integer o, Card ex, ...)" tips="过滤函数，返回指定位置满足过滤条件f并且不等于ex的卡。第6个参数开始为额外参数。" />
+    <template des="GetMatchingGroupCount(function f, integer player, integer s, integer o, Card ex, ...)" insertInfo="integer Duel.GetMatchingGroupCount(function f, integer player, integer s, integer o, Card ex, ...)" tips="同上，返回值变成符合的卡的数量。" />
+    <template des="GetFirstMatchingCard(function f, integer player, integer s, integer o, Card ex, ...)" insertInfo="Card Duel.GetFirstMatchingCard(function f, integer player, integer s, integer o, Card ex, ...)" tips="过滤函数，返回指定位置满足过滤条件f并且不等于ex的第一张卡。第6个参数开始为额外参数。" />
+    <template des="IsExistingMatchingCard(function f, integer player, integer s, integer o, integer count, Card ex, ...)" insertInfo="boolean Duel.IsExistingMatchingCard(function f, integer player, integer s, integer o, integer count, Card ex, ...)" tips="过滤函数，检查指定位置是否存在至少count张满足过滤条件f并且不等于ex的卡。第7个参数开始为额外参数。" />
+    <template des="SelectMatchingCard(integer sel_player, function f, integer player, integer s, integer o, integer min, integer max, Card ex, ...)" insertInfo="Group Duel.SelectMatchingCard(integer sel_player, function f, integer player, integer s, integer o, integer min, integer max, Card ex, ...)" tips="过滤函数，让玩家sel_player选择指定位置满足过滤条件f并且不等于ex的min-max张卡。第9个参数开始为额外参数。" />
+    <template des="GetReleaseGroup(integer player)" insertInfo="Group Duel.GetReleaseGroup(integer player)" tips="返回玩家player可解放（非上级召唤用)的卡片组" />
+    <template des="GetReleaseGroupCount(integer player)" insertInfo="integer Duel.GetReleaseGroupCount(integer player)" tips="返回玩家player可解放（非上级召唤用)的卡片数量" />
+    <template des="ChecktReleaseGroup(integer player, function f, integer count, Card ex, ...)" insertInfo="boolean Duel.ChecktReleaseGroup(integer player, function f, integer count, Card ex, ...)" tips="过滤函数，检查玩家player是否存在至少count张不等于ex的满足条件f的可解放的卡" />
+    <template des="SelectReleaseGroup(integer player, function f, integer min, integer max, Card ex, ...)" insertInfo="Group Duel.SelectReleaseGroup(integer player, function f, integer min, integer max, Card ex, ...)" tips="过滤函数，让玩家player选择min-max张不等于ex的满足条件f的可解放的卡并返回" />
+    <template des="GetTributeGroup(Card c)" insertInfo="Group Duel.GetTributeGroup(Card c)" tips="返回用于通常召唤c可解放（上级召唤用)的卡片组" />
+    <template des="GetTributeCount(Card c)" insertInfo="integer Duel.GetTributeCount(Card c)" tips="返回用于通常召唤c的祭品数量。此数量不一定等于上一个函数的返回值中的卡片数量。因为某些卡可以作为两个祭品来使用。" />
+    <template des="SelectTribute(integer player, Card c, integer min, integer max)" insertInfo="Group Duel.SelectTribute(integer player, Card c, integer min, integer max)" tips="让玩家player选择用于通常召唤c的min-max个祭品。" />
+    <template des="GetTargetCount(function f, integer player, integer s, integer o, Card ex, ...)" insertInfo="integer Duel.GetTargetCount(function f, integer player, integer s, integer o, Card ex, ...)" tips="基本同Duel.GetMatchingGroupCount，不同之处在于需要追加判定卡片是否能成为当前正在处理的效果的对象。" />
+    <template des="IsExistingTarget(function f, integer player, integer s, integer o, integer count, Card ex, ...)" insertInfo="boolean Duel.IsExistingTarget(function f, integer player, integer s, integer o, integer count, Card ex, ...)" tips="过滤函数，检查指定位置是否存在至少count张满足过滤条件f并且不等于ex并且可以成为当前正在处理的效果的对象的卡。第7个参数开始为额外参数。" />
+    <template des="SelectTarget(integer sel_player, function f, integer player, integer s, integer o, integer min, integer max, Card ex, ...)" insertInfo="Group Duel.SelectTarget(integer sel_player, function f, integer player, integer s, integer o, integer min, integer max, Card ex, ...)" tips="过滤函数，让玩家sel_player选择指定位置满足过滤条件f并且不等于ex并且可以成为当前正在处理的效果的对象的min-max张卡。第9个参数开始为额外参数。此函数会同时酱当前正在处理的连锁的对象设置成选择的卡" />
+    <template des="SelectFusionMaterial(integer player, Card c, Group g)" insertInfo="Group Duel.SelectFusionMaterial(integer player, Card c, Group g)" tips="让玩家player从g中选择一组满足c的融合素材的卡" />
+    <template des="SetFusionMaterial(Group g)" insertInfo="void Duel.SetFusionMaterial(Group g)" tips="设置g为需要使用的融合素材" />
+    <template des="SetSynchroMaterial(Group g)" insertInfo="void Duel.SetSynchroMaterial(Group g)" tips="设置g为需要使用的同调素材" />
+    <template des="SelectSynchroMaterial(integer player, Card c, function f1, function f2, integer min)" insertInfo="Group Duel.SelectSynchroMaterial(integer player, Card c, function f1, function f2, integer min)" tips="让玩家选择用于同调c需要的满足条件的数量至少是min的一组素材。" />
+    <template des="CheckSynchroMaterial(Card c, function f1, function f2, integer min)" insertInfo="boolean Duel.CheckSynchroMaterial(Card c, function f1, function f2, integer min)" tips="检查是否存在一组满足条件的卡作为同调召唤c的素材。f1,f2,min同上。" />
+    <template des="SelectTunerMaterial(integer player, Card c, Card tuner, function f1, function f2, integer min)" insertInfo="Group Duel.SelectTunerMaterial(integer player, Card c, Card tuner, function f1, function f2, integer min)" tips="让玩家选择用于同调c需要的满足条件的以tuner作为调整的数量至少是min的一组素材。" />
+    <template des="CheckTunerMaterial(Card c, Card tuner, function f1, function f2, integer min)" insertInfo="boolean Duel.CheckTunerMaterial(Card c, Card tuner, function f1, function f2, integer min)" tips="检查以tuner作为调整是否存在一组满足条件的卡作为同调召唤c的素材。f1,f2,min同上。" />
+    <template des="GetRitualMaterial(integer player)" insertInfo="Group Duel.GetRitualMaterial(integer player)" tips="返回玩家player可用的用于仪式召唤素材的卡片组。包含手上，场上可解放的以及墓地的仪式魔人等卡。" />
+    <template des="ReleaseRitualMaterial(Group g)" insertInfo="void Duel.ReleaseRitualMaterial(Group g)" tips="解放仪式用的素材g。如果是墓地的仪式魔人等卡则除外。" />
+    <template des="SetTargetCard(Group g)" insertInfo="void Duel.SetTargetCard(Group g)" tips="把当前正在处理的连锁的对象设置成g。" />
+    <template des="SetTargetPlayer(integer player)" insertInfo="void Duel.SetTargetPlayer(integer player)" tips="把当前正在处理的连锁的对象玩家设置成player。" />
+    <template des="SetTargetParam(integer param)" insertInfo="void Duel.SetTargetParam(integer param)" tips="把当前正在处理的连锁的对象参数设置成param。" />
+    <template des="SetOperationInfo(integer chainc, integer category, Card|Group targets, integer count, integer target_player, integer target_param)" insertInfo="void Duel.SetOperationInfo(integer chainc, integer category, Card|Group targets, integer count, integer target_player, integer target_param)" tips="设置当前处理的连锁的操作信息。此操作信息包含了效果处理中确定要处理的效果分类。比如潜行狙击手需要设置CATEGORY_DICE，但是不能设置CATEGORY_DESTROY，因为不确定。对于破坏效果，targets需要设置成发动时可能成为连锁的影响对象的卡，并设置count为发动时确定的要处理的卡的数量。比如黑洞发动时，targets需要设定为场上的所有怪物，count设置成场上的怪的数量。对于CATEGORY_SPECIAL_SUMMON,CATEGORY_TOHAND,CATEGORY_TODECK等分类，如果取对象则设置targets为对象，count为对象的数量；如果不取对象则设置targets为nil,count为预计要处理的卡的数量，并设置target_param为预计要处理的卡的位置。例如增援：SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,LOCATION_DECK)。操作信息用于很多效果的发动的检测，例如星尘龙，王家沉眠之谷等。" />
+    <template des=".. Duel.GetOperationInfo(integer chainc, integer category)" insertInfo="... Duel.GetOperationInfo(integer chainc, integer category)" tips="返回连锁chainc的category分类的操作信息。返回值为5个，第一个返回值是false的话表示不存在该分类。后4个返回值对应上一个函数的后4个参数。" />
+    <template des="GetOperationCount(integer chainc)" insertInfo="integer Duel.GetOperationCount(integer chainc)" tips="返回连锁chainc包含的操作分类的数量" />
+    <template des="GetExceedMaterial(Card c)" insertInfo="Group Duel.GetExceedMaterial(Card c)" tips="返回c的超量素材" />
+    <template des="Overlay(Card c, Card|Group ocard)" insertInfo="void Duel.Overlay(Card c, Card|Group ocard)" tips="把ocard作为c的叠放卡叠放" />
+    <template des="GetOverlayGroup(integer player, integer s, integer o)" insertInfo="Group Duel.GetOverlayGroup(integer player, integer s, integer o)" tips="返回指定位置的所有叠放的卡" />
+    <template des="GetOverlayCount(integer player, integer s, integer o)" insertInfo="Integer Duel.GetOverlayCount(integer player, integer s, integer o)" tips="返回指定位置的所有叠放的卡的数量" />
+    <template des="RemoveOverlayCard(integer player, integer s, integer o, integer min, integer max, integer reason)" insertInfo="void Duel.RemoveOverlayCard(integer player, integer s, integer o, integer min, integer max, integer reason)" tips="以reason原因移除指定位置的min-max张叠放卡" />
+    <template des="Hint(integer player, integer desc)【作废函数】" insertInfo="void Duel.Hint(integer player, integer desc)" tips="给玩家发送内置消息提示" />
+	 <template des="Hint(integer HINT_，integer player, integer HINT_)" insertInfo="void Duel.Hint(integer HINT_，integer player, integer HINT_)" tips="给玩家发送内置消息提示 HINT_常量" />
+    <template des="SelectEffectYesNo(integer player, integer code)" insertInfo="boolean Duel.SelectEffectYesNo(integer player, integer code)" tips="让玩家选择是否发动卡的效果" />
+    <template des="SelectYesNo(integer player, integer desc)" insertInfo="boolean Duel.SelectYesNo(integer player, integer desc)" tips="让玩家选择是或否" />
+    <template des="SelectOption(integer player, ...)" insertInfo="integer Duel.SelectOption(integer player, ...)" tips="让玩家选择选项。从第二个参数开始，每一个参数代表一条选项。" />
+    <template des="SelectDisableField(integer player, integer count, integer s, integer o, integer filter)" insertInfo="integer Duel.SelectDisableField(integer player, integer count, integer s, integer o, integer filter)" tips="让玩家player选择指定位置的count个位置不能使用。" />
+    <template des="AnnounceRace(integer player, integer count, integer available)" insertInfo="integer Duel.AnnounceRace(integer player, integer count, integer available)" tips="让玩家player从可选的种族中宣言count个种族。available是所有可选种族的组合值。" />
+    <template des="AnnounceAttribute(integer player, integer count, integer available)" insertInfo="integer Duel.AnnounceAttribute(integer player, integer count, integer available)" tips="让玩家player从可选的属性中宣言count个属性。available是所有可选属性的组合值。" />
+    <template des="AnnounceCard(integer player)" insertInfo="integer Duel.AnnounceCard(integer player)" tips="让玩家player宣言一个卡片代号。" />
+    <template des="AnnounceType(integer player)" insertInfo="integer Duel.AnnounceType(integer player)" tips="让玩家player宣言一个卡片类型。" />
+    <template des="AnnounceNumber(integer player, ...)" insertInfo="integer Duel.AnnounceNumber(integer player, ...)" tips="让玩家player宣言一个数字。从第二个参数开始，每一个参数代表一个可宣言的数字。" />
+    <template des="AnnounceCoin(integer player)" insertInfo="integer Duel.AnnounceCoin(integer player)" tips="让玩家player宣言硬币的正反面。" />
+    <template des=".. Duel.TossCoin(integer player, integer count)" insertInfo="... Duel.TossCoin(integer player, integer count)" tips="让玩家player投count次硬币。返回值为count个结果。结果是0或者1." />
+    <template des=".. Duel.TossDice(integer player, integer count)" insertInfo="... Duel.TossDice(integer player, integer count)" tips="让玩家player投count次骰子。返回值为count个结果。结果是1-6." />
+    <template des="SetCoinResult( ... )" insertInfo="void Duel.SetCoinResult( ... )" tips="强行修改投硬币的结果。此函数用于永续的EVENT_TOSS_COIN事件中" />
+    <template des="SetDiceResult( ... )" insertInfo="void Duel.SetDiceResult( ... )" tips="强行修改投骰子的结果。此函数用于永续的EVENT_TOSS_DICE事件中" />
+    <template des="IsPlayerAffectByEffect(integer player, integer code)" insertInfo="boolean Duel.IsPlayerAffectByEffect(integer player, integer code)" tips="检查玩家player是否受特性效果的影响" />
+    <template des="IsPlayerCanDraw(integer player)" insertInfo="boolean Duel.IsPlayerCanDraw(integer player)" tips="检查玩家player是否可以效果抽卡" />
+    <template des="IsPlayerCanDiscardDeck(integer player)" insertInfo="boolean Duel.IsPlayerCanDiscardDeck(integer player)" tips="检查玩家player是否可以把卡组顶端的卡送去墓地" />
+    <template des="IsPlayerCanDiscardDeckAdCost(integer player, int count)" insertInfo="boolean Duel.IsPlayerCanDiscardDeckAdCost(integer player, int count)" tips="检查玩家player是否可以把卡组顶端的卡送去墓地作为cost。当卡组没有足够数量的卡，或者当卡组中的卡受到送墓转移效果的影响时（如大宇宙，次元裂缝，即使不是全部）此函数会返回false" />
+    <template des="IsPlayerCanSummon(integer player, integer sumtype, Card c)" insertInfo="boolean Duel.IsPlayerCanSummon(integer player, integer sumtype, Card c)" tips="检查玩家player是否可以以sumtype方式通常召唤c。仅当玩家收到“不能上级召唤”等效果的影响时返回false。" />
+    <template des="IsPlayerCanFlipSummon(integer player, Card c)" insertInfo="boolean Duel.IsPlayerCanFlipSummon(integer player, Card c)" tips="检查玩家player是否可以反转召唤c。" />
+    <template des="IsPlayerCanSpecialSummonMonster(integer player, integet code, integer setcode, integer attack, integer defence integer level, integer race, integer attribute, [integer pos=POS_FACEUP, integer target_player=player])" insertInfo="boolean Duel.IsPlayerCanSpecialSummonMonster(integer player, integet code, integer setcode, integer attack, integer defence integer level, integer race, integer attribute, [integer pos=POS_FACEUP, integer target_player=player])" tips="检查玩家player是否可以以pos的表示形式特殊召唤特定属性值的怪物到target_player场上。此函数通常用于判定是否可以特招token和陷阱怪物。" />
+    <template des="IsPlayerCanRelease(integer player, Card c)" insertInfo="boolean Duel.IsPlayerCanRelease(integer player, Card c)" tips="检查玩家是否能解放c" />
+    <template des="IsPlayerCanRemove(integer player, Card c)" insertInfo="boolean Duel.IsPlayerCanRemove(integer player, Card c)" tips="检查玩家是否能除外c" />
+    <template des="IsPlayerCanSendtoHand(integer player, Card c)" insertInfo="boolean Duel.IsPlayerCanSendtoHand(integer player, Card c)" tips="检查玩家是否能把c送去手牌" />
+    <template des="IsPlayerCanSendtoGrave(integer player, Card c)" insertInfo="boolean Duel.IsPlayerCanSendtoGrave(integer player, Card c)" tips="检查玩家是否能把c送去墓地" />
+    <template des="IsPlayerCanSendtoDeck(integer player, Card c)" insertInfo="boolean Duel.IsPlayerCanSendtoDeck(integer player, Card c)" tips="检查玩家是否能把c送去卡组" />
+    <template des="IsChainInactivatable(integer chainc)" insertInfo="boolean Duel.IsChainInactivatable(integer chainc)" tips="检查连锁chainc的发动是否可以被无效化" />
+    <template des="IsChainDisablable(integer chainc)" insertInfo="boolean Duel.IsChainDisablable(integer chainc)" tips="检查连锁chainc的效果是否可以被无效化" />
+    <template des="CheckChainTarget(integer chainc, Card c)" insertInfo="boolean Duel.CheckChainTarget(integer chainc, Card c)" tips="检查c是否是连锁chainc的正确的对象" />
+    <template des="CheckChainUniqueness()" insertInfo="boolean Duel.CheckChainUniqueness()" tips="检查当前连锁中是否存在同名卡的发动。true表示无同名卡。" />
+    <template des="SwapDeckAndGrave(integer player)" insertInfo="boolean Duel.SwapDeckAndGrave(integer player)" tips="现世与冥界的逆转专用。把玩家player的卡组和墓地交换" />
+    <template des="CheckSummonActivity(integer player)" insertInfo="boolean Duel.CheckSummonActivity(integer player)" tips="检查玩家player本回合有没有进行过召唤的行为。召唤被无效视作进行过召唤行为。" />
+    <template des="CheckNormalSummonActivity(integer player)" insertInfo="boolean Duel.CheckNormalSummonActivity(integer player)" tips="检查玩家player本回合有没有进行过通常召唤的行为。包括召唤和set" />
+    <template des="CheckFlipSummonActivity(integer player)" insertInfo="boolean Duel.CheckFlipSummonActivity(integer player)" tips="检查玩家player本回合有没有进行过反转召唤的行为。" />
+    <template des="CheckFlipSummonActivity(integer player)" insertInfo="boolean Duel.CheckFlipSummonActivity(integer player)" tips="检查玩家player本回合有没有进行过特殊召唤的行为。" />
+    <template des="CheckAttackActivity(integer player)" insertInfo="boolean Duel.CheckAttackActivity(integer player)" tips="检查玩家player本回合有没有进行过攻击。" />
+  </command>
+</library>
