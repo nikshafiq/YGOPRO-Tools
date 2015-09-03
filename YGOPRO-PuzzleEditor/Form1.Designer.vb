@@ -324,6 +324,8 @@ Partial Class Form1
         Me.GameDirectoryBox = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
         Me.RichTextBox6 = New System.Windows.Forms.RichTextBox()
         Me.TextBox10 = New System.Windows.Forms.TextBox()
@@ -602,8 +604,6 @@ Partial Class Form1
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -786,6 +786,7 @@ Partial Class Form1
         Me.GroupBox3.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         Me.TabPage5.SuspendLayout()
@@ -800,7 +801,6 @@ Partial Class Form1
         Me.Panel4.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -3985,6 +3985,24 @@ Partial Class Form1
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Script View"
         '
+        'GroupBox8
+        '
+        Me.GroupBox8.Controls.Add(Me.RichTextBox4)
+        Me.GroupBox8.Location = New System.Drawing.Point(406, 335)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(375, 326)
+        Me.GroupBox8.TabIndex = 4
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "AI Script"
+        '
+        'RichTextBox4
+        '
+        Me.RichTextBox4.Location = New System.Drawing.Point(22, 63)
+        Me.RichTextBox4.Name = "RichTextBox4"
+        Me.RichTextBox4.Size = New System.Drawing.Size(326, 241)
+        Me.RichTextBox4.TabIndex = 3
+        Me.RichTextBox4.Text = ""
+        '
         'GroupBox11
         '
         Me.GroupBox11.Controls.Add(Me.RichTextBox6)
@@ -4184,7 +4202,7 @@ Partial Class Form1
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(130, 539)
+        Me.Label32.Location = New System.Drawing.Point(12, 599)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(19, 13)
         Me.Label32.TabIndex = 16
@@ -4192,7 +4210,7 @@ Partial Class Form1
         '
         'TextBox7
         '
-        Me.TextBox7.Location = New System.Drawing.Point(56, 576)
+        Me.TextBox7.Location = New System.Drawing.Point(116, 576)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.ReadOnly = True
         Me.TextBox7.Size = New System.Drawing.Size(47, 20)
@@ -4200,7 +4218,7 @@ Partial Class Form1
         '
         'TextBox6
         '
-        Me.TextBox6.Location = New System.Drawing.Point(155, 536)
+        Me.TextBox6.Location = New System.Drawing.Point(37, 596)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.ReadOnly = True
         Me.TextBox6.Size = New System.Drawing.Size(23, 20)
@@ -4208,7 +4226,7 @@ Partial Class Form1
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(52, 596)
+        Me.TextBox5.Location = New System.Drawing.Point(6, 462)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(10, 20)
         Me.TextBox5.TabIndex = 13
@@ -4217,7 +4235,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(119, 560)
+        Me.Label8.Location = New System.Drawing.Point(112, 513)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(49, 13)
         Me.Label8.TabIndex = 12
@@ -4225,7 +4243,7 @@ Partial Class Form1
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(116, 576)
+        Me.TextBox2.Location = New System.Drawing.Point(106, 529)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
         Me.TextBox2.Size = New System.Drawing.Size(56, 20)
@@ -4234,7 +4252,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(72, 560)
+        Me.Label4.Location = New System.Drawing.Point(132, 560)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(31, 13)
         Me.Label4.TabIndex = 10
@@ -4354,7 +4372,7 @@ Partial Class Form1
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(66, 536)
+        Me.TextBox3.Location = New System.Drawing.Point(105, 481)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.ReadOnly = True
         Me.TextBox3.Size = New System.Drawing.Size(58, 20)
@@ -4366,7 +4384,7 @@ Partial Class Form1
         Me.DataGridView1.Location = New System.Drawing.Point(6, 192)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(166, 338)
+        Me.DataGridView1.Size = New System.Drawing.Size(166, 264)
         Me.DataGridView1.TabIndex = 6
         '
         'Label7
@@ -4390,7 +4408,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(5, 539)
+        Me.Label5.Location = New System.Drawing.Point(103, 464)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(58, 13)
         Me.Label5.TabIndex = 3
@@ -4400,9 +4418,9 @@ Partial Class Form1
         '
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 555)
+        Me.PictureBox1.Location = New System.Drawing.Point(8, 462)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(44, 64)
+        Me.PictureBox1.Size = New System.Drawing.Size(84, 124)
         Me.PictureBox1.TabIndex = 2
         Me.PictureBox1.TabStop = False
         '
@@ -4426,19 +4444,19 @@ Partial Class Form1
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.NewToolStripMenuItem.Text = "New"
         '
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.SaveToolStripMenuItem.Text = "Save"
         '
         'LoadToolStripMenuItem
         '
         Me.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem"
-        Me.LoadToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LoadToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.LoadToolStripMenuItem.Text = "Load"
         '
         'ToolsToolStripMenuItem
@@ -5941,24 +5959,6 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'GroupBox8
-        '
-        Me.GroupBox8.Controls.Add(Me.RichTextBox4)
-        Me.GroupBox8.Location = New System.Drawing.Point(406, 335)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(375, 326)
-        Me.GroupBox8.TabIndex = 4
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "AI Script"
-        '
-        'RichTextBox4
-        '
-        Me.RichTextBox4.Location = New System.Drawing.Point(22, 63)
-        Me.RichTextBox4.Name = "RichTextBox4"
-        Me.RichTextBox4.Size = New System.Drawing.Size(326, 241)
-        Me.RichTextBox4.TabIndex = 3
-        Me.RichTextBox4.Text = ""
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6161,6 +6161,7 @@ Partial Class Form1
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
+        Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
         Me.GroupBox10.ResumeLayout(False)
@@ -6183,7 +6184,6 @@ Partial Class Form1
         Me.StatusStrip1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        Me.GroupBox8.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

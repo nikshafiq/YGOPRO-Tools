@@ -117,12 +117,15 @@ Public Class Form1
 
 
     Private Sub DataGridView1_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellEnter
+        PictureBox1.BackgroundImage = Nothing
+
         Try
             TextBox3.Text = DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
             TextBox4.Text = DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
             RichTextBox2.Text = DataGridView1.Item(2, DataGridView1.CurrentRow.Index).Value
-            Dim file As String = My.Settings.GameDirectory & "\pics\thumbnail\"
-            PictureBox1.ImageLocation = file & TextBox3.Text & ".jpg"
+            Dim file As String = My.Settings.GameDirectory & "\pics\"
+            PictureBox1.BackgroundImage = Bitmap.FromFile(file & TextBox3.Text & ".jpg")
+
         Catch ex As Exception
             MsgBox("Cell value is null")
         End Try
@@ -144,8 +147,8 @@ Public Class Form1
     Private Sub ListView1_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListView1.SelectedIndexChanged
         Dim current As String = ListView1.FocusedItem.Text
         Dim selected As ListViewItem = ListView1.FocusedItem
-        Dim file As String = My.Settings.GameDirectory & "\pics\thumbnail\"
-        PictureBox1.ImageLocation = file & current & ".jpg"
+        Dim file As String = My.Settings.GameDirectory & "\pics"
+        PictureBox1.BackgroundImage = Bitmap.FromFile(file + current + ".jpg")
         TextBox3.Text = current
         TextBox4.Text = selected.SubItems(1).Text
         RichTextBox2.Text = selected.SubItems(2).Text
@@ -221,7 +224,7 @@ Public Class Form1
             If ComboBox4.SelectedValue = Nothing Then
             Else
                 Try
-                    SearchforLevel()
+                    SelectforMonsterLevel()
                 Catch ex As Exception
                     MsgBox("Cannot select for level category")
                 End Try
@@ -240,7 +243,7 @@ Public Class Form1
 
             Else
                 Try
-                    SearchforRace()
+                    SelectforMonsterRace()
                 Catch ex As Exception
                     MsgBox("Cannot select for race category")
                 End Try
@@ -316,6 +319,8 @@ Public Class Form1
         Catch ex As Exception
             MsgBox("File has not been saved")
         End Try
+
+
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutToolStripMenuItem.Click
@@ -9273,9 +9278,8 @@ Public Class Form1
 
 
     Private Sub PuzzleListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PuzzleListToolStripMenuItem.Click
-
+        Form2.Show()
     End Sub
-
 
 
 

@@ -1757,8 +1757,9 @@ Public Class ScripFile
 
             Loop
 
-        
+        stream.Close()
 
+        stream.Dispose()
 
 
 
