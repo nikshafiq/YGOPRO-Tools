@@ -378,11 +378,9 @@ Partial Class Form1
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PuzzleListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartGameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PuzzlesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -604,6 +602,9 @@ Partial Class Form1
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolStripStatusLabel5 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel16 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel17 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -4427,7 +4428,7 @@ Partial Class Form1
         'MenuStrip1
         '
         Me.MenuStrip1.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.AboutToolStripMenuItem, Me.SettingsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1008, 24)
@@ -4478,37 +4479,24 @@ Partial Class Form1
         Me.PuzzleListToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
         Me.PuzzleListToolStripMenuItem.Text = "Puzzle List"
         '
-        'SettingsToolStripMenuItem
-        '
-        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartGameToolStripMenuItem})
-        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
-        Me.SettingsToolStripMenuItem.Text = "Misc"
-        '
-        'StartGameToolStripMenuItem
-        '
-        Me.StartGameToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeckToolStripMenuItem, Me.PuzzlesToolStripMenuItem})
-        Me.StartGameToolStripMenuItem.Name = "StartGameToolStripMenuItem"
-        Me.StartGameToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
-        Me.StartGameToolStripMenuItem.Text = "Start Game"
-        '
-        'DeckToolStripMenuItem
-        '
-        Me.DeckToolStripMenuItem.Name = "DeckToolStripMenuItem"
-        Me.DeckToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
-        Me.DeckToolStripMenuItem.Text = "Deck"
-        '
-        'PuzzlesToolStripMenuItem
-        '
-        Me.PuzzlesToolStripMenuItem.Name = "PuzzlesToolStripMenuItem"
-        Me.PuzzlesToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
-        Me.PuzzlesToolStripMenuItem.Text = "Puzzles"
-        '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartGameToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(41, 20)
+        Me.SettingsToolStripMenuItem.Text = "Test"
+        '
+        'StartGameToolStripMenuItem
+        '
+        Me.StartGameToolStripMenuItem.Name = "StartGameToolStripMenuItem"
+        Me.StartGameToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.StartGameToolStripMenuItem.Text = "Start Game"
         '
         'ImageList1
         '
@@ -4528,7 +4516,7 @@ Partial Class Form1
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel4, Me.ToolStripProgressBar1, Me.ToolStripStatusLabel6, Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripProgressBar2, Me.ToolStripStatusLabel7, Me.ToolStripStatusLabel8, Me.ToolStripStatusLabel9, Me.ToolStripStatusLabel10, Me.ToolStripStatusLabel11, Me.ToolStripStatusLabel12, Me.ToolStripStatusLabel13, Me.ToolStripStatusLabel14, Me.ToolStripStatusLabel15})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel4, Me.ToolStripProgressBar1, Me.ToolStripStatusLabel6, Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripProgressBar2, Me.ToolStripStatusLabel7, Me.ToolStripStatusLabel8, Me.ToolStripStatusLabel9, Me.ToolStripStatusLabel10, Me.ToolStripStatusLabel11, Me.ToolStripStatusLabel12, Me.ToolStripStatusLabel13, Me.ToolStripStatusLabel14, Me.ToolStripStatusLabel15, Me.ToolStripStatusLabel5, Me.ToolStripStatusLabel16, Me.ToolStripStatusLabel17})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 740)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1008, 22)
@@ -5959,6 +5947,24 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'ToolStripStatusLabel5
+        '
+        Me.ToolStripStatusLabel5.Image = Global.YGOPRO_PuzzleEditor.My.Resources.Resources.bar
+        Me.ToolStripStatusLabel5.Name = "ToolStripStatusLabel5"
+        Me.ToolStripStatusLabel5.Size = New System.Drawing.Size(16, 17)
+        '
+        'ToolStripStatusLabel16
+        '
+        Me.ToolStripStatusLabel16.Name = "ToolStripStatusLabel16"
+        Me.ToolStripStatusLabel16.Size = New System.Drawing.Size(85, 17)
+        Me.ToolStripStatusLabel16.Text = "Total Cards: 00"
+        '
+        'ToolStripStatusLabel17
+        '
+        Me.ToolStripStatusLabel17.Name = "ToolStripStatusLabel17"
+        Me.ToolStripStatusLabel17.Size = New System.Drawing.Size(127, 15)
+        Me.ToolStripStatusLabel17.Text = "ToolStripStatusLabel17"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6502,8 +6508,6 @@ Partial Class Form1
     Friend WithEvents RadioButton65 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton66 As System.Windows.Forms.RadioButton
     Friend WithEvents StartGameToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DeckToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PuzzlesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TextBox14 As System.Windows.Forms.TextBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Label31 As System.Windows.Forms.Label
@@ -6768,5 +6772,8 @@ Partial Class Form1
     Friend WithEvents Label33 As System.Windows.Forms.Label
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents RichTextBox4 As System.Windows.Forms.RichTextBox
+    Friend WithEvents ToolStripStatusLabel5 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel16 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel17 As System.Windows.Forms.ToolStripStatusLabel
 
 End Class

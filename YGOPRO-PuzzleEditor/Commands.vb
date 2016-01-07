@@ -25,6 +25,21 @@ Public Class Commands
         Dim DataAdapter1 As SQLiteDataAdapter = New SQLiteDataAdapter()
         DataAdapter1.SelectCommand = sql
         DataAdapter1.Fill(ds, "texts")
+        con.Close()
+
+        Dim constring2 As String = "data source=" & My.Settings.ExpansionDB
+        Dim con2 As SQLiteConnection = New SQLiteConnection(constring2)
+        Dim query2 As String
+        query2 = "SELECT A.id, A.name, A.desc, B.type, B.race, B.level FROM texts A, datas B WHERE (A.id= B.id) AND (name LIKE @name)"
+        Dim search2 As String = "%" + Form1.TextBox1.Text + "%"
+        Dim sql2 As SQLiteCommand = New SQLiteCommand(query2, con2)
+        sql2.Parameters.AddWithValue("@name", search2)
+        con2.Open()
+        Dim DataAdapter2 As SQLiteDataAdapter = New SQLiteDataAdapter()
+        DataAdapter2.SelectCommand = sql2
+        DataAdapter2.Fill(ds, "texts")
+        con2.Close()
+
         Form1.DataGridView1.DataSource = ds
         Form1.DataGridView1.DataMember = "texts"
         Dim source As New BindingSource
@@ -36,7 +51,9 @@ Public Class Commands
         Form1.TextBox4.DataBindings.Add(bind2)
         Dim bind3 As New Binding("text", source, "desc")
         Form1.RichTextBox2.DataBindings.Add(bind3)
-        con.Close()
+
+
+        Form1.ToolStripStatusLabel16.Text = "Total Cards: " & Form1.DataGridView1.Rows.Count - 1
         Dim current As String = Form1.TextBox3.Text
         Dim file As String = My.Settings.GameDirectory & "\pics\"
         Form1.PictureBox1.BackgroundImage = Bitmap.FromFile(file & current & ".jpg")

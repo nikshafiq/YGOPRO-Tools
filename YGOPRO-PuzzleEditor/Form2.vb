@@ -149,7 +149,7 @@ Public Class Form2
         If Me.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
 
 
-            createfile()
+                createfile("000.lua")
             My.Computer.FileSystem.CopyFile((Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\New.lua"), Me.SaveFileDialog1.FileName, True)
 
         End If
