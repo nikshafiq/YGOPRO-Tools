@@ -1,0 +1,14 @@
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.csprojResolveAssemblyReference.cache
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\bin\Debug\YGOPRO_CardManager.exe
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\bin\Debug\YGOPRO_CardManager.pdb
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.exe
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.pdb
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.Main_frm.resources
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.csproj.GenerateResource.Cache
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.CDBEditor.resources
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.BanlistEditor.resources
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.IDConverter.resources
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.LuaEdit.resources
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.EffectWizzard.resources
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\bin\Debug\Ionic.Zip.dll
+C:\Users\Usuario\Documents\Xamarin\Projects\YGOPRO_CardManager\YGOPRO_CardManager\obj\x86\Debug\YGOPRO_CardManager.DeckManager.resources

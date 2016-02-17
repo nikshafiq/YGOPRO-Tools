@@ -38,6 +38,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="CardData.cs" />
     <Compile Include="CardEditor\ColorText.cs" />
     <Compile Include="CardEditor\Keyword.cs" />
     <Compile Include="CardInfo.cs" />
@@ -54,6 +55,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="DeckManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EffectSet.cs" />
     <Compile Include="EffectWizzard.cs">
       <SubType>Form</SubType>
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BanlistEditor.resx">
       <DependentUpon>BanlistEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeckManager.resx">
+      <DependentUpon>DeckManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EffectWizzard.resx">
       <DependentUpon>EffectWizzard.cs</DependentUpon>

@@ -59,6 +59,20 @@ namespace YGOPRO_CardManager
 
         }
 
+        public static void Pack(string path, string zipfile, string card)
+        {
+
+
+            var options = new ReadOptions { StatusMessageWriter = System.Console.Out };
+            using (ZipFile zip = ZipFile.Read(zipfile, options))
+            {
+                zip.AddFile(card, path);
+                zip.Save();
+            }
+
+
+        }
+
         public static void ExtractEntries(string path, string zipfile)
         {
 

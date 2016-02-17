@@ -15,7 +15,7 @@ namespace YGOPRO_CardManager
     public partial class CDBEditor: Form
     {
         private System.ComponentModel.IContainer components = null;
-        private const string Cdbdir = "cards.cdb";
+        private string Cdbdir = "cards.cdb";
         string m_loadedImage = "";
         Dictionary<int, string> m_setCodes;
         List<int> m_formats;
@@ -48,6 +48,7 @@ namespace YGOPRO_CardManager
         private ComboBox comboBox1;
         private string currentexpansiondb;
         private Button ExtractScriptBtn;
+        private Button button1;
         private bool expansionload;
 
         protected override void Dispose(bool disposing)
@@ -66,6 +67,8 @@ namespace YGOPRO_CardManager
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ExtractScriptBtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -97,8 +100,8 @@ namespace YGOPRO_CardManager
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label14 = new System.Windows.Forms.Label();
-            this.Effect2List = new System.Windows.Forms.CheckedListBox();
             this.Effect1List = new System.Windows.Forms.CheckedListBox();
+            this.Effect2List = new System.Windows.Forms.CheckedListBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -120,21 +123,21 @@ namespace YGOPRO_CardManager
             this.CategoryList = new System.Windows.Forms.CheckedListBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.OpenScriptBtn = new System.Windows.Forms.Button();
-            this.ExtractScriptBtn = new System.Windows.Forms.Button();
+            this.CreateScriptBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.Clearbtn = new System.Windows.Forms.Button();
             this.SaveCardbtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
-            this.CreateScriptBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.CardImg = new System.Windows.Forms.PictureBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.LoadImageBtn = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.searchBox1 = new YGOPRO_CardManager.Components.SearchBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -165,7 +168,7 @@ namespace YGOPRO_CardManager
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(903, 593);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(903, 596);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // tableLayoutPanel3
@@ -189,17 +192,39 @@ namespace YGOPRO_CardManager
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(720, 587);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(720, 590);
             this.tableLayoutPanel3.TabIndex = 7;
             // 
             // flowLayoutPanel4
             // 
+            this.flowLayoutPanel4.Controls.Add(this.button1);
+            this.flowLayoutPanel4.Controls.Add(this.ExtractScriptBtn);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 557);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(294, 27);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(294, 30);
             this.flowLayoutPanel4.TabIndex = 9;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(179, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Pack Script";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // ExtractScriptBtn
+            // 
+            this.ExtractScriptBtn.Location = new System.Drawing.Point(61, 3);
+            this.ExtractScriptBtn.Name = "ExtractScriptBtn";
+            this.ExtractScriptBtn.Size = new System.Drawing.Size(112, 23);
+            this.ExtractScriptBtn.TabIndex = 1;
+            this.ExtractScriptBtn.Text = "Extract Script";
+            this.ExtractScriptBtn.UseVisualStyleBackColor = true;
+            this.ExtractScriptBtn.Click += new System.EventHandler(this.ExtractScriptBtn_Click);
             // 
             // groupBox2
             // 
@@ -530,42 +555,45 @@ namespace YGOPRO_CardManager
             this.tableLayoutPanel8.ColumnCount = 3;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.75309F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.24691F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 224F));
-            this.tableLayoutPanel8.Controls.Add(this.label14, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.Effect1List, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.Effect2List, 2, 0);
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 242F));
+            this.tableLayoutPanel8.Controls.Add(this.label14, 1, 0);
+            this.tableLayoutPanel8.Controls.Add(this.Effect1List, 1, 1);
+            this.tableLayoutPanel8.Controls.Add(this.Effect2List, 2, 1);
             this.tableLayoutPanel8.Location = new System.Drawing.Point(-1, 19);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(405, 135);
             this.tableLayoutPanel8.TabIndex = 2;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 0);
+            this.label14.Location = new System.Drawing.Point(35, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(26, 52);
+            this.label14.Size = new System.Drawing.Size(67, 13);
             this.label14.TabIndex = 0;
             this.label14.Text = "Effect Types";
-            // 
-            // Effect2List
-            // 
-            this.Effect2List.FormattingEnabled = true;
-            this.Effect2List.Location = new System.Drawing.Point(183, 3);
-            this.Effect2List.Name = "Effect2List";
-            this.Effect2List.Size = new System.Drawing.Size(139, 124);
-            this.Effect2List.TabIndex = 1;
             // 
             // Effect1List
             // 
             this.Effect1List.FormattingEnabled = true;
-            this.Effect1List.Location = new System.Drawing.Point(38, 3);
+            this.Effect1List.Location = new System.Drawing.Point(35, 60);
             this.Effect1List.Name = "Effect1List";
-            this.Effect1List.Size = new System.Drawing.Size(139, 124);
+            this.Effect1List.Size = new System.Drawing.Size(124, 49);
             this.Effect1List.TabIndex = 2;
+            // 
+            // Effect2List
+            // 
+            this.Effect2List.FormattingEnabled = true;
+            this.Effect2List.Location = new System.Drawing.Point(165, 60);
+            this.Effect2List.Name = "Effect2List";
+            this.tableLayoutPanel8.SetRowSpan(this.Effect2List, 2);
+            this.Effect2List.Size = new System.Drawing.Size(136, 49);
+            this.Effect2List.TabIndex = 1;
             // 
             // tableLayoutPanel6
             // 
@@ -812,7 +840,7 @@ namespace YGOPRO_CardManager
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.Controls.Add(this.OpenScriptBtn);
-            this.flowLayoutPanel3.Controls.Add(this.ExtractScriptBtn);
+            this.flowLayoutPanel3.Controls.Add(this.CreateScriptBtn);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 521);
@@ -830,22 +858,21 @@ namespace YGOPRO_CardManager
             this.OpenScriptBtn.UseVisualStyleBackColor = true;
             this.OpenScriptBtn.Click += new System.EventHandler(this.OpenScriptBtn_Click_1);
             // 
-            // ExtractScriptBtn
+            // CreateScriptBtn
             // 
-            this.ExtractScriptBtn.Location = new System.Drawing.Point(61, 3);
-            this.ExtractScriptBtn.Name = "ExtractScriptBtn";
-            this.ExtractScriptBtn.Size = new System.Drawing.Size(112, 23);
-            this.ExtractScriptBtn.TabIndex = 1;
-            this.ExtractScriptBtn.Text = "Extract Script";
-            this.ExtractScriptBtn.UseVisualStyleBackColor = true;
-            this.ExtractScriptBtn.Click += new System.EventHandler(this.ExtractScriptBtn_Click);
+            this.CreateScriptBtn.Location = new System.Drawing.Point(61, 3);
+            this.CreateScriptBtn.Name = "CreateScriptBtn";
+            this.CreateScriptBtn.Size = new System.Drawing.Size(112, 23);
+            this.CreateScriptBtn.TabIndex = 11;
+            this.CreateScriptBtn.Text = "Create Script";
+            this.CreateScriptBtn.UseVisualStyleBackColor = true;
+            this.CreateScriptBtn.Click += new System.EventHandler(this.CreateScriptBtn_Click);
             // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.Clearbtn);
             this.flowLayoutPanel2.Controls.Add(this.SaveCardbtn);
             this.flowLayoutPanel2.Controls.Add(this.DeleteBtn);
-            this.flowLayoutPanel2.Controls.Add(this.CreateScriptBtn);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(303, 521);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -882,16 +909,6 @@ namespace YGOPRO_CardManager
             this.DeleteBtn.UseVisualStyleBackColor = true;
             this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
             // 
-            // CreateScriptBtn
-            // 
-            this.CreateScriptBtn.Location = new System.Drawing.Point(32, 3);
-            this.CreateScriptBtn.Name = "CreateScriptBtn";
-            this.CreateScriptBtn.Size = new System.Drawing.Size(112, 23);
-            this.CreateScriptBtn.TabIndex = 11;
-            this.CreateScriptBtn.Text = "Create Script";
-            this.CreateScriptBtn.UseVisualStyleBackColor = true;
-            this.CreateScriptBtn.Click += new System.EventHandler(this.CreateScriptBtn_Click);
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -912,7 +929,7 @@ namespace YGOPRO_CardManager
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(171, 587);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(171, 590);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // comboBox1
@@ -958,15 +975,6 @@ namespace YGOPRO_CardManager
             this.LoadImageBtn.UseVisualStyleBackColor = true;
             this.LoadImageBtn.Click += new System.EventHandler(this.LoadImageBtn_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(3, 505);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(165, 23);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Expansion Cards";
-            // 
             // searchBox1
             // 
             this.searchBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -977,18 +985,28 @@ namespace YGOPRO_CardManager
             this.searchBox1.TabStop = false;
             this.searchBox1.Text = "Search";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(3, 505);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(165, 23);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Expansion Cards";
+            // 
             // CDBEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(903, 593);
+            this.ClientSize = new System.Drawing.Size(903, 596);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CDBEditor";
             this.Text = "CDBEditor";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -1895,6 +1913,7 @@ namespace YGOPRO_CardManager
              {
                  expansionload = false;
                  checkBox1.CheckState = CheckState.Unchecked;
+                 Cdbdir = "cards.cdb";
                  
              }
 
@@ -1904,10 +1923,11 @@ namespace YGOPRO_CardManager
 
                  if (expansionload == false && currentexpansiondb != String.Empty)
                      {
-                 LoadExpansionData(currentexpansiondb);
-                 //SQLiteCommands.ExtractEntries(AppDomain.CurrentDomain.BaseDirectory, zip);
-                 expansionload = true;
-                 MessageBox.Show("Expansion cards loaded " + currentexpansiondb);
+                         Cdbdir = "expansions/" + currentexpansiondb;
+                       LoadExpansionData(currentexpansiondb);
+                        //SQLiteCommands.ExtractEntries(AppDomain.CurrentDomain.BaseDirectory, zip);
+                       expansionload = true;
+                       MessageBox.Show("Expansion cards loaded " + currentexpansiondb);
                      }
              }
              
@@ -1963,11 +1983,14 @@ namespace YGOPRO_CardManager
 
          private void SaveCardbtn_Click(object sender, EventArgs e)
          {
-             if (SaveCardtoCDB(Cdbdir))
-             {
+            
+                if (SaveCardtoCDB(Cdbdir))
+                {
                  SaveImage(CardID.Text);
                  m_loadedCard = Convert.ToInt32(CardID.Text);
-             }
+                }
+             
+            
          }
 
          private void Clearbtn_Click(object sender, EventArgs e)
@@ -2072,8 +2095,15 @@ namespace YGOPRO_CardManager
 
          private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
          {
-             if (comboBox1.Items != null)
+             if (comboBox1.SelectedItem != null)
+                 {
+
+                     if (checkBox1.Checked == true) Cdbdir = "expansions/" + currentexpansiondb;
+                     else Cdbdir = "cards.cdb";
                  currentexpansiondb = comboBox1.SelectedItem.ToString();
+                 
+
+                 }
 
          }
 
@@ -2084,21 +2114,52 @@ namespace YGOPRO_CardManager
                  string file = "script\\c" + m_loadedCard + ".lua";
                  if (!File.Exists(file))
                  {
+                     string path = AppDomain.CurrentDomain.BaseDirectory + "Patch";
                      string zip = "expansions\\" + comboBox1.SelectedItem.ToString().Split('.')[0] + ".zip";
                      string card = "script/c" + m_loadedCard + ".lua";
-                     string image = "pics/" + m_loadedCard + ".jpg";
-                     SQLiteCommands.Extract(AppDomain.CurrentDomain.BaseDirectory,zip, card);
-                     SQLiteCommands.Extract(AppDomain.CurrentDomain.BaseDirectory, zip, image);
+                     string image =  "pics/" + m_loadedCard + ".jpg";
+                     string thumb = "pics/thumbnail/" + m_loadedCard + ".jpg";
+                     SQLiteCommands.Extract(path, zip, card);
+                     SQLiteCommands.Extract(path, zip, image);
+                     SQLiteCommands.Extract(path, zip, thumb);
+
+                     MessageBox.Show("Cards extracted");
+
                  }
 
              }
+             else
+                 MessageBox.Show("No card selected");
+             
+
          }
 
+         private void button1_Click(object sender, EventArgs e)
+         {
+             if (m_loadedCard != 0)
+             {
+                 string path = AppDomain.CurrentDomain.BaseDirectory + "Patch";
+                 string file = "script\\c" + m_loadedCard + ".lua";
+                 string zip = "expansions\\" + comboBox1.SelectedItem.ToString().Split('.')[0] + ".zip";
+                 string card = path + "/script/c" + m_loadedCard + ".lua";
+                 string image = path + "/pics/" + m_loadedCard + ".jpg";
+                 string thumb = path + "/pics/thumbnail/" + m_loadedCard + ".jpg";
+                 if (!File.Exists(file))
+                 {
+                     SQLiteCommands.Pack("/script/",  zip, card);
+                     SQLiteCommands.Pack("pics/",  zip, image);
+                     SQLiteCommands.Pack("pics/thumbnail/", zip, thumb);
 
+                     MessageBox.Show("Cards packed");
+                 }
 
+                
 
+             }
+             else
+                 MessageBox.Show("No pack selected");
 
-
+         }
 
 
 

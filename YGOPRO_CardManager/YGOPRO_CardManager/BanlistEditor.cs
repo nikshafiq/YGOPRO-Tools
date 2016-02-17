@@ -720,6 +720,8 @@ namespace YGOPRO_CardManager
 
 
 
+
+
     }
 
     public class BanListCard

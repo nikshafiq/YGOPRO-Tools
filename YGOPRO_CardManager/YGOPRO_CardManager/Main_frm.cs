@@ -29,12 +29,14 @@ namespace YGOPRO_CardManager
             editor.Controls.Add(new CDBEditor());
             var banlisted = new TabPage { Name = "Banlist Editor", Text = "Banlist Editor" };
             banlisted.Controls.Add(new BanlistEditor());
+            var deckmgr = new TabPage { Name = "Deck Manager", Text = "Deck Manager" };
+            deckmgr.Controls.Add(new DeckManager());
             var idConverter = new TabPage { Name = "ID Converter", Text = "ID Converter" };
             idConverter.Controls.Add(new IDConverter());
             var effecteditor = new TabPage { Name = "Effect Editor", Text = "Effect Editor" };
             effecteditor.Controls.Add(new LuaEdit());
 
-            tabControl1.TabPages.AddRange(new[] { editor, banlisted, idConverter, effecteditor });
+            tabControl1.TabPages.AddRange(new[] { editor, banlisted, deckmgr, idConverter, effecteditor });
 		}
 		
 		protected override void Dispose(bool disposing)
@@ -144,7 +146,7 @@ namespace YGOPRO_CardManager
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(133, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "YGOPRO Version: 1.033.5";
+            this.label2.Text = "YGOPRO Version: 1.033.6";
             // 
             // Main_frm
             // 
@@ -160,7 +162,7 @@ namespace YGOPRO_CardManager
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Main_frm";
-            this.Text = "YGOPro CardManager v1.7";
+            this.Text = "YGOPro CardManager v1.8";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
