@@ -592,7 +592,6 @@ namespace YGOPRO_CardManager
                     name = line.Substring(0, line.Length - 3).Trim();
                     count = 2;
                     
-
                     
                     PlayerMainDeckText.Add(name);
                 }
@@ -602,7 +601,6 @@ namespace YGOPRO_CardManager
                     name = line.Substring(0, line.Length - 3).Trim();
                     count = 3;
                     
-
                     PlayerMainDeckText.Add(name);
                     PlayerMainDeckText.Add(name);
                 }
@@ -613,9 +611,6 @@ namespace YGOPRO_CardManager
                     name = line.Substring(2, line.Length - 2).Trim();
                     count = 1;
                     
-
-
-                    //PlayerMainDeckText.Add(name);
                 }
 
                 else if (line.Contains("2 "))
@@ -623,8 +618,6 @@ namespace YGOPRO_CardManager
 
                     name = line.Substring(2, line.Length - 2).Trim();
                     count = 2;
-                    
-
                     
                     PlayerMainDeckText.Add(name);
                 }
@@ -634,7 +627,6 @@ namespace YGOPRO_CardManager
 
                     name = line.Substring(2, line.Length - 2).Trim();
                     count = 3;
-                   
 
                     PlayerMainDeckText.Add(name);
                     PlayerMainDeckText.Add(name);
@@ -647,16 +639,12 @@ namespace YGOPRO_CardManager
 
             }
 
-            
-
 
             getCardIdentifier(PlayerMainDeckText, mainDeck);
 
             CardList.DataSource = mainDeck;
             CardList.DisplayMember = "Name";
             CardList.ValueMember = "ID";
-
-           
 
         }
 
@@ -676,7 +664,6 @@ namespace YGOPRO_CardManager
                     count = 2;
                    
 
-
                     PlayerExtraDeckText.Add(name);
                 }
                 else if (line.Contains("x3"))
@@ -696,9 +683,6 @@ namespace YGOPRO_CardManager
                     name = line.Substring(2, line.Length - 2).Trim();
                     count = 1;
                     
-
-
-                    //PlayerExtraDeckText.Add(name);
                 }
 
                 else if (line.Contains("2 "))
@@ -707,7 +691,6 @@ namespace YGOPRO_CardManager
                     name = line.Substring(2, line.Length - 2).Trim();
                     count = 2;
                    
-
 
                     PlayerExtraDeckText.Add(name);
                 }
@@ -729,7 +712,6 @@ namespace YGOPRO_CardManager
                 PlayerExtraDeckText.Add(name);
 
             }
-
 
 
 
