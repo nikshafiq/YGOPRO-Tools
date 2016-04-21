@@ -75,7 +75,6 @@
         Reptile = 524288
         Psychic = 1048576
         DivineBeast = 2097152
-        Wyrm = 8388608
     End Enum
 
     Public Enum Levels

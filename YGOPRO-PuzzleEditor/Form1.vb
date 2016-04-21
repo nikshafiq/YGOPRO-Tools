@@ -9,7 +9,7 @@ Public Class Form1
 
     Private connection As SQLiteConnection
     Private status As Boolean
-    Private CardTable As DataTable
+
     Private pictureselected As PictureBox
 
 
@@ -34,55 +34,38 @@ Public Class Form1
                     MsgBox("Now you cannot edit files using database")
                 End If
             Else
-                GameDirectoryBox.Text = My.Settings.GameDirectory
+
             End If
         Catch ex As Exception
             MsgBox("Now you cannot edit files using database")
         End Try
 
-        If (GameDirectoryBox.Text <> String.Empty) Then
-            CardTable = New DataTable()
 
-            Dim path As String = (GameDirectoryBox.Text & "\cards.cdb")
-            Dim epath As String = (GameDirectoryBox.Text & "\expansions\cards-tf.cdb")
-            GameDirectoryBox.Text = My.Settings.GameDirectory
-            My.Settings.Dabatase = path
-            My.Settings.ExpansionDB = epath
-            My.Settings.Save()
+        Dim path As String
+        path = (GameDirectoryBox.Text & "\cards.cdb")
+        GameDirectoryBox.Text = My.Settings.GameDirectory
+        My.Settings.Dabatase = (GameDirectoryBox.Text & "\cards.cdb")
+        My.Settings.Save()
+        path = (GameDirectoryBox.Text & "\cards.cdb")
+        Dim constring As String = "data source=" & My.Settings.Dabatase
+        connection = New SQLiteConnection(constring)
+        Dim sql As SQLiteCommand = New SQLiteCommand("SELECT A.id, A.name, A.desc, B.level, B.type, b.race FROM texts A, datas B WHERE A.id= B.id", connection)
+        Dim ds As DataSet = New DataSet()
+        Dim DataAdapter1 As SQLiteDataAdapter = New SQLiteDataAdapter()
+        connection.Open()
+        Dim table As New DataTable()
+        DataAdapter1.SelectCommand = sql
+        DataAdapter1.Fill(table)
+        Dim source As New BindingSource
+        source.DataSource = table
+        DataGridView1.DataSource = source
+        connection.Close()
+        DataGridView1.Columns.Item("id").Visible = False
+        DataGridView1.Columns.Item("desc").Visible = False
+        DataGridView1.Columns.Item("level").Visible = False
+        DataGridView1.Columns.Item("type").Visible = False
+        DataGridView1.Columns.Item("race").Visible = False
 
-            Dim constring As String = "data source=" & My.Settings.Dabatase
-            connection = New SQLiteConnection(constring)
-            Dim sql As SQLiteCommand = New SQLiteCommand("SELECT A.id, A.name, A.desc, B.level, B.type, b.race FROM texts A, datas B WHERE A.id= B.id", connection)
-            Dim ds As DataSet = New DataSet()
-            Dim DataAdapter1 As SQLiteDataAdapter = New SQLiteDataAdapter()
-            connection.Open()
-            DataAdapter1.SelectCommand = sql
-            DataAdapter1.Fill(CardTable)
-            connection.Close()
-
-            Dim constring2 As String = "data source=" & epath
-            Dim connection2 As New SQLiteConnection(constring2)
-            Dim sql2 As SQLiteCommand = New SQLiteCommand("SELECT A.id, A.name, A.desc, B.level, B.type, b.race FROM texts A, datas B WHERE A.id= B.id", connection2)
-            Dim ds2 As DataSet = New DataSet()
-            Dim DataAdapter2 As SQLiteDataAdapter = New SQLiteDataAdapter()
-            connection2.Open()
-            DataAdapter2.SelectCommand = sql2
-            DataAdapter2.Fill(CardTable)
-            connection2.Close()
-
-            Dim source As New BindingSource
-            source.DataSource = CardTable
-            DataGridView1.DataSource = source
-
-            ToolStripStatusLabel16.Text = "Total Cards: " & DataGridView1.Rows.Count - 1
-
-            DataGridView1.Columns.Item("id").Visible = False
-            DataGridView1.Columns.Item("desc").Visible = False
-            DataGridView1.Columns.Item("level").Visible = False
-            DataGridView1.Columns.Item("type").Visible = False
-            DataGridView1.Columns.Item("race").Visible = False
-
-        End If
 
         If Not My.Settings.GameDirectory Is Nothing Then
 
@@ -91,13 +74,7 @@ Public Class Form1
 
 
         End If
-
-        If File.Exists(My.Settings.GameDirectory & "/script.txt") Then
-            Me.RichTextBox4.AppendText(File.ReadAllText(My.Settings.GameDirectory & "/script.txt"))
-
-        End If
-
-
+       
     End Sub
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
@@ -134,15 +111,12 @@ Public Class Form1
 
 
     Private Sub DataGridView1_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellEnter
-        PictureBox1.BackgroundImage = Nothing
-
         Try
             TextBox3.Text = DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
             TextBox4.Text = DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
             RichTextBox2.Text = DataGridView1.Item(2, DataGridView1.CurrentRow.Index).Value
-            Dim file As String = My.Settings.GameDirectory & "\pics\"
-            PictureBox1.BackgroundImage = Bitmap.FromFile(file & TextBox3.Text & ".jpg")
-            ToolStripStatusLabel15.Text = DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
+            Dim file As String = My.Settings.GameDirectory & "\pics\thumbnail\"
+            PictureBox1.ImageLocation = file & TextBox3.Text & ".jpg"
         Catch ex As Exception
             MsgBox("Cell value is null")
         End Try
@@ -164,8 +138,8 @@ Public Class Form1
     Private Sub ListView1_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListView1.SelectedIndexChanged
         Dim current As String = ListView1.FocusedItem.Text
         Dim selected As ListViewItem = ListView1.FocusedItem
-        Dim file As String = My.Settings.GameDirectory & "\pics"
-        PictureBox1.BackgroundImage = Bitmap.FromFile(file + current + ".jpg")
+        Dim file As String = My.Settings.GameDirectory & "\pics\thumbnail\"
+        PictureBox1.ImageLocation = file & current & ".jpg"
         TextBox3.Text = current
         TextBox4.Text = selected.SubItems(1).Text
         RichTextBox2.Text = selected.SubItems(2).Text
@@ -241,7 +215,7 @@ Public Class Form1
             If ComboBox4.SelectedValue = Nothing Then
             Else
                 Try
-                    SelectforMonsterLevel()
+                    SearchforLevel()
                 Catch ex As Exception
                     MsgBox("Cannot select for level category")
                 End Try
@@ -260,7 +234,7 @@ Public Class Form1
 
             Else
                 Try
-                    SelectforMonsterRace()
+                    SearchforRace()
                 Catch ex As Exception
                     MsgBox("Cannot select for race category")
                 End Try
@@ -297,24 +271,27 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DeckToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
+    Private Sub DeckToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DeckToolStripMenuItem.Click
         Dim process As New Process
         process.StartInfo.WorkingDirectory = My.Settings.GameDirectory
-        process.StartInfo.FileName = "ygopro_vs_ai_debug.exe"
+        process.StartInfo.FileName = "ygopro_vs.exe"
         process.StartInfo.Arguments = "-j"
         process.Start()
     End Sub
 
-    Private Sub PuzzlesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
-
+    Private Sub PuzzlesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PuzzlesToolStripMenuItem.Click
+        Dim process As New Process
+        process.StartInfo.WorkingDirectory = My.Settings.GameDirectory
+        process.StartInfo.FileName = "ygopro_vs.exe"
+        process.StartInfo.Arguments = "-s"
+        process.Start()
     End Sub
 
 
     Private Sub SaveToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SaveToolStripMenuItem.Click
-
         Try
-            createfile(My.Settings.GameDirectory + "/single/New.lua")
 
+            createfile()
             SaveFileDialog1.InitialDirectory = My.Settings.GameDirectory & "\single"
             SaveFileDialog1.Filter = "Lua Files (*.lua)|*.lua|All Files (*.*)|*.*"
             SaveFileDialog1.FilterIndex = 1
@@ -322,18 +299,16 @@ Public Class Form1
             If Me.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
 
 
-                My.Computer.FileSystem.CopyFile((My.Settings.GameDirectory + "/single/New.lua"), SaveFileDialog1.FileName, True)
+                My.Computer.FileSystem.CopyFile((Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\New.lua"), Me.SaveFileDialog1.FileName, True)
+
+
 
             End If
-
-
             MsgBox("File Saved")
 
         Catch ex As Exception
             MsgBox("File has not been saved")
         End Try
-
-
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutToolStripMenuItem.Click
@@ -9293,27 +9268,4 @@ Public Class Form1
     Private Sub PuzzleListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PuzzleListToolStripMenuItem.Click
         Form2.Show()
     End Sub
-
-
-
-    Private Sub StartGameToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles StartGameToolStripMenuItem.Click
-
-        If (filename <> String.Empty) Then
-
-            My.Computer.FileSystem.CopyFile(ScripFilename, My.Settings.GameDirectory + "/single/" + filename, True)
-
-            Dim process As New Process
-            process.StartInfo.WorkingDirectory = My.Settings.GameDirectory
-            process.StartInfo.FileName = "ygopro_vs_ai_debug.exe"
-            process.StartInfo.Arguments = "-s"
-            process.Start()
-
-        End If
-    End Sub
-
-    Private Sub SettingsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
-
-    End Sub
-
-
 End Class

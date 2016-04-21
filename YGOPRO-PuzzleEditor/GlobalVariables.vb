@@ -129,8 +129,6 @@ Public Class GlobalVariables
     Public Shared poss1, poss2, poss3, poss4, poss5, poss6, poss7, poss8 As String
     Public Shared posz1, posz2, posz3, posz4, posz5, posz6, posz7, posz8 As String
     Public Shared pos21, pos22, pos23, pos24, pos25 As String
-    Public Shared aimode, aitype As Integer
-    Public Shared aiscript, aicommand As String
 
     ' Propertys
     Public Shared Property Duelcomment As String

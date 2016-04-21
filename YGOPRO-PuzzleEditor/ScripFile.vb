@@ -3,7 +3,6 @@ Imports System.Data.SQLite
 Imports System.IO
 
 Public Class ScripFile
-    Public Shared filename As String = "000.lua"
     Public Shared ScripFilename As String
     Public Shared stream As StreamReader
     Public Shared lines() As String
@@ -75,1693 +74,1691 @@ Public Class ScripFile
 
     Public Shared Sub LoadFile(filepath As String)
 
-
+        
         stream = New IO.StreamReader(filepath)
-        ScripFilename = filepath
         Form1.TextBox10.Text = filepath
         Form1.TextBox46.Text = Path.GetFileNameWithoutExtension(filepath)
 
-        Do While stream.Peek() >= 0
-            line = stream.ReadLine
-            If line.Contains("--") Then
-                Form1.RichTextBox3.AppendText(line & vbNewLine)
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-            End If
-
-            If line.Contains("Debug.SetAIName(") Then
-                ainm = line.Split("(").Last
-
-                AIname = ainm.Split(")").First
-                Form1.TextBox42.Text = AIname.Trim(My.Settings.Chars)
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-
-            End If
-            If line.Contains("Debug.ReloadFieldBegin(") Then
-                dueltp = line.Split("(").Last
-                Dueltype = dueltp.Split("+").First
-                Form1.ComboBox5.Text = Dueltype
-                duelmd = dueltp.Split("+").Last
-                Duelmode = duelmd.Split(")").First
-                Form1.ComboBox6.Text = Duelmode
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-            End If
-            If line.Contains("Debug.SetPlayerInfo(0,") Then
-                playerlp = Split(line, ",", 2, CompareMethod.Text).Last
-                Playerpoints = Split(playerlp, ",", 1, CompareMethod.Text).Last
-                playerp = Playerpoints.Split(",").First
-                Form1.TextBox8.Text = playerp
-                Form1.TextBox44.Text = "Player"
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-            End If
-            If line.Contains("Debug.SetPlayerInfo(1,") Then
-                enemylp = Split(line, ",", 2, CompareMethod.Text).Last
-                Enemypoints = Split(enemylp, ",", 1, CompareMethod.Text).Last
-                enemyp = Enemypoints.Split(",").First
-                Form1.TextBox11.Text = enemyp
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-            End If
-            If line.Contains("0,0,LOCATION_MZONE,0") Then
-                monster11 = line.Split("(").Last
-                monstercard11 = monster11.Split(",").First
-                selectedcard = monstercard11
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard11 & ".jpg"
-                Form1.PictureBox2.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox2, Form1.TextBox4.Text)
-                If monster11.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton1.Checked = CheckState.Checked
-                    Form1.RadioButton5.Checked = CheckState.Checked
-                ElseIf monster11.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton2.Checked = CheckState.Checked
-                    Form1.RadioButton5.Checked = CheckState.Checked
-                ElseIf monster11.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton2.Checked = CheckState.Checked
-                    Form1.RadioButton6.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("0,0,LOCATION_MZONE,1") Then
-                monster12 = line.Split("(").Last
-                monstercard12 = monster12.Split(",").First
-                selectedcard = monstercard12
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard12 & ".jpg"
-                Form1.PictureBox3.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox3, Form1.TextBox4.Text)
-                If monster12.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton3.Checked = CheckState.Checked
-                    Form1.RadioButton23.Checked = CheckState.Checked
-                ElseIf monster12.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton3.Checked = CheckState.Checked
-                    Form1.RadioButton24.Checked = CheckState.Checked
-                ElseIf monster12.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton4.Checked = CheckState.Checked
-                    Form1.RadioButton24.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("0,0,LOCATION_MZONE,2") Then
-                monster13 = line.Split("(").Last
-                monstercard13 = monster13.Split(",").First
-                selectedcard = monstercard13
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard13 & ".jpg"
-                Form1.PictureBox4.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox4, Form1.TextBox4.Text)
-                If monster13.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton7.Checked = CheckState.Checked
-                    Form1.RadioButton25.Checked = CheckState.Checked
-                ElseIf monster13.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton7.Checked = CheckState.Checked
-                    Form1.RadioButton26.Checked = CheckState.Checked
-                ElseIf monster13.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton8.Checked = CheckState.Checked
-                    Form1.RadioButton26.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("0,0,LOCATION_MZONE,3") Then
-                monster14 = line.Split("(").Last
-                monstercard14 = monster14.Split(",").First
-                selectedcard = monstercard14
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard14 & ".jpg"
-                Form1.PictureBox5.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox5, Form1.TextBox4.Text)
-                If monster14.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton9.Checked = CheckState.Checked
-                    Form1.RadioButton27.Checked = CheckState.Checked
-                ElseIf monster14.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton9.Checked = CheckState.Checked
-                    Form1.RadioButton28.Checked = CheckState.Checked
-                ElseIf monster14.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton10.Checked = CheckState.Checked
-                    Form1.RadioButton28.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("0,0,LOCATION_MZONE,4") Then
-                monster15 = line.Split("(").Last
-                monstercard15 = monster15.Split(",").First
-                selectedcard = monstercard15
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard15 & ".jpg"
-                Form1.PictureBox6.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox6, Form1.TextBox4.Text)
-                If monster15.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton11.Checked = CheckState.Checked
-                    Form1.RadioButton29.Checked = CheckState.Checked
-                ElseIf monster15.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton11.Checked = CheckState.Checked
-                    Form1.RadioButton30.Checked = CheckState.Checked
-                ElseIf monster15.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton12.Checked = CheckState.Checked
-                    Form1.RadioButton30.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("0,0,LOCATION_SZONE,0") Then
-                szone11 = line.Split("(").Last
-                spellcard11 = szone11.Split(",").First
-                selectedcard = spellcard11
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard11 & ".jpg"
-                Form1.PictureBox7.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox7, Form1.TextBox4.Text)
-                If szone11.Contains("POS_FACEUP") Then
-                    Form1.RadioButton13.Checked = CheckState.Checked
-
-                ElseIf szone11.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton14.Checked = CheckState.Checked
-
-                End If
-
-
-            End If
-
-            If line.Contains("0,0,LOCATION_SZONE,1") Then
-                szone12 = line.Split("(").Last
-                spellcard12 = szone12.Split(",").First
-                selectedcard = spellcard12
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard12 & ".jpg"
-                Form1.PictureBox8.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox8, Form1.TextBox4.Text)
-                If szone12.Contains("POS_FACEUP") Then
-                    Form1.RadioButton15.Checked = CheckState.Checked
-
-                ElseIf szone12.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton16.Checked = CheckState.Checked
-
-                End If
-
-
-            End If
-
-            If line.Contains("0,0,LOCATION_SZONE,2") Then
-                szone13 = line.Split("(").Last
-                spellcard13 = szone13.Split(",").First
-                selectedcard = spellcard13
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard13 & ".jpg"
-                Form1.PictureBox9.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox9, Form1.TextBox4.Text)
-                If szone13.Contains("POS_FACEUP") Then
-                    Form1.RadioButton17.Checked = CheckState.Checked
-
-                ElseIf szone13.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton18.Checked = CheckState.Checked
-
-                End If
-
-
-            End If
-
-            If line.Contains("0,0,LOCATION_SZONE,3") Then
-                szone14 = line.Split("(").Last
-                spellcard14 = szone14.Split(",").First
-                selectedcard = spellcard14
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard14 & ".jpg"
-                Form1.PictureBox10.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox10, Form1.TextBox4.Text)
-                If szone14.Contains("POS_FACEUP") Then
-                    Form1.RadioButton19.Checked = CheckState.Checked
-
-                ElseIf szone14.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton20.Checked = CheckState.Checked
-
-                End If
-
-
-            End If
-
-            If line.Contains("0,0,LOCATION_SZONE,4") Then
-                szone15 = line.Split("(").Last
-                spellcard15 = szone15.Split(",").First
-                selectedcard = spellcard15
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard15 & ".jpg"
-                Form1.PictureBox11.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox11, Form1.TextBox4.Text)
-                If szone15.Contains("POS_FACEUP") Then
-                    Form1.RadioButton21.Checked = CheckState.Checked
-
-                ElseIf szone15.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton22.Checked = CheckState.Checked
-
-                End If
-
-
-            End If
-
-            If line.Contains("0,0,LOCATION_SZONE,5") Then
-                szone16 = line.Split("(").Last
-                spellcard16 = szone16.Split(",").First
-                selectedcard = spellcard16
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard16 & ".jpg"
-                Form1.PictureBox21.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox21, Form1.TextBox4.Text)
-                If szone16.Contains("POS_FACEUP") Then
-                    Form1.RadioButton65.Checked = CheckState.Checked
-
-                ElseIf szone16.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton66.Checked = CheckState.Checked
-
-                End If
-
-
-            End If
-
-            If line.Contains("0,0,LOCATION_SZONE,6") Then
-                szone17 = line.Split("(").Last
-                spellcard17 = szone17.Split(",").First
-                selectedcard = spellcard17
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard17 & ".jpg"
-                Form1.PictureBox122.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox122, Form1.TextBox4.Text)
-                If szone17.Contains("POS_FACEUP") Then
-                    Form1.RadioButton69.Checked = CheckState.Checked
-
-                ElseIf szone17.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton70.Checked = CheckState.Checked
-
-                End If
-
-
-            End If
-
-            If line.Contains("0,0,LOCATION_SZONE,7") Then
-                szone18 = line.Split("(").Last
-                spellcard18 = szone18.Split(",").First
-                selectedcard = spellcard18
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard18 & ".jpg"
-                Form1.PictureBox123.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox123, Form1.TextBox4.Text)
-                If szone18.Contains("POS_FACEUP") Then
-                    Form1.RadioButton71.Checked = CheckState.Checked
-
-                ElseIf szone18.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton72.Checked = CheckState.Checked
-
-                End If
-
-
-            End If
-
-            If line.Contains(",0,0,LOCATION_HAND,0,") Then
-
-                If hand11 = Nothing Then
-
-                    hand11 = line.Split("(").Last
-                    handcard11 = hand11.Split(",").First
-                    selectedcard = handcard11
-                    SearchbyId()
+            Do While stream.Peek() >= 0
+                line = stream.ReadLine
+                If line.Contains("--") Then
+                    Form1.RichTextBox3.AppendText(line & vbNewLine)
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard11 & ".jpg"
-                    Form1.PictureBox12.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox12, Form1.TextBox4.Text)
+                End If
 
+                If line.Contains("Debug.SetAIName(") Then
+                    ainm = line.Split("(").Last
 
-                ElseIf hand12 = Nothing Then
-
-                    hand12 = line.Split("(").Last
-                    handcard12 = hand12.Split(",").First
-                    selectedcard = handcard12
-                    SearchbyId()
+                    AIname = ainm.Split(")").First
+                    Form1.TextBox42.Text = AIname.Trim(My.Settings.Chars)
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard12 & ".jpg"
-                    Form1.PictureBox13.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox13, Form1.TextBox4.Text)
 
-                ElseIf hand13 = Nothing Then
-
-                    hand13 = line.Split("(").Last
-                    handcard13 = hand13.Split(",").First
-                    selectedcard = handcard13
-                    SearchbyId()
+                End If
+                If line.Contains("Debug.ReloadFieldBegin(") Then
+                    dueltp = line.Split("(").Last
+                    Dueltype = dueltp.Split("+").First
+                    Form1.ComboBox5.Text = Dueltype
+                    duelmd = dueltp.Split("+").Last
+                    Duelmode = duelmd.Split(")").First
+                    Form1.ComboBox6.Text = Duelmode
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard13 & ".jpg"
-                    Form1.PictureBox14.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox14, Form1.TextBox4.Text)
-
-                ElseIf hand14 = Nothing Then
-
-                    hand14 = line.Split("(").Last
-                    handcard14 = hand14.Split(",").First
-                    selectedcard = handcard14
-                    SearchbyId()
+                End If
+                If line.Contains("Debug.SetPlayerInfo(0,") Then
+                    playerlp = Split(line, ",", 2, CompareMethod.Text).Last
+                    Playerpoints = Split(playerlp, ",", 1, CompareMethod.Text).Last
+                    playerp = Playerpoints.Split(",").First
+                    Form1.TextBox8.Text = playerp
+                    Form1.TextBox44.Text = "Player"
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard14 & ".jpg"
-                    Form1.PictureBox15.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox15, Form1.TextBox4.Text)
-
-                ElseIf hand15 = Nothing Then
-
-                    hand15 = line.Split("(").Last
-                    handcard15 = hand15.Split(",").First
-                    selectedcard = handcard15
-                    SearchbyId()
+                End If
+                If line.Contains("Debug.SetPlayerInfo(1,") Then
+                    enemylp = Split(line, ",", 2, CompareMethod.Text).Last
+                    Enemypoints = Split(enemylp, ",", 1, CompareMethod.Text).Last
+                    enemyp = Enemypoints.Split(",").First
+                    Form1.TextBox11.Text = enemyp
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard15 & ".jpg"
-                    Form1.PictureBox16.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox16, Form1.TextBox4.Text)
+                End If
+                If line.Contains("0,0,LOCATION_MZONE,0") Then
+                    monster11 = line.Split("(").Last
+                    monstercard11 = monster11.Split(",").First
+                    selectedcard = monstercard11
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard11 & ".jpg"
+                    Form1.PictureBox2.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox2, Form1.TextBox4.Text)
+                    If monster11.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton1.Checked = CheckState.Checked
+                        Form1.RadioButton5.Checked = CheckState.Checked
+                    ElseIf monster11.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton2.Checked = CheckState.Checked
+                        Form1.RadioButton5.Checked = CheckState.Checked
+                    ElseIf monster11.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton2.Checked = CheckState.Checked
+                        Form1.RadioButton6.Checked = CheckState.Checked
+                    End If
+                End If
 
+                If line.Contains("0,0,LOCATION_MZONE,1") Then
+                    monster12 = line.Split("(").Last
+                    monstercard12 = monster12.Split(",").First
+                    selectedcard = monstercard12
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard12 & ".jpg"
+                    Form1.PictureBox3.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox3, Form1.TextBox4.Text)
+                    If monster12.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton3.Checked = CheckState.Checked
+                        Form1.RadioButton23.Checked = CheckState.Checked
+                    ElseIf monster12.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton3.Checked = CheckState.Checked
+                        Form1.RadioButton24.Checked = CheckState.Checked
+                    ElseIf monster12.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton4.Checked = CheckState.Checked
+                        Form1.RadioButton24.Checked = CheckState.Checked
+                    End If
+                End If
+
+                If line.Contains("0,0,LOCATION_MZONE,2") Then
+                    monster13 = line.Split("(").Last
+                    monstercard13 = monster13.Split(",").First
+                    selectedcard = monstercard13
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard13 & ".jpg"
+                    Form1.PictureBox4.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox4, Form1.TextBox4.Text)
+                    If monster13.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton7.Checked = CheckState.Checked
+                        Form1.RadioButton25.Checked = CheckState.Checked
+                    ElseIf monster13.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton7.Checked = CheckState.Checked
+                        Form1.RadioButton26.Checked = CheckState.Checked
+                    ElseIf monster13.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton8.Checked = CheckState.Checked
+                        Form1.RadioButton26.Checked = CheckState.Checked
+                    End If
+                End If
+
+                If line.Contains("0,0,LOCATION_MZONE,3") Then
+                    monster14 = line.Split("(").Last
+                    monstercard14 = monster14.Split(",").First
+                    selectedcard = monstercard14
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard14 & ".jpg"
+                    Form1.PictureBox5.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox5, Form1.TextBox4.Text)
+                    If monster14.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton9.Checked = CheckState.Checked
+                        Form1.RadioButton27.Checked = CheckState.Checked
+                    ElseIf monster14.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton9.Checked = CheckState.Checked
+                        Form1.RadioButton28.Checked = CheckState.Checked
+                    ElseIf monster14.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton10.Checked = CheckState.Checked
+                        Form1.RadioButton28.Checked = CheckState.Checked
+                    End If
+                End If
+
+                If line.Contains("0,0,LOCATION_MZONE,4") Then
+                    monster15 = line.Split("(").Last
+                    monstercard15 = monster15.Split(",").First
+                    selectedcard = monstercard15
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard15 & ".jpg"
+                    Form1.PictureBox6.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox6, Form1.TextBox4.Text)
+                    If monster15.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton11.Checked = CheckState.Checked
+                        Form1.RadioButton29.Checked = CheckState.Checked
+                    ElseIf monster15.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton11.Checked = CheckState.Checked
+                        Form1.RadioButton30.Checked = CheckState.Checked
+                    ElseIf monster15.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton12.Checked = CheckState.Checked
+                        Form1.RadioButton30.Checked = CheckState.Checked
+                    End If
+                End If
+
+                If line.Contains("0,0,LOCATION_SZONE,0") Then
+                    szone11 = line.Split("(").Last
+                    spellcard11 = szone11.Split(",").First
+                    selectedcard = spellcard11
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard11 & ".jpg"
+                    Form1.PictureBox7.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox7, Form1.TextBox4.Text)
+                    If szone11.Contains("POS_FACEUP") Then
+                        Form1.RadioButton13.Checked = CheckState.Checked
+
+                    ElseIf szone11.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton14.Checked = CheckState.Checked
+
+                    End If
 
 
                 End If
 
-
-            End If
-
-
-            If line.Contains("0,0,LOCATION_DECK,0") Then
-                Form1.PictureBox17.Image = My.Resources.cardback
-                Form1.Label10.Text += 1
-                If deck11 = Nothing Then
-
-                    deck11 = line.Split("(").Last
-                    deckcard11 = deck11.Split(",").First
-                    selectedcard = deckcard11
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard11 & ".jpg"
-                    Form1.PictureBox45.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox45, Form1.TextBox4.Text)
-
-
-                ElseIf deck12 = Nothing Then
-
-                    deck12 = line.Split("(").Last
-                    deckcard12 = deck12.Split(",").First
-                    selectedcard = deckcard12
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard12 & ".jpg"
-                    Form1.PictureBox44.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox44, Form1.TextBox4.Text)
-
-                ElseIf deck13 = Nothing Then
-
-                    deck13 = line.Split("(").Last
-                    deckcard13 = deck13.Split(",").First
-                    selectedcard = deckcard13
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard13 & ".jpg"
-                    Form1.PictureBox43.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox43, Form1.TextBox4.Text)
-
-                ElseIf deck14 = Nothing Then
-
-                    deck14 = line.Split("(").Last
-                    deckcard14 = deck14.Split(",").First
-                    selectedcard = deckcard14
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard14 & ".jpg"
-                    Form1.PictureBox42.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox42, Form1.TextBox4.Text)
-
-                ElseIf deck15 = Nothing Then
-
-                    deck15 = line.Split("(").Last
-                    deckcard15 = deck15.Split(",").First
-                    selectedcard = deckcard15
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard15 & ".jpg"
-                    Form1.PictureBox41.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox41, Form1.TextBox4.Text)
-
-                ElseIf deck16 = Nothing Then
-                    deck16 = line.Split("(").Last
-                    deckcard16 = deck16.Split(",").First
-                    selectedcard = deckcard16
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard16 & ".jpg"
-                    Form1.PictureBox82.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox82, Form1.TextBox4.Text)
-
-                ElseIf deck17 = Nothing Then
-                    deck17 = line.Split("(").Last
-                    deckcard17 = deck17.Split(",").First
-                    selectedcard = deckcard17
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard17 & ".jpg"
-                    Form1.PictureBox83.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox83, Form1.TextBox4.Text)
-
-                ElseIf deck18 = Nothing Then
-                    deck18 = line.Split("(").Last
-                    deckcard18 = deck18.Split(",").First
-                    selectedcard = deckcard18
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard18 & ".jpg"
-                    Form1.PictureBox84.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox84, Form1.TextBox4.Text)
-
-                ElseIf deck19 = Nothing Then
-                    deck19 = line.Split("(").Last
-                    deckcard19 = deck19.Split(",").First
-                    selectedcard = deckcard19
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard19 & ".jpg"
-                    Form1.PictureBox85.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox85, Form1.TextBox4.Text)
-
-                ElseIf deck10 = Nothing Then
-                    deck10 = line.Split("(").Last
-                    deckcard16 = deck10.Split(",").First
-                    selectedcard = deckcard10
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard10 & ".jpg"
-                    Form1.PictureBox86.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox86, Form1.TextBox4.Text)
-
-                End If
-
-            End If
-
-
-            If line.Contains("0,0,LOCATION_GRAVE,0") Then
-                Form1.PictureBox18.Image = My.Resources.cardback
-                Form1.Label11.Text += 1
-                If grave11 = Nothing Then
-
-                    grave11 = line.Split("(").Last
-                    gravecard11 = grave11.Split(",").First
-                    selectedcard = gravecard11
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard11 & ".jpg"
-                    Form1.PictureBox55.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox55, Form1.TextBox4.Text)
-
-
-                ElseIf grave12 = Nothing Then
-
-                    grave12 = line.Split("(").Last
-                    gravecard12 = grave12.Split(",").First
-                    selectedcard = gravecard12
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard12 & ".jpg"
-                    Form1.PictureBox54.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox54, Form1.TextBox4.Text)
-
-                ElseIf grave13 = Nothing Then
-
-                    grave13 = line.Split("(").Last
-                    gravecard13 = grave13.Split(",").First
-                    selectedcard = gravecard13
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard13 & ".jpg"
-                    Form1.PictureBox53.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox53, Form1.TextBox4.Text)
-
-                ElseIf grave14 = Nothing Then
-
-                    grave14 = line.Split("(").Last
-                    gravecard14 = grave14.Split(",").First
-                    selectedcard = gravecard14
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard14 & ".jpg"
-                    Form1.PictureBox52.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox52, Form1.TextBox4.Text)
-
-                ElseIf grave15 = Nothing Then
-
-                    grave15 = line.Split("(").Last
-                    gravecard15 = grave15.Split(",").First
-                    selectedcard = gravecard15
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard15 & ".jpg"
-                    Form1.PictureBox51.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox51, Form1.TextBox4.Text)
-
-                ElseIf grave16 = Nothing Then
-
-                    grave16 = line.Split("(").Last
-                    gravecard16 = grave16.Split(",").First
-                    selectedcard = gravecard16
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard16 & ".jpg"
-                    Form1.PictureBox87.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox87, Form1.TextBox4.Text)
-
-                ElseIf grave17 = Nothing Then
-
-                    grave17 = line.Split("(").Last
-                    gravecard17 = grave17.Split(",").First
-                    selectedcard = gravecard17
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard17 & ".jpg"
-                    Form1.PictureBox88.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox88, Form1.TextBox4.Text)
-
-                ElseIf grave18 = Nothing Then
-
-                    grave18 = line.Split("(").Last
-                    gravecard18 = grave18.Split(",").First
-                    selectedcard = gravecard18
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard18 & ".jpg"
-                    Form1.PictureBox89.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox89, Form1.TextBox4.Text)
-
-
-                ElseIf grave19 = Nothing Then
-
-                    grave19 = line.Split("(").Last
-                    gravecard19 = grave19.Split(",").First
-                    selectedcard = gravecard19
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard19 & ".jpg"
-                    Form1.PictureBox90.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox90, Form1.TextBox4.Text)
-
-
-                ElseIf grave20 = Nothing Then
-
-                    grave20 = line.Split("(").Last
-                    gravecard20 = grave20.Split(",").First
-                    selectedcard = gravecard20
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard20 & ".jpg"
-                    Form1.PictureBox91.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox91, Form1.TextBox4.Text)
-
-                End If
-
-            End If
-
-            If line.Contains("0,0,LOCATION_REMOVED,0") Then
-                Form1.PictureBox19.Image = My.Resources.cardback
-                Form1.Label12.Text += 1
-                If removed11 = Nothing Then
-
-                    removed11 = line.Split("(").Last
-                    removedcard11 = removed11.Split(",").First
-                    selectedcard = removedcard11
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard11 & ".jpg"
-                    Form1.PictureBox65.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox65, Form1.TextBox4.Text)
-
-
-                ElseIf removed12 = Nothing Then
-
-                    removed12 = line.Split("(").Last
-                    removedcard12 = removed12.Split(",").First
-                    selectedcard = removedcard12
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard12 & ".jpg"
-                    Form1.PictureBox64.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox64, Form1.TextBox4.Text)
-
-                ElseIf removed13 = Nothing Then
-
-                    removed13 = line.Split("(").Last
-                    removedcard13 = removed13.Split(",").First
-                    selectedcard = removedcard13
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard13 & ".jpg"
-                    Form1.PictureBox63.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox63, Form1.TextBox4.Text)
-
-                ElseIf removed14 = Nothing Then
-
-                    removed14 = line.Split("(").Last
-                    removedcard14 = removed14.Split(",").First
-                    selectedcard = removedcard14
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard14 & ".jpg"
-                    Form1.PictureBox62.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox62, Form1.TextBox4.Text)
-
-                ElseIf removed15 = Nothing Then
-
-                    removed15 = line.Split("(").Last
-                    removedcard15 = removed15.Split(",").First
-                    selectedcard = removedcard15
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard15 & ".jpg"
-                    Form1.PictureBox61.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox61, Form1.TextBox4.Text)
-
-                ElseIf removed16 = Nothing Then
-
-                    removed16 = line.Split("(").Last
-                    removedcard16 = removed16.Split(",").First
-                    selectedcard = removedcard16
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard16 & ".jpg"
-                    Form1.PictureBox92.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox92, Form1.TextBox4.Text)
-
-                ElseIf removed17 = Nothing Then
-
-                    removed17 = line.Split("(").Last
-                    removedcard17 = removed17.Split(",").First
-                    selectedcard = removedcard17
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard17 & ".jpg"
-                    Form1.PictureBox93.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox93, Form1.TextBox4.Text)
-
-                ElseIf removed18 = Nothing Then
-
-                    removed18 = line.Split("(").Last
-                    removedcard18 = removed18.Split(",").First
-                    selectedcard = removedcard18
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard18 & ".jpg"
-                    Form1.PictureBox94.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox94, Form1.TextBox4.Text)
-
-
-                ElseIf removed19 = Nothing Then
-
-                    removed19 = line.Split("(").Last
-                    removedcard19 = removed19.Split(",").First
-                    selectedcard = removedcard19
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard19 & ".jpg"
-                    Form1.PictureBox95.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox95, Form1.TextBox4.Text)
-
-                ElseIf removed20 = Nothing Then
-
-                    removed20 = line.Split("(").Last
-                    removedcard20 = removed20.Split(",").First
-                    selectedcard = removedcard20
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard20 & ".jpg"
-                    Form1.PictureBox96.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox96, Form1.TextBox4.Text)
-
-                End If
-
-
-            End If
-
-
-            If line.Contains("0,0,LOCATION_EXTRA,0") Then
-                Form1.PictureBox20.Image = My.Resources.cardback
-                Form1.Label13.Text += 1
-                If extra11 = Nothing Then
-
-                    extra11 = line.Split("(").Last
-                    extracard11 = extra11.Split(",").First
-                    selectedcard = extracard11
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard11 & ".jpg"
-                    Form1.PictureBox75.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox75, Form1.TextBox4.Text)
-
-
-                ElseIf extra12 = Nothing Then
-
-                    extra12 = line.Split("(").Last
-                    extracard12 = extra12.Split(",").First
-                    selectedcard = extracard12
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard12 & ".jpg"
-                    Form1.PictureBox74.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox74, Form1.TextBox4.Text)
-
-                ElseIf extra13 = Nothing Then
-
-                    extra13 = line.Split("(").Last
-                    extracard13 = extra13.Split(",").First
-                    selectedcard = extracard13
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard13 & ".jpg"
-                    Form1.PictureBox73.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox73, Form1.TextBox4.Text)
-
-                ElseIf extra14 = Nothing Then
-
-                    extra14 = line.Split("(").Last
-                    extracard14 = extra14.Split(",").First
-                    selectedcard = extracard14
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard14 & ".jpg"
-                    Form1.PictureBox72.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox72, Form1.TextBox4.Text)
-
-                ElseIf extra15 = Nothing Then
-
-                    extra15 = line.Split("(").Last
-                    extracard15 = extra15.Split(",").First
-                    selectedcard = extracard15
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard15 & ".jpg"
-                    Form1.PictureBox71.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox71, Form1.TextBox4.Text)
-
-                ElseIf extra16 = Nothing Then
-
-                    extra16 = line.Split("(").Last
-                    extracard16 = extra16.Split(",").First
-                    selectedcard = extracard16
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard16 & ".jpg"
-                    Form1.PictureBox97.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox97, Form1.TextBox4.Text)
-
-                ElseIf extra17 = Nothing Then
-
-                    extra17 = line.Split("(").Last
-                    extracard17 = extra17.Split(",").First
-                    selectedcard = extracard17
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard17 & ".jpg"
-                    Form1.PictureBox98.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox98, Form1.TextBox4.Text)
-
-
-                ElseIf extra18 = Nothing Then
-
-                    extra18 = line.Split("(").Last
-                    extracard18 = extra18.Split(",").First
-                    selectedcard = extracard18
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard18 & ".jpg"
-                    Form1.PictureBox99.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox99, Form1.TextBox4.Text)
-
-                ElseIf extra19 = Nothing Then
-
-                    extra19 = line.Split("(").Last
-                    extracard19 = extra19.Split(",").First
-                    selectedcard = extracard19
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard19 & ".jpg"
-                    Form1.PictureBox100.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox100, Form1.TextBox4.Text)
-
-                ElseIf extra10 = Nothing Then
-
-                    extra10 = line.Split("(").Last
-                    extracard10 = extra10.Split(",").First
-                    selectedcard = extracard10
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard10 & ".jpg"
-                    Form1.PictureBox101.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox101, Form1.TextBox4.Text)
-
-                End If
-
-
-
-            End If
-
-
-            If line.Contains("1,1,LOCATION_MZONE,0") Then
-                monster21 = line.Split("(").Last
-                monstercard21 = monster21.Split(",").First
-                selectedcard = monstercard21
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard21 & ".jpg"
-                Form1.PictureBox22.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox22, Form1.TextBox4.Text)
-                If monster21.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton35.Checked = CheckState.Checked
-                    Form1.RadioButton45.Checked = CheckState.Checked
-                ElseIf monster21.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton35.Checked = CheckState.Checked
-                    Form1.RadioButton46.Checked = CheckState.Checked
-                ElseIf monster21.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton36.Checked = CheckState.Checked
-                    Form1.RadioButton46.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("1,1,LOCATION_MZONE,1") Then
-                monster22 = line.Split("(").Last
-                monstercard22 = monster22.Split(",").First
-                selectedcard = monstercard22
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard22 & ".jpg"
-                Form1.PictureBox23.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox23, Form1.TextBox4.Text)
-                If monster22.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton37.Checked = CheckState.Checked
-                    Form1.RadioButton47.Checked = CheckState.Checked
-                ElseIf monster22.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton37.Checked = CheckState.Checked
-                    Form1.RadioButton48.Checked = CheckState.Checked
-                ElseIf monster22.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton38.Checked = CheckState.Checked
-                    Form1.RadioButton48.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("1,1,LOCATION_MZONE,2") Then
-                monster23 = line.Split("(").Last
-                monstercard23 = monster23.Split(",").First
-                selectedcard = monstercard23
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard23 & ".jpg"
-                Form1.PictureBox24.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox24, Form1.TextBox4.Text)
-                If monster23.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton39.Checked = CheckState.Checked
-                    Form1.RadioButton49.Checked = CheckState.Checked
-                ElseIf monster23.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton39.Checked = CheckState.Checked
-                    Form1.RadioButton50.Checked = CheckState.Checked
-                ElseIf monster23.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton40.Checked = CheckState.Checked
-                    Form1.RadioButton50.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("1,1,LOCATION_MZONE,3") Then
-                monster24 = line.Split("(").Last
-                monstercard24 = monster24.Split(",").First
-                selectedcard = monstercard24
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard24 & ".jpg"
-                Form1.PictureBox25.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox25, Form1.TextBox4.Text)
-                If monster24.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton41.Checked = CheckState.Checked
-                    Form1.RadioButton51.Checked = CheckState.Checked
-                ElseIf monster24.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton41.Checked = CheckState.Checked
-                    Form1.RadioButton52.Checked = CheckState.Checked
-                ElseIf monster24.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton42.Checked = CheckState.Checked
-                    Form1.RadioButton52.Checked = CheckState.Checked
-                End If
-            End If
-
-            If line.Contains("1,1,LOCATION_MZONE,4") Then
-                monster25 = line.Split("(").Last
-                monstercard25 = monster25.Split(",").First
-                selectedcard = monstercard25
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard25 & ".jpg"
-                Form1.PictureBox26.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox26, Form1.TextBox4.Text)
-                If monster25.Contains("POS_FACEUP_ATTACK") Then
-                    Form1.RadioButton43.Checked = CheckState.Checked
-                    Form1.RadioButton53.Checked = CheckState.Checked
-                ElseIf monster25.Contains("POS_FACEUP_DEFENCE") Then
-                    Form1.RadioButton43.Checked = CheckState.Checked
-                    Form1.RadioButton54.Checked = CheckState.Checked
-                ElseIf monster25.Contains("POS_FACEDOWN_DEFENCE") Then
-                    Form1.RadioButton44.Checked = CheckState.Checked
-                    Form1.RadioButton54.Checked = CheckState.Checked
-                End If
-            End If
-
-
-            If line.Contains("1,1,LOCATION_SZONE,0") Then
-                szone21 = line.Split("(").Last
-                spellcard21 = szone21.Split(",").First
-                selectedcard = spellcard21
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard21 & ".jpg"
-                Form1.PictureBox27.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox27, Form1.TextBox4.Text)
-                If szone21.Contains("POS_FACEUP") Then
-                    Form1.RadioButton55.Checked = CheckState.Checked
-
-                ElseIf szone21.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton56.Checked = CheckState.Checked
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_SZONE,1") Then
-                szone22 = line.Split("(").Last
-                spellcard22 = szone22.Split(",").First
-                selectedcard = spellcard22
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard22 & ".jpg"
-                Form1.PictureBox28.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox28, Form1.TextBox4.Text)
-                If szone22.Contains("POS_FACEUP") Then
-                    Form1.RadioButton57.Checked = CheckState.Checked
-
-                ElseIf szone22.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton58.Checked = CheckState.Checked
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_SZONE,2") Then
-                szone23 = line.Split("(").Last
-                spellcard23 = szone23.Split(",").First
-                selectedcard = spellcard23
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard23 & ".jpg"
-                Form1.PictureBox29.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox29, Form1.TextBox4.Text)
-                If szone23.Contains("POS_FACEUP") Then
-                    Form1.RadioButton59.Checked = CheckState.Checked
-
-                ElseIf szone23.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton60.Checked = CheckState.Checked
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_SZONE,3") Then
-                szone24 = line.Split("(").Last
-                spellcard24 = szone24.Split(",").First
-                selectedcard = spellcard24
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard24 & ".jpg"
-                Form1.PictureBox30.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox30, Form1.TextBox4.Text)
-                If szone24.Contains("POS_FACEUP") Then
-                    Form1.RadioButton61.Checked = CheckState.Checked
-
-                ElseIf szone24.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton62.Checked = CheckState.Checked
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_SZONE,4") Then
-                szone25 = line.Split("(").Last
-                spellcard25 = szone25.Split(",").First
-                selectedcard = spellcard25
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard25 & ".jpg"
-                Form1.PictureBox31.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox31, Form1.TextBox4.Text)
-                If szone25.Contains("POS_FACEUP") Then
-                    Form1.RadioButton63.Checked = CheckState.Checked
-
-                ElseIf szone25.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton64.Checked = CheckState.Checked
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_SZONE,5") Then
-                szone26 = line.Split("(").Last
-                spellcard26 = szone26.Split(",").First
-                selectedcard = spellcard26
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard26 & ".jpg"
-                Form1.PictureBox40.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox40, Form1.TextBox4.Text)
-                If szone26.Contains("POS_FACEUP") Then
-                    Form1.RadioButton67.Checked = CheckState.Checked
-
-                ElseIf szone26.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton68.Checked = CheckState.Checked
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_SZONE,6") Then
-                szone27 = line.Split("(").Last
-                spellcard27 = szone27.Split(",").First
-                selectedcard = spellcard27
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard27 & ".jpg"
-                Form1.PictureBox124.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox124, Form1.TextBox4.Text)
-                If szone27.Contains("POS_FACEUP") Then
-                    Form1.RadioButton73.Checked = CheckState.Checked
-
-                ElseIf szone27.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton74.Checked = CheckState.Checked
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_SZONE,7") Then
-                szone28 = line.Split("(").Last
-                spellcard28 = szone28.Split(",").First
-                selectedcard = spellcard28
-                Form1.RichTextBox5.AppendText(line & vbNewLine)
-                Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard28 & ".jpg"
-                Form1.PictureBox125.ImageLocation = current
-                SearchbyId()
-                Form1.ToolTip1.SetToolTip(Form1.PictureBox125, Form1.TextBox4.Text)
-                If szone28.Contains("POS_FACEUP") Then
-                    Form1.RadioButton75.Checked = CheckState.Checked
-
-                ElseIf szone28.Contains("POS_FACEDOWN") Then
-                    Form1.RadioButton76.Checked = CheckState.Checked
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_HAND,0") Then
-
-                If hand21 = Nothing Then
-
-                    hand21 = line.Split("(").Last
-                    handcard21 = hand21.Split(",").First
-                    selectedcard = handcard21
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard21 & ".jpg"
-                    Form1.PictureBox32.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox32, Form1.TextBox4.Text)
-
-
-                ElseIf hand22 = Nothing Then
-
-                    hand22 = line.Split("(").Last
-                    handcard22 = hand22.Split(",").First
-                    selectedcard = handcard22
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard22 & ".jpg"
-                    Form1.PictureBox33.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox33, Form1.TextBox4.Text)
-
-                ElseIf hand23 = Nothing Then
-
-                    hand23 = line.Split("(").Last
-                    handcard23 = hand23.Split(",").First
-                    selectedcard = handcard23
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard23 & ".jpg"
-                    Form1.PictureBox34.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox34, Form1.TextBox4.Text)
-
-                ElseIf hand24 = Nothing Then
-
-                    hand24 = line.Split("(").Last
-                    handcard24 = hand24.Split(",").First
-                    selectedcard = handcard24
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard24 & ".jpg"
-                    Form1.PictureBox35.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox35, Form1.TextBox4.Text)
-
-                ElseIf hand25 = Nothing Then
-
-                    hand25 = line.Split("(").Last
-                    handcard25 = hand25.Split(",").First
-                    selectedcard = handcard25
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard25 & ".jpg"
-                    Form1.PictureBox36.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox36, Form1.TextBox4.Text)
-
-                End If
-
-
-            End If
-
-
-            If line.Contains("1,1,LOCATION_DECK,0") Then
-                Form1.PictureBox37.Image = My.Resources.cardback
-                Form1.Label28.Text += 1
-                If deck21 = Nothing Then
-
-                    deck21 = line.Split("(").Last
-                    deckcard21 = deck21.Split(",").First
-                    selectedcard = deckcard21
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard21 & ".jpg"
-                    Form1.PictureBox50.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox50, Form1.TextBox4.Text)
-
-
-                ElseIf deck22 = Nothing Then
-
-                    deck22 = line.Split("(").Last
-                    deckcard22 = deck22.Split(",").First
-                    selectedcard = deckcard22
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard22 & ".jpg"
-                    Form1.PictureBox49.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox49, Form1.TextBox4.Text)
-
-                ElseIf deck23 = Nothing Then
-
-                    deck23 = line.Split("(").Last
-                    deckcard23 = deck23.Split(",").First
-                    selectedcard = deckcard23
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard23 & ".jpg"
-                    Form1.PictureBox48.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox48, Form1.TextBox4.Text)
-
-                ElseIf deck24 = Nothing Then
-
-                    deck24 = line.Split("(").Last
-                    deckcard24 = deck24.Split(",").First
-                    selectedcard = deckcard24
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard24 & ".jpg"
-                    Form1.PictureBox47.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox47, Form1.TextBox4.Text)
-
-                ElseIf deck25 = Nothing Then
-
-                    deck25 = line.Split("(").Last
-                    deckcard25 = deck25.Split(",").First
-                    selectedcard = deckcard25
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard25 & ".jpg"
-                    Form1.PictureBox46.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox46, Form1.TextBox4.Text)
-
-                ElseIf deck26 = Nothing Then
-
-                    deck26 = line.Split("(").Last
-                    deckcard26 = deck26.Split(",").First
-                    selectedcard = deckcard26
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard26 & ".jpg"
-                    Form1.PictureBox102.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox102, Form1.TextBox4.Text)
-
-                ElseIf deck27 = Nothing Then
-
-                    deck27 = line.Split("(").Last
-                    deckcard27 = deck27.Split(",").First
-                    selectedcard = deckcard27
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard27 & ".jpg"
-                    Form1.PictureBox103.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox103, Form1.TextBox4.Text)
-
-                ElseIf deck28 = Nothing Then
-
-                    deck28 = line.Split("(").Last
-                    deckcard28 = deck28.Split(",").First
-                    selectedcard = deckcard28
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard28 & ".jpg"
-                    Form1.PictureBox104.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox104, Form1.TextBox4.Text)
-
-                ElseIf deck29 = Nothing Then
-
-                    deck29 = line.Split("(").Last
-                    deckcard29 = deck29.Split(",").First
-                    selectedcard = deckcard29
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard29 & ".jpg"
-                    Form1.PictureBox105.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox105, Form1.TextBox4.Text)
-
-                ElseIf deck20 = Nothing Then
-
-                    deck20 = line.Split("(").Last
-                    deckcard20 = deck20.Split(",").First
-                    selectedcard = deckcard20
-                    SearchbyId()
+                If line.Contains("0,0,LOCATION_SZONE,1") Then
+                    szone12 = line.Split("(").Last
+                    spellcard12 = szone12.Split(",").First
+                    selectedcard = spellcard12
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard20 & ".jpg"
-                    Form1.PictureBox106.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox106, Form1.TextBox4.Text)
-
-                End If
-
-            End If
-
-            If line.Contains("1,1,LOCATION_GRAVE,0") Then
-                Form1.PictureBox38.Image = My.Resources.cardback
-                Form1.Label27.Text += 1
-                If grave21 = Nothing Then
-
-                    grave21 = line.Split("(").Last
-                    gravecard21 = grave21.Split(",").First
-                    selectedcard = gravecard21
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard21 & ".jpg"
-                    Form1.PictureBox60.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox60, Form1.TextBox4.Text)
-
-
-                ElseIf grave22 = Nothing Then
-
-                    grave22 = line.Split("(").Last
-                    gravecard22 = grave22.Split(",").First
-                    selectedcard = gravecard22
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard22 & ".jpg"
-                    Form1.PictureBox59.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox59, Form1.TextBox4.Text)
-
-                ElseIf grave23 = Nothing Then
-
-                    grave23 = line.Split("(").Last
-                    gravecard23 = grave23.Split(",").First
-                    selectedcard = gravecard23
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard23 & ".jpg"
-                    Form1.PictureBox58.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox58, Form1.TextBox4.Text)
-
-                ElseIf grave24 = Nothing Then
-
-                    grave24 = line.Split("(").Last
-                    gravecard24 = grave24.Split(",").First
-                    selectedcard = gravecard24
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard24 & ".jpg"
-                    Form1.PictureBox57.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox57, Form1.TextBox4.Text)
-
-                ElseIf grave25 = Nothing Then
-
-                    grave25 = line.Split("(").Last
-                    gravecard25 = grave25.Split(",").First
-                    selectedcard = gravecard25
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard25 & ".jpg"
-                    Form1.PictureBox56.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox56, Form1.TextBox4.Text)
-
-                ElseIf grave26 = Nothing Then
-
-                    grave26 = line.Split("(").Last
-                    gravecard26 = grave26.Split(",").First
-                    selectedcard = gravecard26
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard26 & ".jpg"
-                    Form1.PictureBox107.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox107, Form1.TextBox4.Text)
-
-                ElseIf grave27 = Nothing Then
-
-                    grave27 = line.Split("(").Last
-                    gravecard27 = grave27.Split(",").First
-                    selectedcard = gravecard27
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard27 & ".jpg"
-                    Form1.PictureBox108.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox108, Form1.TextBox4.Text)
-
-                ElseIf grave28 = Nothing Then
-
-                    grave28 = line.Split("(").Last
-                    gravecard28 = grave28.Split(",").First
-                    selectedcard = gravecard28
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard28 & ".jpg"
-                    Form1.PictureBox109.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox109, Form1.TextBox4.Text)
-
-
-                ElseIf grave29 = Nothing Then
-
-                    grave29 = line.Split("(").Last
-                    gravecard29 = grave29.Split(",").First
-                    selectedcard = gravecard29
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard12 & ".jpg"
+                    Form1.PictureBox8.ImageLocation = current
                     SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard29 & ".jpg"
-                    Form1.PictureBox110.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox110, Form1.TextBox4.Text)
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox8, Form1.TextBox4.Text)
+                    If szone12.Contains("POS_FACEUP") Then
+                        Form1.RadioButton15.Checked = CheckState.Checked
 
-                ElseIf grave20 = Nothing Then
+                    ElseIf szone12.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton16.Checked = CheckState.Checked
 
-                    grave20 = line.Split("(").Last
-                    gravecard20 = grave20.Split(",").First
-                    selectedcard = gravecard20
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard20 & ".jpg"
-                    Form1.PictureBox111.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox111, Form1.TextBox4.Text)
+                    End If
 
 
                 End If
 
-            End If
-
-
-            If line.Contains("1,1,LOCATION_REMOVED,0") Then
-                Form1.PictureBox39.Image = My.Resources.cardback
-                Form1.Label23.Text += 1
-                If removed21 = Nothing Then
-
-                    removed21 = line.Split("(").Last
-                    removedcard21 = removed21.Split(",").First
-                    selectedcard = removedcard21
-                    SearchbyId()
+                If line.Contains("0,0,LOCATION_SZONE,2") Then
+                    szone13 = line.Split("(").Last
+                    spellcard13 = szone13.Split(",").First
+                    selectedcard = spellcard13
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard21 & ".jpg"
-                    Form1.PictureBox70.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox70, Form1.TextBox4.Text)
-
-
-                ElseIf removed22 = Nothing Then
-
-                    removed22 = line.Split("(").Last
-                    removedcard22 = removed22.Split(",").First
-                    selectedcard = removedcard22
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard13 & ".jpg"
+                    Form1.PictureBox9.ImageLocation = current
                     SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox9, Form1.TextBox4.Text)
+                    If szone13.Contains("POS_FACEUP") Then
+                        Form1.RadioButton17.Checked = CheckState.Checked
+
+                    ElseIf szone13.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton18.Checked = CheckState.Checked
+
+                    End If
+
+
+                End If
+
+                If line.Contains("0,0,LOCATION_SZONE,3") Then
+                    szone14 = line.Split("(").Last
+                    spellcard14 = szone14.Split(",").First
+                    selectedcard = spellcard14
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard22 & ".jpg"
-                    Form1.PictureBox69.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox69, Form1.TextBox4.Text)
-
-                ElseIf removed23 = Nothing Then
-
-                    removed23 = line.Split("(").Last
-                    removedcard23 = removed23.Split(",").First
-                    selectedcard = removedcard23
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard14 & ".jpg"
+                    Form1.PictureBox10.ImageLocation = current
                     SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox10, Form1.TextBox4.Text)
+                    If szone14.Contains("POS_FACEUP") Then
+                        Form1.RadioButton19.Checked = CheckState.Checked
+
+                    ElseIf szone14.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton20.Checked = CheckState.Checked
+
+                    End If
+
+
+                End If
+
+                If line.Contains("0,0,LOCATION_SZONE,4") Then
+                    szone15 = line.Split("(").Last
+                    spellcard15 = szone15.Split(",").First
+                    selectedcard = spellcard15
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard23 & ".jpg"
-                    Form1.PictureBox68.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox68, Form1.TextBox4.Text)
-
-                ElseIf removed24 = Nothing Then
-
-                    removed24 = line.Split("(").Last
-                    removedcard24 = removed24.Split(",").First
-                    selectedcard = removedcard24
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard15 & ".jpg"
+                    Form1.PictureBox11.ImageLocation = current
                     SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox11, Form1.TextBox4.Text)
+                    If szone15.Contains("POS_FACEUP") Then
+                        Form1.RadioButton21.Checked = CheckState.Checked
+
+                    ElseIf szone15.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton22.Checked = CheckState.Checked
+
+                    End If
+
+
+                End If
+
+                If line.Contains("0,0,LOCATION_SZONE,5") Then
+                    szone16 = line.Split("(").Last
+                    spellcard16 = szone16.Split(",").First
+                    selectedcard = spellcard16
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard24 & ".jpg"
-                    Form1.PictureBox67.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox67, Form1.TextBox4.Text)
-
-                ElseIf removed25 = Nothing Then
-
-                    removed25 = line.Split("(").Last
-                    removedcard25 = removed25.Split(",").First
-                    selectedcard = removedcard25
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard16 & ".jpg"
+                    Form1.PictureBox21.ImageLocation = current
                     SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox21, Form1.TextBox4.Text)
+                    If szone16.Contains("POS_FACEUP") Then
+                        Form1.RadioButton65.Checked = CheckState.Checked
+
+                    ElseIf szone16.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton66.Checked = CheckState.Checked
+
+                    End If
+
+
+                End If
+
+                If line.Contains("0,0,LOCATION_SZONE,6") Then
+                    szone17 = line.Split("(").Last
+                    spellcard17 = szone17.Split(",").First
+                    selectedcard = spellcard17
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard25 & ".jpg"
-                    Form1.PictureBox66.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox66, Form1.TextBox4.Text)
-
-                ElseIf removed26 = Nothing Then
-
-                    removed26 = line.Split("(").Last
-                    removedcard26 = removed26.Split(",").First
-                    selectedcard = removedcard26
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard17 & ".jpg"
+                    Form1.PictureBox122.ImageLocation = current
                     SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox122, Form1.TextBox4.Text)
+                    If szone17.Contains("POS_FACEUP") Then
+                        Form1.RadioButton69.Checked = CheckState.Checked
+
+                    ElseIf szone17.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton70.Checked = CheckState.Checked
+
+                    End If
+
+
+                End If
+
+                If line.Contains("0,0,LOCATION_SZONE,7") Then
+                    szone18 = line.Split("(").Last
+                    spellcard18 = szone18.Split(",").First
+                    selectedcard = spellcard18
                     Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard26 & ".jpg"
-                    Form1.PictureBox112.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox112, Form1.TextBox4.Text)
-
-
-                ElseIf removed27 = Nothing Then
-
-                    removed27 = line.Split("(").Last
-                    removedcard27 = removed27.Split(",").First
-                    selectedcard = removedcard27
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard18 & ".jpg"
+                    Form1.PictureBox123.ImageLocation = current
                     SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard27 & ".jpg"
-                    Form1.PictureBox113.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox113, Form1.TextBox4.Text)
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox123, Form1.TextBox4.Text)
+                    If szone18.Contains("POS_FACEUP") Then
+                        Form1.RadioButton71.Checked = CheckState.Checked
+
+                    ElseIf szone18.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton72.Checked = CheckState.Checked
+
+                    End If
 
 
-                ElseIf removed28 = Nothing Then
+                End If
 
-                    removed28 = line.Split("(").Last
-                    removedcard28 = removed28.Split(",").First
-                    selectedcard = removedcard28
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard28 & ".jpg"
-                    Form1.PictureBox114.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox114, Form1.TextBox4.Text)
+                If line.Contains(",0,0,LOCATION_HAND,0,") Then
 
+                    If hand11 = Nothing Then
 
-                ElseIf removed29 = Nothing Then
-
-                    removed29 = line.Split("(").Last
-                    removedcard29 = removed29.Split(",").First
-                    selectedcard = removedcard29
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard29 & ".jpg"
-                    Form1.PictureBox115.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox115, Form1.TextBox4.Text)
+                        hand11 = line.Split("(").Last
+                        handcard11 = hand11.Split(",").First
+                        selectedcard = handcard11
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard11 & ".jpg"
+                        Form1.PictureBox12.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox12, Form1.TextBox4.Text)
 
 
-                ElseIf removed20 = Nothing Then
+                    ElseIf hand12 = Nothing Then
 
-                    removed20 = line.Split("(").Last
-                    removedcard20 = removed20.Split(",").First
-                    selectedcard = removedcard20
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard20 & ".jpg"
-                    Form1.PictureBox116.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox116, Form1.TextBox4.Text)
+                        hand12 = line.Split("(").Last
+                        handcard12 = hand12.Split(",").First
+                        selectedcard = handcard12
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard12 & ".jpg"
+                        Form1.PictureBox13.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox13, Form1.TextBox4.Text)
+
+                    ElseIf hand13 = Nothing Then
+
+                        hand13 = line.Split("(").Last
+                        handcard13 = hand13.Split(",").First
+                        selectedcard = handcard13
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard13 & ".jpg"
+                        Form1.PictureBox14.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox14, Form1.TextBox4.Text)
+
+                    ElseIf hand14 = Nothing Then
+
+                        hand14 = line.Split("(").Last
+                        handcard14 = hand14.Split(",").First
+                        selectedcard = handcard14
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard14 & ".jpg"
+                        Form1.PictureBox15.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox15, Form1.TextBox4.Text)
+
+                    ElseIf hand15 = Nothing Then
+
+                        hand15 = line.Split("(").Last
+                        handcard15 = hand15.Split(",").First
+                        selectedcard = handcard15
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard15 & ".jpg"
+                        Form1.PictureBox16.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox16, Form1.TextBox4.Text)
+
+
+
+                    End If
+
 
                 End If
 
 
-            End If
+                If line.Contains("0,0,LOCATION_DECK,0") Then
+                    Form1.PictureBox17.Image = My.Resources.cardback
+                    Form1.Label10.Text += 1
+                    If deck11 = Nothing Then
+
+                        deck11 = line.Split("(").Last
+                        deckcard11 = deck11.Split(",").First
+                        selectedcard = deckcard11
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard11 & ".jpg"
+                        Form1.PictureBox45.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox45, Form1.TextBox4.Text)
 
 
-            If line.Contains("1,1,LOCATION_EXTRA,0") Then
-                Form1.PictureBox81.Image = My.Resources.cardback
-                Form1.Label30.Text += 1
-                If extra21 = Nothing Then
+                    ElseIf deck12 = Nothing Then
 
-                    extra21 = line.Split("(").Last
-                    extracard21 = extra21.Split(",").First
-                    selectedcard = extracard21
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard21 & ".jpg"
-                    Form1.PictureBox80.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox80, Form1.TextBox4.Text)
+                        deck12 = line.Split("(").Last
+                        deckcard12 = deck12.Split(",").First
+                        selectedcard = deckcard12
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard12 & ".jpg"
+                        Form1.PictureBox44.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox44, Form1.TextBox4.Text)
 
+                    ElseIf deck13 = Nothing Then
 
-                ElseIf extra22 = Nothing Then
+                        deck13 = line.Split("(").Last
+                        deckcard13 = deck13.Split(",").First
+                        selectedcard = deckcard13
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard13 & ".jpg"
+                        Form1.PictureBox43.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox43, Form1.TextBox4.Text)
 
-                    extra22 = line.Split("(").Last
-                    extracard22 = extra22.Split(",").First
-                    selectedcard = extracard22
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard22 & ".jpg"
-                    Form1.PictureBox79.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox79, Form1.TextBox4.Text)
+                    ElseIf deck14 = Nothing Then
 
-                ElseIf extra23 = Nothing Then
+                        deck14 = line.Split("(").Last
+                        deckcard14 = deck14.Split(",").First
+                        selectedcard = deckcard14
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard14 & ".jpg"
+                        Form1.PictureBox42.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox42, Form1.TextBox4.Text)
 
-                    extra23 = line.Split("(").Last
-                    extracard23 = extra23.Split(",").First
-                    selectedcard = extracard23
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard23 & ".jpg"
-                    Form1.PictureBox78.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox78, Form1.TextBox4.Text)
+                    ElseIf deck15 = Nothing Then
 
-                ElseIf extra24 = Nothing Then
+                        deck15 = line.Split("(").Last
+                        deckcard15 = deck15.Split(",").First
+                        selectedcard = deckcard15
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard15 & ".jpg"
+                        Form1.PictureBox41.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox41, Form1.TextBox4.Text)
 
-                    extra24 = line.Split("(").Last
-                    extracard24 = extra24.Split(",").First
-                    selectedcard = extracard24
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard24 & ".jpg"
-                    Form1.PictureBox77.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox77, Form1.TextBox4.Text)
+                    ElseIf deck16 = Nothing Then
+                        deck16 = line.Split("(").Last
+                        deckcard16 = deck16.Split(",").First
+                        selectedcard = deckcard16
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard16 & ".jpg"
+                        Form1.PictureBox82.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox82, Form1.TextBox4.Text)
 
-                ElseIf extra25 = Nothing Then
+                    ElseIf deck17 = Nothing Then
+                        deck17 = line.Split("(").Last
+                        deckcard17 = deck17.Split(",").First
+                        selectedcard = deckcard17
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard17 & ".jpg"
+                        Form1.PictureBox83.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox83, Form1.TextBox4.Text)
 
-                    extra25 = line.Split("(").Last
-                    extracard25 = extra25.Split(",").First
-                    selectedcard = extracard25
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard25 & ".jpg"
-                    Form1.PictureBox76.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox76, Form1.TextBox4.Text)
+                    ElseIf deck18 = Nothing Then
+                        deck18 = line.Split("(").Last
+                        deckcard18 = deck18.Split(",").First
+                        selectedcard = deckcard18
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard18 & ".jpg"
+                        Form1.PictureBox84.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox84, Form1.TextBox4.Text)
 
-                ElseIf extra26 = Nothing Then
+                    ElseIf deck19 = Nothing Then
+                        deck19 = line.Split("(").Last
+                        deckcard19 = deck19.Split(",").First
+                        selectedcard = deckcard19
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard19 & ".jpg"
+                        Form1.PictureBox85.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox85, Form1.TextBox4.Text)
 
-                    extra26 = line.Split("(").Last
-                    extracard26 = extra26.Split(",").First
-                    selectedcard = extracard26
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard26 & ".jpg"
-                    Form1.PictureBox117.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox117, Form1.TextBox4.Text)
+                    ElseIf deck10 = Nothing Then
+                        deck10 = line.Split("(").Last
+                        deckcard16 = deck10.Split(",").First
+                        selectedcard = deckcard10
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard10 & ".jpg"
+                        Form1.PictureBox86.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox86, Form1.TextBox4.Text)
 
-                ElseIf extra27 = Nothing Then
-
-                    extra27 = line.Split("(").Last
-                    extracard27 = extra27.Split(",").First
-                    selectedcard = extracard27
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard27 & ".jpg"
-                    Form1.PictureBox118.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox118, Form1.TextBox4.Text)
-
-                ElseIf extra28 = Nothing Then
-
-                    extra28 = line.Split("(").Last
-                    extracard28 = extra28.Split(",").First
-                    selectedcard = extracard28
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard28 & ".jpg"
-                    Form1.PictureBox119.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox119, Form1.TextBox4.Text)
-
-
-                ElseIf extra29 = Nothing Then
-
-                    extra29 = line.Split("(").Last
-                    extracard29 = extra29.Split(",").First
-                    selectedcard = extracard29
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard29 & ".jpg"
-                    Form1.PictureBox120.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox120, Form1.TextBox4.Text)
-
-                ElseIf extra20 = Nothing Then
-
-                    extra20 = line.Split("(").Last
-                    extracard20 = extra20.Split(",").First
-                    selectedcard = extracard20
-                    SearchbyId()
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
-                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard20 & ".jpg"
-                    Form1.PictureBox121.ImageLocation = current
-                    Form1.ToolTip1.SetToolTip(Form1.PictureBox121, Form1.TextBox4.Text)
+                    End If
 
                 End If
 
 
+                If line.Contains("0,0,LOCATION_GRAVE,0") Then
+                    Form1.PictureBox18.Image = My.Resources.cardback
+                    Form1.Label11.Text += 1
+                    If grave11 = Nothing Then
 
-            End If
+                        grave11 = line.Split("(").Last
+                        gravecard11 = grave11.Split(",").First
+                        selectedcard = gravecard11
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard11 & ".jpg"
+                        Form1.PictureBox55.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox55, Form1.TextBox4.Text)
 
-            If line.Contains("Debug.ShowHint(") Then
 
-                If HINT1 = Nothing Then
+                    ElseIf grave12 = Nothing Then
+
+                        grave12 = line.Split("(").Last
+                        gravecard12 = grave12.Split(",").First
+                        selectedcard = gravecard12
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard12 & ".jpg"
+                        Form1.PictureBox54.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox54, Form1.TextBox4.Text)
+
+                    ElseIf grave13 = Nothing Then
+
+                        grave13 = line.Split("(").Last
+                        gravecard13 = grave13.Split(",").First
+                        selectedcard = gravecard13
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard13 & ".jpg"
+                        Form1.PictureBox53.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox53, Form1.TextBox4.Text)
+
+                    ElseIf grave14 = Nothing Then
+
+                        grave14 = line.Split("(").Last
+                        gravecard14 = grave14.Split(",").First
+                        selectedcard = gravecard14
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard14 & ".jpg"
+                        Form1.PictureBox52.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox52, Form1.TextBox4.Text)
+
+                    ElseIf grave15 = Nothing Then
+
+                        grave15 = line.Split("(").Last
+                        gravecard15 = grave15.Split(",").First
+                        selectedcard = gravecard15
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard15 & ".jpg"
+                        Form1.PictureBox51.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox51, Form1.TextBox4.Text)
+
+                    ElseIf grave16 = Nothing Then
+
+                        grave16 = line.Split("(").Last
+                        gravecard16 = grave16.Split(",").First
+                        selectedcard = gravecard16
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard16 & ".jpg"
+                        Form1.PictureBox87.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox87, Form1.TextBox4.Text)
+
+                    ElseIf grave17 = Nothing Then
+
+                        grave17 = line.Split("(").Last
+                        gravecard17 = grave17.Split(",").First
+                        selectedcard = gravecard17
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard17 & ".jpg"
+                        Form1.PictureBox88.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox88, Form1.TextBox4.Text)
+
+                    ElseIf grave18 = Nothing Then
+
+                        grave18 = line.Split("(").Last
+                        gravecard18 = grave18.Split(",").First
+                        selectedcard = gravecard18
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard18 & ".jpg"
+                        Form1.PictureBox89.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox89, Form1.TextBox4.Text)
 
 
-                    HINT1 = line.Split("(").Last
+                    ElseIf grave19 = Nothing Then
 
-                    SHOWHINT1 = HINT1.Split(")").First
-                    Form1.TextBox12.Text = SHOWHINT1.Trim(My.Settings.Chars)
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        grave19 = line.Split("(").Last
+                        gravecard19 = grave19.Split(",").First
+                        selectedcard = gravecard19
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard19 & ".jpg"
+                        Form1.PictureBox90.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox90, Form1.TextBox4.Text)
 
-                ElseIf HINT2 = Nothing Then
 
-                    HINT2 = line.Split("(").Last
+                    ElseIf grave20 = Nothing Then
 
-                    SHOWHINT2 = HINT2.Split(")").First
-                    Form1.TextBox13.Text = SHOWHINT2.Trim(My.Settings.Chars)
-                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        grave20 = line.Split("(").Last
+                        gravecard20 = grave20.Split(",").First
+                        selectedcard = gravecard20
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard20 & ".jpg"
+                        Form1.PictureBox91.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox91, Form1.TextBox4.Text)
+
+                    End If
 
                 End If
 
-            End If
+                If line.Contains("0,0,LOCATION_REMOVED,0") Then
+                    Form1.PictureBox19.Image = My.Resources.cardback
+                    Form1.Label12.Text += 1
+                    If removed11 = Nothing Then
 
-        Loop
+                        removed11 = line.Split("(").Last
+                        removedcard11 = removed11.Split(",").First
+                        selectedcard = removedcard11
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard11 & ".jpg"
+                        Form1.PictureBox65.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox65, Form1.TextBox4.Text)
 
-        stream.Close()
 
-        stream.Dispose()
+                    ElseIf removed12 = Nothing Then
+
+                        removed12 = line.Split("(").Last
+                        removedcard12 = removed12.Split(",").First
+                        selectedcard = removedcard12
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard12 & ".jpg"
+                        Form1.PictureBox64.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox64, Form1.TextBox4.Text)
+
+                    ElseIf removed13 = Nothing Then
+
+                        removed13 = line.Split("(").Last
+                        removedcard13 = removed13.Split(",").First
+                        selectedcard = removedcard13
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard13 & ".jpg"
+                        Form1.PictureBox63.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox63, Form1.TextBox4.Text)
+
+                    ElseIf removed14 = Nothing Then
+
+                        removed14 = line.Split("(").Last
+                        removedcard14 = removed14.Split(",").First
+                        selectedcard = removedcard14
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard14 & ".jpg"
+                        Form1.PictureBox62.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox62, Form1.TextBox4.Text)
+
+                    ElseIf removed15 = Nothing Then
+
+                        removed15 = line.Split("(").Last
+                        removedcard15 = removed15.Split(",").First
+                        selectedcard = removedcard15
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard15 & ".jpg"
+                        Form1.PictureBox61.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox61, Form1.TextBox4.Text)
+
+                    ElseIf removed16 = Nothing Then
+
+                        removed16 = line.Split("(").Last
+                        removedcard16 = removed16.Split(",").First
+                        selectedcard = removedcard16
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard16 & ".jpg"
+                        Form1.PictureBox92.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox92, Form1.TextBox4.Text)
+
+                    ElseIf removed17 = Nothing Then
+
+                        removed17 = line.Split("(").Last
+                        removedcard17 = removed17.Split(",").First
+                        selectedcard = removedcard17
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard17 & ".jpg"
+                        Form1.PictureBox93.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox93, Form1.TextBox4.Text)
+
+                    ElseIf removed18 = Nothing Then
+
+                        removed18 = line.Split("(").Last
+                        removedcard18 = removed18.Split(",").First
+                        selectedcard = removedcard18
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard18 & ".jpg"
+                        Form1.PictureBox94.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox94, Form1.TextBox4.Text)
+
+
+                    ElseIf removed19 = Nothing Then
+
+                        removed19 = line.Split("(").Last
+                        removedcard19 = removed19.Split(",").First
+                        selectedcard = removedcard19
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard19 & ".jpg"
+                        Form1.PictureBox95.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox95, Form1.TextBox4.Text)
+
+                    ElseIf removed20 = Nothing Then
+
+                        removed20 = line.Split("(").Last
+                        removedcard20 = removed20.Split(",").First
+                        selectedcard = removedcard20
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard20 & ".jpg"
+                        Form1.PictureBox96.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox96, Form1.TextBox4.Text)
+
+                    End If
+
+
+                End If
+
+
+                If line.Contains("0,0,LOCATION_EXTRA,0") Then
+                    Form1.PictureBox20.Image = My.Resources.cardback
+                    Form1.Label13.Text += 1
+                    If extra11 = Nothing Then
+
+                        extra11 = line.Split("(").Last
+                        extracard11 = extra11.Split(",").First
+                        selectedcard = extracard11
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard11 & ".jpg"
+                        Form1.PictureBox75.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox75, Form1.TextBox4.Text)
+
+
+                    ElseIf extra12 = Nothing Then
+
+                        extra12 = line.Split("(").Last
+                        extracard12 = extra12.Split(",").First
+                        selectedcard = extracard12
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard12 & ".jpg"
+                        Form1.PictureBox74.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox74, Form1.TextBox4.Text)
+
+                    ElseIf extra13 = Nothing Then
+
+                        extra13 = line.Split("(").Last
+                        extracard13 = extra13.Split(",").First
+                        selectedcard = extracard13
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard13 & ".jpg"
+                        Form1.PictureBox73.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox73, Form1.TextBox4.Text)
+
+                    ElseIf extra14 = Nothing Then
+
+                        extra14 = line.Split("(").Last
+                        extracard14 = extra14.Split(",").First
+                        selectedcard = extracard14
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard14 & ".jpg"
+                        Form1.PictureBox72.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox72, Form1.TextBox4.Text)
+
+                    ElseIf extra15 = Nothing Then
+
+                        extra15 = line.Split("(").Last
+                        extracard15 = extra15.Split(",").First
+                        selectedcard = extracard15
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard15 & ".jpg"
+                        Form1.PictureBox71.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox71, Form1.TextBox4.Text)
+
+                    ElseIf extra16 = Nothing Then
+
+                        extra16 = line.Split("(").Last
+                        extracard16 = extra16.Split(",").First
+                        selectedcard = extracard16
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard16 & ".jpg"
+                        Form1.PictureBox97.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox97, Form1.TextBox4.Text)
+
+                    ElseIf extra17 = Nothing Then
+
+                        extra17 = line.Split("(").Last
+                        extracard17 = extra17.Split(",").First
+                        selectedcard = extracard17
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard17 & ".jpg"
+                        Form1.PictureBox98.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox98, Form1.TextBox4.Text)
+
+
+                    ElseIf extra18 = Nothing Then
+
+                        extra18 = line.Split("(").Last
+                        extracard18 = extra18.Split(",").First
+                        selectedcard = extracard18
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard18 & ".jpg"
+                        Form1.PictureBox99.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox99, Form1.TextBox4.Text)
+
+                    ElseIf extra19 = Nothing Then
+
+                        extra19 = line.Split("(").Last
+                        extracard19 = extra19.Split(",").First
+                        selectedcard = extracard19
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard19 & ".jpg"
+                        Form1.PictureBox100.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox100, Form1.TextBox4.Text)
+
+                    ElseIf extra10 = Nothing Then
+
+                        extra10 = line.Split("(").Last
+                        extracard10 = extra10.Split(",").First
+                        selectedcard = extracard10
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard10 & ".jpg"
+                        Form1.PictureBox101.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox101, Form1.TextBox4.Text)
+
+                    End If
+
+
+
+                End If
+
+
+                If line.Contains("1,1,LOCATION_MZONE,0") Then
+                    monster21 = line.Split("(").Last
+                    monstercard21 = monster21.Split(",").First
+                    selectedcard = monstercard21
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard21 & ".jpg"
+                    Form1.PictureBox22.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox22, Form1.TextBox4.Text)
+                    If monster21.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton35.Checked = CheckState.Checked
+                        Form1.RadioButton45.Checked = CheckState.Checked
+                    ElseIf monster21.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton35.Checked = CheckState.Checked
+                        Form1.RadioButton46.Checked = CheckState.Checked
+                    ElseIf monster21.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton36.Checked = CheckState.Checked
+                        Form1.RadioButton46.Checked = CheckState.Checked
+                    End If
+                End If
+
+                If line.Contains("1,1,LOCATION_MZONE,1") Then
+                    monster22 = line.Split("(").Last
+                    monstercard22 = monster22.Split(",").First
+                    selectedcard = monstercard22
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard22 & ".jpg"
+                    Form1.PictureBox23.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox23, Form1.TextBox4.Text)
+                    If monster22.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton37.Checked = CheckState.Checked
+                        Form1.RadioButton47.Checked = CheckState.Checked
+                    ElseIf monster22.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton37.Checked = CheckState.Checked
+                        Form1.RadioButton48.Checked = CheckState.Checked
+                    ElseIf monster22.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton38.Checked = CheckState.Checked
+                        Form1.RadioButton48.Checked = CheckState.Checked
+                    End If
+                End If
+
+                If line.Contains("1,1,LOCATION_MZONE,2") Then
+                    monster23 = line.Split("(").Last
+                    monstercard23 = monster23.Split(",").First
+                    selectedcard = monstercard23
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard23 & ".jpg"
+                    Form1.PictureBox24.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox24, Form1.TextBox4.Text)
+                    If monster23.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton39.Checked = CheckState.Checked
+                        Form1.RadioButton49.Checked = CheckState.Checked
+                    ElseIf monster23.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton39.Checked = CheckState.Checked
+                        Form1.RadioButton50.Checked = CheckState.Checked
+                    ElseIf monster23.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton40.Checked = CheckState.Checked
+                        Form1.RadioButton50.Checked = CheckState.Checked
+                    End If
+                End If
+
+                If line.Contains("1,1,LOCATION_MZONE,3") Then
+                    monster24 = line.Split("(").Last
+                    monstercard24 = monster24.Split(",").First
+                    selectedcard = monstercard24
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard24 & ".jpg"
+                    Form1.PictureBox25.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox25, Form1.TextBox4.Text)
+                    If monster24.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton41.Checked = CheckState.Checked
+                        Form1.RadioButton51.Checked = CheckState.Checked
+                    ElseIf monster24.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton41.Checked = CheckState.Checked
+                        Form1.RadioButton52.Checked = CheckState.Checked
+                    ElseIf monster24.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton42.Checked = CheckState.Checked
+                        Form1.RadioButton52.Checked = CheckState.Checked
+                    End If
+                End If
+
+                If line.Contains("1,1,LOCATION_MZONE,4") Then
+                    monster25 = line.Split("(").Last
+                    monstercard25 = monster25.Split(",").First
+                    selectedcard = monstercard25
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & monstercard25 & ".jpg"
+                    Form1.PictureBox26.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox26, Form1.TextBox4.Text)
+                    If monster25.Contains("POS_FACEUP_ATTACK") Then
+                        Form1.RadioButton43.Checked = CheckState.Checked
+                        Form1.RadioButton53.Checked = CheckState.Checked
+                    ElseIf monster25.Contains("POS_FACEUP_DEFENCE") Then
+                        Form1.RadioButton43.Checked = CheckState.Checked
+                        Form1.RadioButton54.Checked = CheckState.Checked
+                    ElseIf monster25.Contains("POS_FACEDOWN_DEFENCE") Then
+                        Form1.RadioButton44.Checked = CheckState.Checked
+                        Form1.RadioButton54.Checked = CheckState.Checked
+                    End If
+                End If
+
+
+                If line.Contains("1,1,LOCATION_SZONE,0") Then
+                    szone21 = line.Split("(").Last
+                    spellcard21 = szone21.Split(",").First
+                    selectedcard = spellcard21
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard21 & ".jpg"
+                    Form1.PictureBox27.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox27, Form1.TextBox4.Text)
+                    If szone21.Contains("POS_FACEUP") Then
+                        Form1.RadioButton55.Checked = CheckState.Checked
+
+                    ElseIf szone21.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton56.Checked = CheckState.Checked
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_SZONE,1") Then
+                    szone22 = line.Split("(").Last
+                    spellcard22 = szone22.Split(",").First
+                    selectedcard = spellcard22
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard22 & ".jpg"
+                    Form1.PictureBox28.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox28, Form1.TextBox4.Text)
+                    If szone22.Contains("POS_FACEUP") Then
+                        Form1.RadioButton57.Checked = CheckState.Checked
+
+                    ElseIf szone22.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton58.Checked = CheckState.Checked
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_SZONE,2") Then
+                    szone23 = line.Split("(").Last
+                    spellcard23 = szone23.Split(",").First
+                    selectedcard = spellcard23
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard23 & ".jpg"
+                    Form1.PictureBox29.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox29, Form1.TextBox4.Text)
+                    If szone23.Contains("POS_FACEUP") Then
+                        Form1.RadioButton59.Checked = CheckState.Checked
+
+                    ElseIf szone23.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton60.Checked = CheckState.Checked
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_SZONE,3") Then
+                    szone24 = line.Split("(").Last
+                    spellcard24 = szone24.Split(",").First
+                    selectedcard = spellcard24
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard24 & ".jpg"
+                    Form1.PictureBox30.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox30, Form1.TextBox4.Text)
+                    If szone24.Contains("POS_FACEUP") Then
+                        Form1.RadioButton61.Checked = CheckState.Checked
+
+                    ElseIf szone24.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton62.Checked = CheckState.Checked
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_SZONE,4") Then
+                    szone25 = line.Split("(").Last
+                    spellcard25 = szone25.Split(",").First
+                    selectedcard = spellcard25
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard25 & ".jpg"
+                    Form1.PictureBox31.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox31, Form1.TextBox4.Text)
+                    If szone25.Contains("POS_FACEUP") Then
+                        Form1.RadioButton63.Checked = CheckState.Checked
+
+                    ElseIf szone25.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton64.Checked = CheckState.Checked
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_SZONE,5") Then
+                    szone26 = line.Split("(").Last
+                    spellcard26 = szone26.Split(",").First
+                    selectedcard = spellcard26
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard26 & ".jpg"
+                    Form1.PictureBox40.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox40, Form1.TextBox4.Text)
+                    If szone26.Contains("POS_FACEUP") Then
+                        Form1.RadioButton67.Checked = CheckState.Checked
+
+                    ElseIf szone26.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton68.Checked = CheckState.Checked
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_SZONE,6") Then
+                    szone27 = line.Split("(").Last
+                    spellcard27 = szone27.Split(",").First
+                    selectedcard = spellcard27
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard27 & ".jpg"
+                    Form1.PictureBox124.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox124, Form1.TextBox4.Text)
+                    If szone27.Contains("POS_FACEUP") Then
+                        Form1.RadioButton73.Checked = CheckState.Checked
+
+                    ElseIf szone27.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton74.Checked = CheckState.Checked
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_SZONE,7") Then
+                    szone28 = line.Split("(").Last
+                    spellcard28 = szone28.Split(",").First
+                    selectedcard = spellcard28
+                    Form1.RichTextBox5.AppendText(line & vbNewLine)
+                    Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & spellcard28 & ".jpg"
+                    Form1.PictureBox125.ImageLocation = current
+                    SearchbyId()
+                    Form1.ToolTip1.SetToolTip(Form1.PictureBox125, Form1.TextBox4.Text)
+                    If szone28.Contains("POS_FACEUP") Then
+                        Form1.RadioButton75.Checked = CheckState.Checked
+
+                    ElseIf szone28.Contains("POS_FACEDOWN") Then
+                        Form1.RadioButton76.Checked = CheckState.Checked
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_HAND,0") Then
+
+                    If hand21 = Nothing Then
+
+                        hand21 = line.Split("(").Last
+                        handcard21 = hand21.Split(",").First
+                        selectedcard = handcard21
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard21 & ".jpg"
+                        Form1.PictureBox32.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox32, Form1.TextBox4.Text)
+
+
+                    ElseIf hand22 = Nothing Then
+
+                        hand22 = line.Split("(").Last
+                        handcard22 = hand22.Split(",").First
+                        selectedcard = handcard22
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard22 & ".jpg"
+                        Form1.PictureBox33.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox33, Form1.TextBox4.Text)
+
+                    ElseIf hand23 = Nothing Then
+
+                        hand23 = line.Split("(").Last
+                        handcard23 = hand23.Split(",").First
+                        selectedcard = handcard23
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard23 & ".jpg"
+                        Form1.PictureBox34.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox34, Form1.TextBox4.Text)
+
+                    ElseIf hand24 = Nothing Then
+
+                        hand24 = line.Split("(").Last
+                        handcard24 = hand24.Split(",").First
+                        selectedcard = handcard24
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard24 & ".jpg"
+                        Form1.PictureBox35.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox35, Form1.TextBox4.Text)
+
+                    ElseIf hand25 = Nothing Then
+
+                        hand25 = line.Split("(").Last
+                        handcard25 = hand25.Split(",").First
+                        selectedcard = handcard25
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & handcard25 & ".jpg"
+                        Form1.PictureBox36.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox36, Form1.TextBox4.Text)
+
+                    End If
+
+
+                End If
+
+
+                If line.Contains("1,1,LOCATION_DECK,0") Then
+                    Form1.PictureBox37.Image = My.Resources.cardback
+                    Form1.Label28.Text += 1
+                    If deck21 = Nothing Then
+
+                        deck21 = line.Split("(").Last
+                        deckcard21 = deck21.Split(",").First
+                        selectedcard = deckcard21
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard21 & ".jpg"
+                        Form1.PictureBox50.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox50, Form1.TextBox4.Text)
+
+
+                    ElseIf deck22 = Nothing Then
+
+                        deck22 = line.Split("(").Last
+                        deckcard22 = deck22.Split(",").First
+                        selectedcard = deckcard22
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard22 & ".jpg"
+                        Form1.PictureBox49.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox49, Form1.TextBox4.Text)
+
+                    ElseIf deck23 = Nothing Then
+
+                        deck23 = line.Split("(").Last
+                        deckcard23 = deck23.Split(",").First
+                        selectedcard = deckcard23
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard23 & ".jpg"
+                        Form1.PictureBox48.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox48, Form1.TextBox4.Text)
+
+                    ElseIf deck24 = Nothing Then
+
+                        deck24 = line.Split("(").Last
+                        deckcard24 = deck24.Split(",").First
+                        selectedcard = deckcard24
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard24 & ".jpg"
+                        Form1.PictureBox47.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox47, Form1.TextBox4.Text)
+
+                    ElseIf deck25 = Nothing Then
+
+                        deck25 = line.Split("(").Last
+                        deckcard25 = deck25.Split(",").First
+                        selectedcard = deckcard25
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard25 & ".jpg"
+                        Form1.PictureBox46.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox46, Form1.TextBox4.Text)
+
+                    ElseIf deck26 = Nothing Then
+
+                        deck26 = line.Split("(").Last
+                        deckcard26 = deck26.Split(",").First
+                        selectedcard = deckcard26
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard26 & ".jpg"
+                        Form1.PictureBox102.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox102, Form1.TextBox4.Text)
+
+                    ElseIf deck27 = Nothing Then
+
+                        deck27 = line.Split("(").Last
+                        deckcard27 = deck27.Split(",").First
+                        selectedcard = deckcard27
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard27 & ".jpg"
+                        Form1.PictureBox103.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox103, Form1.TextBox4.Text)
+
+                    ElseIf deck28 = Nothing Then
+
+                        deck28 = line.Split("(").Last
+                        deckcard28 = deck28.Split(",").First
+                        selectedcard = deckcard28
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard28 & ".jpg"
+                        Form1.PictureBox104.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox104, Form1.TextBox4.Text)
+
+                    ElseIf deck29 = Nothing Then
+
+                        deck29 = line.Split("(").Last
+                        deckcard29 = deck29.Split(",").First
+                        selectedcard = deckcard29
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard29 & ".jpg"
+                        Form1.PictureBox105.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox105, Form1.TextBox4.Text)
+
+                    ElseIf deck20 = Nothing Then
+
+                        deck20 = line.Split("(").Last
+                        deckcard20 = deck20.Split(",").First
+                        selectedcard = deckcard20
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & deckcard20 & ".jpg"
+                        Form1.PictureBox106.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox106, Form1.TextBox4.Text)
+
+                    End If
+
+                End If
+
+                If line.Contains("1,1,LOCATION_GRAVE,0") Then
+                    Form1.PictureBox38.Image = My.Resources.cardback
+                    Form1.Label27.Text += 1
+                    If grave21 = Nothing Then
+
+                        grave21 = line.Split("(").Last
+                        gravecard21 = grave21.Split(",").First
+                        selectedcard = gravecard21
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard21 & ".jpg"
+                        Form1.PictureBox60.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox60, Form1.TextBox4.Text)
+
+
+                    ElseIf grave22 = Nothing Then
+
+                        grave22 = line.Split("(").Last
+                        gravecard22 = grave22.Split(",").First
+                        selectedcard = gravecard22
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard22 & ".jpg"
+                        Form1.PictureBox59.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox59, Form1.TextBox4.Text)
+
+                    ElseIf grave23 = Nothing Then
+
+                        grave23 = line.Split("(").Last
+                        gravecard23 = grave23.Split(",").First
+                        selectedcard = gravecard23
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard23 & ".jpg"
+                        Form1.PictureBox58.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox58, Form1.TextBox4.Text)
+
+                    ElseIf grave24 = Nothing Then
+
+                        grave24 = line.Split("(").Last
+                        gravecard24 = grave24.Split(",").First
+                        selectedcard = gravecard24
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard24 & ".jpg"
+                        Form1.PictureBox57.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox57, Form1.TextBox4.Text)
+
+                    ElseIf grave25 = Nothing Then
+
+                        grave25 = line.Split("(").Last
+                        gravecard25 = grave25.Split(",").First
+                        selectedcard = gravecard25
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard25 & ".jpg"
+                        Form1.PictureBox56.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox56, Form1.TextBox4.Text)
+
+                    ElseIf grave26 = Nothing Then
+
+                        grave26 = line.Split("(").Last
+                        gravecard26 = grave26.Split(",").First
+                        selectedcard = gravecard26
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard26 & ".jpg"
+                        Form1.PictureBox107.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox107, Form1.TextBox4.Text)
+
+                    ElseIf grave27 = Nothing Then
+
+                        grave27 = line.Split("(").Last
+                        gravecard27 = grave27.Split(",").First
+                        selectedcard = gravecard27
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard27 & ".jpg"
+                        Form1.PictureBox108.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox108, Form1.TextBox4.Text)
+
+                    ElseIf grave28 = Nothing Then
+
+                        grave28 = line.Split("(").Last
+                        gravecard28 = grave28.Split(",").First
+                        selectedcard = gravecard28
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard28 & ".jpg"
+                        Form1.PictureBox109.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox109, Form1.TextBox4.Text)
+
+
+                    ElseIf grave29 = Nothing Then
+
+                        grave29 = line.Split("(").Last
+                        gravecard29 = grave29.Split(",").First
+                        selectedcard = gravecard29
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard29 & ".jpg"
+                        Form1.PictureBox110.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox110, Form1.TextBox4.Text)
+
+                    ElseIf grave20 = Nothing Then
+
+                        grave20 = line.Split("(").Last
+                        gravecard20 = grave20.Split(",").First
+                        selectedcard = gravecard20
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & gravecard20 & ".jpg"
+                        Form1.PictureBox111.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox111, Form1.TextBox4.Text)
+
+
+                    End If
+
+                End If
+
+
+                If line.Contains("1,1,LOCATION_REMOVED,0") Then
+                    Form1.PictureBox39.Image = My.Resources.cardback
+                    Form1.Label23.Text += 1
+                    If removed21 = Nothing Then
+
+                        removed21 = line.Split("(").Last
+                        removedcard21 = removed21.Split(",").First
+                        selectedcard = removedcard21
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard21 & ".jpg"
+                        Form1.PictureBox70.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox70, Form1.TextBox4.Text)
+
+
+                    ElseIf removed22 = Nothing Then
+
+                        removed22 = line.Split("(").Last
+                        removedcard22 = removed22.Split(",").First
+                        selectedcard = removedcard22
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard22 & ".jpg"
+                        Form1.PictureBox69.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox69, Form1.TextBox4.Text)
+
+                    ElseIf removed23 = Nothing Then
+
+                        removed23 = line.Split("(").Last
+                        removedcard23 = removed23.Split(",").First
+                        selectedcard = removedcard23
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard23 & ".jpg"
+                        Form1.PictureBox68.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox68, Form1.TextBox4.Text)
+
+                    ElseIf removed24 = Nothing Then
+
+                        removed24 = line.Split("(").Last
+                        removedcard24 = removed24.Split(",").First
+                        selectedcard = removedcard24
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard24 & ".jpg"
+                        Form1.PictureBox67.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox67, Form1.TextBox4.Text)
+
+                    ElseIf removed25 = Nothing Then
+
+                        removed25 = line.Split("(").Last
+                        removedcard25 = removed25.Split(",").First
+                        selectedcard = removedcard25
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard25 & ".jpg"
+                        Form1.PictureBox66.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox66, Form1.TextBox4.Text)
+
+                    ElseIf removed26 = Nothing Then
+
+                        removed26 = line.Split("(").Last
+                        removedcard26 = removed26.Split(",").First
+                        selectedcard = removedcard26
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard26 & ".jpg"
+                        Form1.PictureBox112.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox112, Form1.TextBox4.Text)
+
+
+                    ElseIf removed27 = Nothing Then
+
+                        removed27 = line.Split("(").Last
+                        removedcard27 = removed27.Split(",").First
+                        selectedcard = removedcard27
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard27 & ".jpg"
+                        Form1.PictureBox113.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox113, Form1.TextBox4.Text)
+
+
+                    ElseIf removed28 = Nothing Then
+
+                        removed28 = line.Split("(").Last
+                        removedcard28 = removed28.Split(",").First
+                        selectedcard = removedcard28
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard28 & ".jpg"
+                        Form1.PictureBox114.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox114, Form1.TextBox4.Text)
+
+
+                    ElseIf removed29 = Nothing Then
+
+                        removed29 = line.Split("(").Last
+                        removedcard29 = removed29.Split(",").First
+                        selectedcard = removedcard29
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard29 & ".jpg"
+                        Form1.PictureBox115.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox115, Form1.TextBox4.Text)
+
+
+                    ElseIf removed20 = Nothing Then
+
+                        removed20 = line.Split("(").Last
+                        removedcard20 = removed20.Split(",").First
+                        selectedcard = removedcard20
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & removedcard20 & ".jpg"
+                        Form1.PictureBox116.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox116, Form1.TextBox4.Text)
+
+                    End If
+
+
+                End If
+
+
+                If line.Contains("1,1,LOCATION_EXTRA,0") Then
+                    Form1.PictureBox81.Image = My.Resources.cardback
+                    Form1.Label30.Text += 1
+                    If extra21 = Nothing Then
+
+                        extra21 = line.Split("(").Last
+                        extracard21 = extra21.Split(",").First
+                        selectedcard = extracard21
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard21 & ".jpg"
+                        Form1.PictureBox80.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox80, Form1.TextBox4.Text)
+
+
+                    ElseIf extra22 = Nothing Then
+
+                        extra22 = line.Split("(").Last
+                        extracard22 = extra22.Split(",").First
+                        selectedcard = extracard22
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard22 & ".jpg"
+                        Form1.PictureBox79.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox79, Form1.TextBox4.Text)
+
+                    ElseIf extra23 = Nothing Then
+
+                        extra23 = line.Split("(").Last
+                        extracard23 = extra23.Split(",").First
+                        selectedcard = extracard23
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard23 & ".jpg"
+                        Form1.PictureBox78.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox78, Form1.TextBox4.Text)
+
+                    ElseIf extra24 = Nothing Then
+
+                        extra24 = line.Split("(").Last
+                        extracard24 = extra24.Split(",").First
+                        selectedcard = extracard24
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard24 & ".jpg"
+                        Form1.PictureBox77.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox77, Form1.TextBox4.Text)
+
+                    ElseIf extra25 = Nothing Then
+
+                        extra25 = line.Split("(").Last
+                        extracard25 = extra25.Split(",").First
+                        selectedcard = extracard25
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard25 & ".jpg"
+                        Form1.PictureBox76.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox76, Form1.TextBox4.Text)
+
+                    ElseIf extra26 = Nothing Then
+
+                        extra26 = line.Split("(").Last
+                        extracard26 = extra26.Split(",").First
+                        selectedcard = extracard26
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard26 & ".jpg"
+                        Form1.PictureBox117.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox117, Form1.TextBox4.Text)
+
+                    ElseIf extra27 = Nothing Then
+
+                        extra27 = line.Split("(").Last
+                        extracard27 = extra27.Split(",").First
+                        selectedcard = extracard27
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard27 & ".jpg"
+                        Form1.PictureBox118.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox118, Form1.TextBox4.Text)
+
+                    ElseIf extra28 = Nothing Then
+
+                        extra28 = line.Split("(").Last
+                        extracard28 = extra28.Split(",").First
+                        selectedcard = extracard28
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard28 & ".jpg"
+                        Form1.PictureBox119.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox119, Form1.TextBox4.Text)
+
+
+                    ElseIf extra29 = Nothing Then
+
+                        extra29 = line.Split("(").Last
+                        extracard29 = extra29.Split(",").First
+                        selectedcard = extracard29
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard29 & ".jpg"
+                        Form1.PictureBox120.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox120, Form1.TextBox4.Text)
+
+                    ElseIf extra20 = Nothing Then
+
+                        extra20 = line.Split("(").Last
+                        extracard20 = extra20.Split(",").First
+                        selectedcard = extracard20
+                        SearchbyId()
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+                        Dim current As String = My.Settings.GameDirectory & "\pics\thumbnail\" & extracard20 & ".jpg"
+                        Form1.PictureBox121.ImageLocation = current
+                        Form1.ToolTip1.SetToolTip(Form1.PictureBox121, Form1.TextBox4.Text)
+
+                    End If
+
+
+
+                End If
+
+                If line.Contains("Debug.ShowHint(") Then
+
+                    If HINT1 = Nothing Then
+
+
+                        HINT1 = line.Split("(").Last
+
+                        SHOWHINT1 = HINT1.Split(")").First
+                        Form1.TextBox12.Text = SHOWHINT1.Trim(My.Settings.Chars)
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+
+                    ElseIf HINT2 = Nothing Then
+
+                        HINT2 = line.Split("(").Last
+
+                        SHOWHINT2 = HINT2.Split(")").First
+                        Form1.TextBox13.Text = SHOWHINT2.Trim(My.Settings.Chars)
+                        Form1.RichTextBox5.AppendText(line & vbNewLine)
+
+                    End If
+
+                End If
+
+            Loop
+
+        
+
 
 
 
@@ -2948,55 +2945,27 @@ Public Class ScripFile
     End Sub
 
 
-    Public Shared Sub createfile(filepath As String)
+    Public Shared Sub createfile()
 
         Try
+            Dim prompt As String = (Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\New.lua")
 
-            ScripFilename = filepath
-            If Not File.Exists(ScripFilename) Then
-                File.Create(ScripFilename).Dispose()
+            If Not File.Exists(prompt) Then
+                File.Create(prompt).Dispose()
             End If
-            Dim writer As New StreamWriter(ScripFilename)
+            Dim writer As New StreamWriter(prompt)
             comment = "--" & Form1.RichTextBox3.Text
             writer.WriteLine(comment)
             Form1.RichTextBox6.AppendText(comment & vbNewLine)
-
-            If Form1.RadioButton31.Checked = True Then
-
-                aiscript = "require (" + My.Settings.Chars + "ai.ai-debug" + My.Settings.Chars + ")"
-                writer.WriteLine(aiscript)
-                Form1.RichTextBox6.AppendText(reload & vbNewLine)
-            End If
-
-            If Form1.RadioButton32.Checked = True Then
-
-                aiscript = "require (" + My.Settings.Chars + "ai.ai-cheating" + My.Settings.Chars + ")"
-                writer.WriteLine(aiscript)
-                Form1.RichTextBox6.AppendText(reload & vbNewLine)
-            End If
 
             writer.WriteLine()
             ainm = "Debug.SetAIName(" & My.Settings.Chars & Form1.TextBox42.Text & My.Settings.Chars & ")"
             writer.WriteLine(ainm)
             Form1.RichTextBox6.AppendText(ainm & vbNewLine)
 
-            If Form1.CheckBox1.Checked = False And Form1.CheckBox2.Checked = False Then
-                reload = "Debug.ReloadFieldBegin(" & Form1.ComboBox5.SelectedItem & "+" & Form1.ComboBox6.SelectedItem & ")"
-                writer.WriteLine(reload)
-                Form1.RichTextBox6.AppendText(reload & vbNewLine)
-
-            ElseIf Form1.CheckBox1.Checked = True Then
-                reload = "Debug.ReloadFieldBegin(DUEL_ATTACK_FIRST_TURN+DUEL_SIMPLE_AI)"
-                writer.WriteLine(reload)
-                Form1.RichTextBox6.AppendText(reload & vbNewLine)
-
-            ElseIf Form1.CheckBox2.Checked = True Then
-                reload = "Debug.ReloadFieldBegin(DUEL_TEST_MODE+0x80)"
-                writer.WriteLine(reload)
-                Form1.RichTextBox6.AppendText(reload & vbNewLine)
-
-
-            End If
+            reload = "Debug.ReloadFieldBegin(" & Form1.ComboBox5.SelectedItem & "+" & Form1.ComboBox6.SelectedItem & ")"
+            writer.WriteLine(reload)
+            Form1.RichTextBox6.AppendText(reload & vbNewLine)
 
             playerlp = "Debug.SetPlayerInfo(0," & Form1.TextBox8.Text & ",0,0)"
             writer.WriteLine(playerlp)
@@ -3005,9 +2974,9 @@ Public Class ScripFile
             writer.WriteLine(enemylp)
             Form1.RichTextBox6.AppendText(enemylp & vbNewLine)
             writer.WriteLine()
-
-
-
+            
+            
+           
             If (monster11 <> Nothing) Then
 
                 If Form1.RadioButton1.Checked And Form1.RadioButton5.Checked Then
@@ -3480,66 +3449,66 @@ Public Class ScripFile
             If extra11 <> Nothing Then
 
 
-                extra11 = (My.Settings.AddCard & extracard11 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra11 = (My.Settings.AddCard & extracard11 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra11)
                 Form1.RichTextBox6.AppendText(extra11 & vbNewLine)
             End If
             If extra12 <> Nothing Then
 
 
-                extra12 = (My.Settings.AddCard & extracard12 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra12 = (My.Settings.AddCard & extracard12 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra12)
                 Form1.RichTextBox6.AppendText(extra12 & vbNewLine)
             End If
             If extra13 <> Nothing Then
 
 
-                extra13 = (My.Settings.AddCard & extracard13 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra13 = (My.Settings.AddCard & extracard13 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra13)
                 Form1.RichTextBox6.AppendText(extra13 & vbNewLine)
             End If
             If extra14 <> Nothing Then
 
 
-                extra14 = (My.Settings.AddCard & extracard14 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra14 = (My.Settings.AddCard & extracard14 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra14)
                 Form1.RichTextBox6.AppendText(extra14 & vbNewLine)
             End If
             If extra15 <> Nothing Then
 
 
-                extra15 = (My.Settings.AddCard & extracard15 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra15 = (My.Settings.AddCard & extracard15 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra15)
                 Form1.RichTextBox6.AppendText(extra15 & vbNewLine)
             End If
             If extra16 <> Nothing Then
 
 
-                extra16 = (My.Settings.AddCard & extracard16 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra16 = (My.Settings.AddCard & extracard16 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra16)
                 Form1.RichTextBox6.AppendText(extra16 & vbNewLine)
             End If
             If extra17 <> Nothing Then
 
-                extra17 = (My.Settings.AddCard & extracard17 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra17 = (My.Settings.AddCard & extracard17 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra17)
                 Form1.RichTextBox6.AppendText(extra17 & vbNewLine)
             End If
             If extra18 <> Nothing Then
 
-                extra18 = (My.Settings.AddCard & extracard18 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra18 = (My.Settings.AddCard & extracard18 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra18)
                 Form1.RichTextBox6.AppendText(extra11 & vbNewLine)
             End If
             If extra19 <> Nothing Then
 
-                extra19 = (My.Settings.AddCard & extracard19 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra19 = (My.Settings.AddCard & extracard19 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra19)
                 Form1.RichTextBox6.AppendText(extra19 & vbNewLine)
             End If
             If extra10 <> Nothing Then
 
-                extra10 = (My.Settings.AddCard & extracard10 & ",0,0,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra10 = (My.Settings.AddCard & extracard10 & ",0,0,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra10)
                 Form1.RichTextBox6.AppendText(extra10 & vbNewLine)
             End If
@@ -4010,82 +3979,73 @@ Public Class ScripFile
             If extra21 <> Nothing Then
 
 
-                extra21 = (My.Settings.AddCard & extracard21 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra21 = (My.Settings.AddCard & extracard21 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra21)
                 Form1.RichTextBox6.AppendText(extra21 & vbNewLine)
             End If
             If extra22 <> Nothing Then
 
 
-                extra22 = (My.Settings.AddCard & extracard22 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra22 = (My.Settings.AddCard & extracard22 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra22)
                 Form1.RichTextBox6.AppendText(extra22 & vbNewLine)
             End If
             If extra23 <> Nothing Then
 
 
-                extra23 = (My.Settings.AddCard & extracard23 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra23 = (My.Settings.AddCard & extracard23 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra23)
                 Form1.RichTextBox6.AppendText(extra23 & vbNewLine)
             End If
             If extra24 <> Nothing Then
 
 
-                extra24 = (My.Settings.AddCard & extracard24 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra24 = (My.Settings.AddCard & extracard24 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra24)
                 Form1.RichTextBox6.AppendText(extra24 & vbNewLine)
             End If
             If extra25 <> Nothing Then
 
 
-                extra25 = (My.Settings.AddCard & extracard25 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra25 = (My.Settings.AddCard & extracard25 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra25)
                 Form1.RichTextBox6.AppendText(extra25 & vbNewLine)
             End If
             If extra26 <> Nothing Then
 
 
-                extra26 = (My.Settings.AddCard & extracard26 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra26 = (My.Settings.AddCard & extracard26 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra26)
                 Form1.RichTextBox6.AppendText(extra26 & vbNewLine)
             End If
             If extra27 <> Nothing Then
 
 
-                extra27 = (My.Settings.AddCard & extracard27 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra27 = (My.Settings.AddCard & extracard27 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra27)
                 Form1.RichTextBox6.AppendText(extra27 & vbNewLine)
             End If
             If extra28 <> Nothing Then
 
 
-                extra28 = (My.Settings.AddCard & extracard28 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra28 = (My.Settings.AddCard & extracard28 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra28)
                 Form1.RichTextBox6.AppendText(extra28 & vbNewLine)
             End If
             If extra29 <> Nothing Then
 
 
-                extra29 = (My.Settings.AddCard & extracard29 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra29 = (My.Settings.AddCard & extracard29 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra29)
                 Form1.RichTextBox6.AppendText(extra29 & vbNewLine)
             End If
             If extra20 <> Nothing Then
 
 
-                extra20 = (My.Settings.AddCard & extracard20 & ",1,1,LOCATION_EXTRA,0,POS_FACEDOWN)")
+                extra20 = (My.Settings.AddCard & extracard20 & ",1,1,LOCATION_EXTRA,0,POS_FACEUP)")
                 writer.WriteLine(extra20)
                 Form1.RichTextBox6.AppendText(extra20 & vbNewLine)
             End If
-
-            If Form1.RadioButton31.Checked = True Then
-                writer.WriteLine("c1=Debug.AddCard(0, 0, 0, LOCATION_REMOVED, 0, POS_FACEDOWN)")
-
-            ElseIf Form1.RadioButton32.Checked Then
-                writer.WriteLine("c1=Debug.AddCard(0, 0, 0, LOCATION_REMOVED, 0, POS_FACEDOWN)")
-            End If
-
-
             reload2 = "Debug.ReloadFieldEnd()"
             writer.WriteLine(reload2)
             Form1.RichTextBox6.AppendText(reload2 & vbNewLine)
@@ -4103,43 +4063,31 @@ Public Class ScripFile
                 Form1.RichTextBox6.AppendText(HINT2 & vbNewLine)
             End If
 
+            If Form1.CheckBox1.Checked Then
 
+               
+            ElseIf Form1.CheckBox2.Checked Then
+
+
+
+            End If
 
             If Form1.RadioButton33.Checked Then
                 aux1 = "Duel.GetTurnCount()"
                 writer.WriteLine(aux1)
-
-
                 Form1.RichTextBox6.AppendText(aux1 & vbNewLine)
 
             ElseIf Form1.RadioButton34.Checked Then
 
                 aux2 = "aux.BeginPuzzle()"
                 writer.WriteLine(aux2)
-
                 Form1.RichTextBox6.AppendText(aux2 & vbNewLine)
 
 
             End If
 
-            If Form1.RadioButton31.Checked = True Then
-                aicommand = "OnStartOfDuel()"
-                writer.WriteLine(aicommand)
-                writer.Write(Form1.RichTextBox4.Text)
-                Form1.RichTextBox6.AppendText(aux1 & vbNewLine)
-
-            ElseIf Form1.RadioButton32.Checked Then
-                aicommand = "OnStartOfDuel()"
-                writer.WriteLine(aicommand)
-                writer.Write(Form1.RichTextBox4.Text)
-                Form1.RichTextBox6.AppendText(aux1 & vbNewLine)
-            End If
-
-
             writer.Close()
-
-
-            Interaction.MsgBox(ScripFilename & vbNewLine & "File created", MsgBoxStyle.ApplicationModal, Nothing)
+            Interaction.MsgBox(prompt & vbNewLine & "File created", MsgBoxStyle.ApplicationModal, Nothing)
         Catch exception1 As Exception
 
             Dim exception As Exception = exception1

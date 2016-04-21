@@ -80,9 +80,6 @@
     <ApplicationIcon>yugioh.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FTPclient">
-      <HintPath>.\FTPclient.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -156,6 +153,9 @@
     <Compile Include="ScripFile.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CardDatabase.resx">
+      <DependentUpon>CardDatabase.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>

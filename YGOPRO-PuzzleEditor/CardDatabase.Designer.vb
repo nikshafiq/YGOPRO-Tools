@@ -22,7 +22,6 @@ Partial Class CardDatabase
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CardDatabase))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -43,9 +42,9 @@ Partial Class CardDatabase
         Me.LanguageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SpanishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeutchsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OriginalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.OriginalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -189,13 +188,13 @@ Partial Class CardDatabase
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.SaveToolStripMenuItem.Text = "Save"
         '
         'LoadToolStripMenuItem
         '
         Me.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem"
-        Me.LoadToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LoadToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.LoadToolStripMenuItem.Text = "Load"
         '
         'AboutToolStripMenuItem
@@ -209,25 +208,25 @@ Partial Class CardDatabase
         '
         Me.LanguageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SpanishToolStripMenuItem, Me.DeutchsToolStripMenuItem})
         Me.LanguageToolStripMenuItem.Name = "LanguageToolStripMenuItem"
-        Me.LanguageToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LanguageToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.LanguageToolStripMenuItem.Text = "Language"
         '
         'SpanishToolStripMenuItem
         '
         Me.SpanishToolStripMenuItem.Name = "SpanishToolStripMenuItem"
-        Me.SpanishToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SpanishToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
         Me.SpanishToolStripMenuItem.Text = "Spanish"
         '
         'DeutchsToolStripMenuItem
         '
         Me.DeutchsToolStripMenuItem.Name = "DeutchsToolStripMenuItem"
-        Me.DeutchsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeutchsToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
         Me.DeutchsToolStripMenuItem.Text = "Deutchs"
         '
         'OriginalToolStripMenuItem
         '
         Me.OriginalToolStripMenuItem.Name = "OriginalToolStripMenuItem"
-        Me.OriginalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OriginalToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.OriginalToolStripMenuItem.Text = "Original"
         '
         'Label5
@@ -249,8 +248,8 @@ Partial Class CardDatabase
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip1)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.MaximizeBox = False
         Me.Name = "CardDatabase"
         Me.Text = "Custom Card Database"
         Me.Panel1.ResumeLayout(False)
